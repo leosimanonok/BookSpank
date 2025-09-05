@@ -1,0 +1,11 @@
+{
+    "java.project.sourcePaths": [
+        "packages/backend/src/main/java"
+    ],
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    },
+    "[xml]": {
+        "editor.defaultFormatter": "DotJoshJohnson.xml"
+    }
+}
