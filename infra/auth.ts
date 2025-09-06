@@ -8,7 +8,6 @@ export const auth = new sst.aws.Auth("MyAuth", {
         handler: "packages/auth/index.handler",
         link: [database, email],
         vpc,
-
     },
     domain: $app.stage === "prod" ? "auth.bookspank.com" : undefined,
 })

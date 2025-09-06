@@ -1,7 +1,6 @@
 
-
-export const email = sst.aws.Email("MyEmail",
-    $app.stage === "prod" ?
+export const email = new sst.aws.Email("MyEmail", {
+    sender: $app.stage === "prod" ?
         "bookspank.com" :
-        "leo@simanonok.net"
-)
+        "leo+bookspank@simanonok.net"
+})

@@ -6,13 +6,15 @@ export const backend = new sst.aws.Service("MyBackend", {
     loadBalancer: {
         public: false,
         rules: [
-            { listen: "80/http" }
+            { listen: "8080/http" }
         ]
     },
     image: {
-        dockerfile: "packages/backend/Dockerfile"
+        dockerfile: "packages/backend/Dockerfile",
     },
     dev: {
-        url: "http://localhost:8080"
-    }
+        url: "http://localhost:8080",
+        command: "docker-compose up --build --abort-on-container-exit",
+        directory: "packages/"
+    },
 });

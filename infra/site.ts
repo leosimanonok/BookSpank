@@ -1,3 +1,4 @@
+import { auth } from "./auth";
 import { backend } from "./backend";
 import { vpc } from "./vpc";
 
@@ -10,6 +11,6 @@ export const site = new sst.aws.Nextjs("MySite", {
         NEXT_PUBLIC_SITE_URL: $app.stage === "prod" ? "bookspank.com" : "localhost:3000",
         NEXT_PUBLIC_AUTH_URL: auth.url,
     },
-    link: [backend],
+    link: [backend, auth],
     vpc
 })

@@ -1,26 +1,135 @@
+/* ==========================================================================
+   IMPORTS
+   ========================================================================== */
 @import "tailwindcss";
 
+/* ==========================================================================
+   BASE VARIABLES
+   ========================================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand colors */
+  --background: #1F4E79;
+  /* Deep blue */
+  --accent: #F16529;
+  /* Bright orange */
+  --foreground: #ffffff;
+  /* Default text color */
+
+  /* Typography */
+  --font-sans: 'Arial', Helvetica, sans-serif;
+  --font-serif: 'Playfair Display', serif;
+
+  /* Card colors */
+  --card: #ffffff;
+  --card-foreground: #1F4E79;
+
+  /* Borders & radius */
+  --border: rgba(255, 255, 255, 0.2);
+  --radius: 0.75rem;
 }
 
+/* ==========================================================================
+   SEMANTIC THEME VARIABLES
+   ========================================================================== */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
 }
 
+/* ==========================================================================
+   DARK MODE VARIABLES
+   ========================================================================== */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --card: #1a1a1a;
+    --card-foreground: #ededed;
+    --border: rgba(255, 255, 255, 0.1);
   }
 }
 
+/* ==========================================================================
+   BASE STYLES
+   ========================================================================== */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+}
+
+/* Links */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   CARD STYLES
+   ========================================================================== */
+.card {
+  background-color: var(--card);
+  color: var(--card-foreground);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   BACKGROUND UTILITIES
+   ========================================================================== */
+.bg-background {
+  background-color: var(--color-background);
+}
+
+.bg-accent {
+  background-color: var(--color-accent);
+}
+
+.bg-card {
+  background-color: var(--card);
+}
+
+/* ==========================================================================
+   TEXT UTILITIES
+   ========================================================================== */
+.text-background {
+  color: var(--color-background);
+}
+
+.text-foreground {
+  color: var(--color-foreground);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-card {
+  color: var(--card-foreground);
 }
