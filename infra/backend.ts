@@ -1,4 +1,5 @@
 import { cluster } from "./cluster";
+import { database } from "./database";
 
 
 export const backend = new sst.aws.Service("MyBackend", {
@@ -17,4 +18,5 @@ export const backend = new sst.aws.Service("MyBackend", {
         command: "docker-compose up --build --abort-on-container-exit",
         directory: "packages/"
     },
+    link: [database]
 });

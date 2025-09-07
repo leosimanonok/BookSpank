@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/bookspank_dev}
+    username: ${DATABASE_USERNAME:bookspank}
+    password: ${DATABASE_PASSWORD:password}
+  jooq:
+    sql-dialect: POSTGRES
