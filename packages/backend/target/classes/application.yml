@@ -5,3 +5,7 @@ spring:
     password: ${DATABASE_PASSWORD:password}
   jooq:
     sql-dialect: POSTGRES
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true

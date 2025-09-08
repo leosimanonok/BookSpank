@@ -1,2 +1,4 @@
-com/bookspank/backend/Adder.class
 com/bookspank/backend/BackendApplication.class
+com/bookspank/backend/model/Book.class
+com/bookspank/backend/IndexController.class
+com/bookspank/backend/Adder.class

@@ -15,7 +15,7 @@ export const backend = new sst.aws.Service("MyBackend", {
     },
     dev: {
         url: "http://localhost:8080",
-        command: "docker-compose up --build --abort-on-container-exit",
+        command: "docker-compose up --build --abort-on-container-exit && docker-compose down --remove-orphans",
         directory: "packages/"
     },
     link: [database]
