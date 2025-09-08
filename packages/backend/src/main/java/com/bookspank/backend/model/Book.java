@@ -1,5 +1,6 @@
 package com.bookspank.backend.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -10,15 +11,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Book {
-    private Long id;
+    private Integer id;
     private String title;
     private String author;
     private String isbn;
     private String olid;
-    private Date started;
-    private Date finished;
+    private LocalDate started;
+    private LocalDate finished;
 
     public boolean inProgress() {
-        return this.started && !this.finished;
+        return this.started != null && this.finished == null;
     }
+
 }

@@ -64,8 +64,20 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>            <!-- latest stable version -->
+            <version>1.18.38</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-codegen</artifactId>
+            <version>3.19.8</version>            <!-- match your jOOQ version -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-meta</artifactId>
+            <version>3.19.8</version>
         </dependency>
     </dependencies>
 
@@ -81,6 +93,16 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <release>${java.version}</release>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -100,18 +122,38 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Migrations -->
+
+            <!-- <plugin>
+                <groupId>org.flywaydb.maven</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>9.25.0</version>
+                <configuration>
+                    <url>jdbc:postgresql://localhost:5432/bookspank_dev</url>
+                    <user>bookspank</user>
+                    <password>password</password>
+                    <locations>
+                        <location>filesystem:src/main/resources/db/migration</location>
+                    </locations>
+                </configuration>
+            </plugin> -->
+
             <!-- SQL CodeGen -->
+
             <plugin>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen-maven</artifactId>
-                <version>3.19.8</version>
+                <version>3.19.11</version>
                 <configuration>
+                    <!-- JDBC connection to local Docker DB -->
                     <jdbc>
                         <driver>org.postgresql.Driver</driver>
                         <url>jdbc:postgresql://localhost:5432/bookspank_dev</url>
                         <user>bookspank</user>
                         <password>password</password>
                     </jdbc>
+
+                    <!-- Generator configuration -->
                     <generator>
                         <database>
                             <name>org.jooq.meta.postgres.PostgresDatabase</name>
@@ -124,8 +166,6 @@
                     </generator>
                 </configuration>
             </plugin>
-
-            <!-- Add jooq gen to src -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>

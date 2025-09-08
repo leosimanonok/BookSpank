@@ -9,8 +9,11 @@ RUN mvn dependency:go-offline
 # Copy the source code
 COPY src ./src
 
+# copy sql
+COPY target/generated-sources/jooq ./target/generated-sources/jooq
+
 # Build the application JAR
-RUN mvn clean package -DskipTests
+RUN mvn package -DskipTests
 
 # -------- Runtime Stage --------
 FROM eclipse-temurin:21-jre-alpine AS runtime

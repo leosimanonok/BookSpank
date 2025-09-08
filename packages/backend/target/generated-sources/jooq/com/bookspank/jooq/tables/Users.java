@@ -8,6 +8,7 @@ import com.bookspank.jooq.Keys;
 import com.bookspank.jooq.Public;
 import com.bookspank.jooq.tables.Books.BooksPath;
 import com.bookspank.jooq.tables.Reviews.ReviewsPath;
+import com.bookspank.jooq.tables.Test.TestPath;
 import com.bookspank.jooq.tables.records.UsersRecord;
 
 import java.util.Arrays;
@@ -166,6 +167,18 @@ public class Users extends TableImpl<UsersRecord> {
             _reviews = new ReviewsPath(this, null, Keys.REVIEWS__REVIEWS_USER_ID_FKEY.getInverseKey());
 
         return _reviews;
+    }
+
+    private transient TestPath _test;
+
+    /**
+     * Get the implicit to-many join path to the <code>public.test</code> table
+     */
+    public TestPath test() {
+        if (_test == null)
+            _test = new TestPath(this, null, Keys.TEST__TEST_USER_ID_FKEY.getInverseKey());
+
+        return _test;
     }
 
     /**
