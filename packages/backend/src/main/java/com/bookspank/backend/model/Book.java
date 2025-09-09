@@ -1,7 +1,6 @@
 package com.bookspank.backend.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,9 +34,4 @@ public class Book {
         this.olid = olid;
         this.started = started;
     }
-
-    public boolean inProgress() {
-        return this.started != null && this.finished == null;
-    }
-
 }
