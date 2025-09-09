@@ -16,10 +16,12 @@ public class BookRepository {
 
     private final DSLContext dsl;
 
-    public List<Book> getAllBooks() {
+    public List<Book> getAllBooks(Integer offset, Integer limit) {
         return this.dsl
                 .select(BOOKS.ID, BOOKS.TITLE, BOOKS.AUTHOR, BOOKS.ISBN, BOOKS.STARTED, BOOKS.FINISHED, BOOKS.OLID)
                 .from(BOOKS)
+                .limit(limit)
+                .offset(offset)
                 .fetch()
                 .map(record -> new Book(
                         record.get(BOOKS.ID),
