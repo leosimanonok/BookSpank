@@ -25,10 +25,11 @@
     <dependencies>
         <!-- Testing -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
 
         <!-- Web (Spring MVC + embedded Tomcat) -->
         <dependency>
@@ -122,21 +123,37 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Migrations -->
-
-            <!-- <plugin>
-                <groupId>org.flywaydb.maven</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>9.25.0</version>
-                <configuration>
-                    <url>jdbc:postgresql://localhost:5432/bookspank_dev</url>
-                    <user>bookspank</user>
-                    <password>password</password>
-                    <locations>
-                        <location>filesystem:src/main/resources/db/migration</location>
-                    </locations>
-                </configuration>
-            </plugin> -->
+            <!-- Test Coverage -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.13</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
+                            <formats>
+                                <format>HTML</format>
+                            </formats>
+                            <excludes>
+                                <!-- Exclude all jOOQ-generated classes -->
+                                <exclude>com/bookspank/jooq/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
             <!-- SQL CodeGen -->
 
