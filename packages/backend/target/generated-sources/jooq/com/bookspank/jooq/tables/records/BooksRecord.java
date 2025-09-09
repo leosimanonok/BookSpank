@@ -118,6 +118,20 @@ public class BooksRecord extends UpdatableRecordImpl<BooksRecord> {
         return (LocalDate) get(6);
     }
 
+    /**
+     * Setter for <code>public.books.selected_by</code>.
+     */
+    public void setSelectedBy(Integer value) {
+        set(7, value);
+    }
+
+    /**
+     * Getter for <code>public.books.selected_by</code>.
+     */
+    public Integer getSelectedBy() {
+        return (Integer) get(7);
+    }
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -141,7 +155,7 @@ public class BooksRecord extends UpdatableRecordImpl<BooksRecord> {
     /**
      * Create a detached, initialised BooksRecord
      */
-    public BooksRecord(Integer id, String title, String author, String isbn, String olid, LocalDate started, LocalDate finished) {
+    public BooksRecord(Integer id, String title, String author, String isbn, String olid, LocalDate started, LocalDate finished, Integer selectedBy) {
         super(Books.BOOKS);
 
         setId(id);
@@ -151,6 +165,7 @@ public class BooksRecord extends UpdatableRecordImpl<BooksRecord> {
         setOlid(olid);
         setStarted(started);
         setFinished(finished);
+        setSelectedBy(selectedBy);
         resetChangedOnNotNull();
     }
 }

@@ -22,6 +22,7 @@ public class IndexController {
     public List<Book> index() {
 
         List<Book> bookList = this.bookService.getAllBooks();
+        System.out.println("Testing logging");
 
         return bookList;
     }

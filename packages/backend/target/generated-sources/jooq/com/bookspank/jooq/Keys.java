@@ -7,12 +7,10 @@ package com.bookspank.jooq;
 import com.bookspank.jooq.tables.Books;
 import com.bookspank.jooq.tables.FlywaySchemaHistory;
 import com.bookspank.jooq.tables.Reviews;
-import com.bookspank.jooq.tables.Test;
 import com.bookspank.jooq.tables.Users;
 import com.bookspank.jooq.tables.records.BooksRecord;
 import com.bookspank.jooq.tables.records.FlywaySchemaHistoryRecord;
 import com.bookspank.jooq.tables.records.ReviewsRecord;
-import com.bookspank.jooq.tables.records.TestRecord;
 import com.bookspank.jooq.tables.records.UsersRecord;
 
 import org.jooq.ForeignKey;
@@ -38,7 +36,6 @@ public class Keys {
     public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, DSL.name("flyway_schema_history_pk"), new TableField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
     public static final UniqueKey<ReviewsRecord> REVIEWS_BOOK_ID_USER_ID_KEY = Internal.createUniqueKey(Reviews.REVIEWS, DSL.name("reviews_book_id_user_id_key"), new TableField[] { Reviews.REVIEWS.BOOK_ID, Reviews.REVIEWS.USER_ID }, true);
     public static final UniqueKey<ReviewsRecord> REVIEWS_PKEY = Internal.createUniqueKey(Reviews.REVIEWS, DSL.name("reviews_pkey"), new TableField[] { Reviews.REVIEWS.ID }, true);
-    public static final UniqueKey<TestRecord> TEST_PKEY = Internal.createUniqueKey(Test.TEST, DSL.name("test_pkey"), new TableField[] { Test.TEST.ID }, true);
     public static final UniqueKey<UsersRecord> USERS_EMAIL_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_email_key"), new TableField[] { Users.USERS.EMAIL }, true);
     public static final UniqueKey<UsersRecord> USERS_PKEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_pkey"), new TableField[] { Users.USERS.ID }, true);
 
@@ -46,7 +43,7 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<BooksRecord, UsersRecord> BOOKS__BOOKS_SELECTED_BY_FKEY = Internal.createForeignKey(Books.BOOKS, DSL.name("books_selected_by_fkey"), new TableField[] { Books.BOOKS.SELECTED_BY }, Keys.USERS_PKEY, new TableField[] { Users.USERS.ID }, true);
     public static final ForeignKey<ReviewsRecord, BooksRecord> REVIEWS__REVIEWS_BOOK_ID_FKEY = Internal.createForeignKey(Reviews.REVIEWS, DSL.name("reviews_book_id_fkey"), new TableField[] { Reviews.REVIEWS.BOOK_ID }, Keys.BOOKS_PKEY, new TableField[] { Books.BOOKS.ID }, true);
     public static final ForeignKey<ReviewsRecord, UsersRecord> REVIEWS__REVIEWS_USER_ID_FKEY = Internal.createForeignKey(Reviews.REVIEWS, DSL.name("reviews_user_id_fkey"), new TableField[] { Reviews.REVIEWS.USER_ID }, Keys.USERS_PKEY, new TableField[] { Users.USERS.ID }, true);
-    public static final ForeignKey<TestRecord, UsersRecord> TEST__TEST_USER_ID_FKEY = Internal.createForeignKey(Test.TEST, DSL.name("test_user_id_fkey"), new TableField[] { Test.TEST.USER_ID }, Keys.USERS_PKEY, new TableField[] { Users.USERS.ID }, true);
 }

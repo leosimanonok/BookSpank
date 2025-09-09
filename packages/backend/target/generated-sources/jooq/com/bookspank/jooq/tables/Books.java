@@ -94,6 +94,11 @@ public class Books extends TableImpl<BooksRecord> {
      */
     public final TableField<BooksRecord, LocalDate> FINISHED = createField(DSL.name("finished"), SQLDataType.LOCALDATE, this, "");
 
+    /**
+     * The column <code>public.books.selected_by</code>.
+     */
+    public final TableField<BooksRecord, Integer> SELECTED_BY = createField(DSL.name("selected_by"), SQLDataType.INTEGER.nullable(false), this, "");
+
     private Books(Name alias, Table<BooksRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
     }
@@ -176,6 +181,23 @@ public class Books extends TableImpl<BooksRecord> {
         return Arrays.asList(Keys.BOOKS_TITLE_AUTHOR_KEY);
     }
 
+    @Override
+    public List<ForeignKey<BooksRecord, ?>> getReferences() {
+        return Arrays.asList(Keys.BOOKS__BOOKS_SELECTED_BY_FKEY);
+    }
+
+    private transient UsersPath _users;
+
+    /**
+     * Get the implicit join path to the <code>public.users</code> table.
+     */
+    public UsersPath users() {
+        if (_users == null)
+            _users = new UsersPath(this, Keys.BOOKS__BOOKS_SELECTED_BY_FKEY, null);
+
+        return _users;
+    }
+
     private transient ReviewsPath _reviews;
 
     /**
@@ -187,14 +209,6 @@ public class Books extends TableImpl<BooksRecord> {
             _reviews = new ReviewsPath(this, null, Keys.REVIEWS__REVIEWS_BOOK_ID_FKEY.getInverseKey());
 
         return _reviews;
-    }
-
-    /**
-     * Get the implicit many-to-many join path to the <code>public.users</code>
-     * table
-     */
-    public UsersPath users() {
-        return reviews().users();
     }
 
     @Override

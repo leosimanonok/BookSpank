@@ -1,7 +1,5 @@
 import { vpc } from "./vpc";
 
-`
-
 export const database = new sst.aws.Postgres("MyDB", {
     dev: {
         username: "bookspank",
@@ -10,4 +8,4 @@ export const database = new sst.aws.Postgres("MyDB", {
         port: 5432,
     },
     vpc
-})
+});

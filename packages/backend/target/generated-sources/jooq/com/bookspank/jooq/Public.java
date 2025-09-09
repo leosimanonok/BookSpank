@@ -7,7 +7,6 @@ package com.bookspank.jooq;
 import com.bookspank.jooq.tables.Books;
 import com.bookspank.jooq.tables.FlywaySchemaHistory;
 import com.bookspank.jooq.tables.Reviews;
-import com.bookspank.jooq.tables.Test;
 import com.bookspank.jooq.tables.Users;
 
 import java.util.Arrays;
@@ -47,11 +46,6 @@ public class Public extends SchemaImpl {
     public final Reviews REVIEWS = Reviews.REVIEWS;
 
     /**
-     * The table <code>public.test</code>.
-     */
-    public final Test TEST = Test.TEST;
-
-    /**
      * The table <code>public.users</code>.
      */
     public final Users USERS = Users.USERS;
@@ -75,7 +69,6 @@ public class Public extends SchemaImpl {
             Books.BOOKS,
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
             Reviews.REVIEWS,
-            Test.TEST,
             Users.USERS
         );
     }
