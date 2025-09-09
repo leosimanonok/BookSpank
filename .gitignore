@@ -1,3 +1,18 @@
 
 # sst
 .sst
+
+# Maven build output
+**/target/
+
+# Logs
+*.log
+
+# IDEs
+/.idea/
+/.vscode/
+/*.iml
+
+# OS junk
+.DS_Store
+Thumbs.db

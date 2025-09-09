@@ -5,6 +5,6 @@ import java.util.List;
 import com.bookspank.backend.model.Book;
 
 public interface BookService {
-    public List<Book> getAllBooks(Integer offset, Integer limit);
+    public List<Book> getBooks(Integer offset, Integer limit);
 
 }

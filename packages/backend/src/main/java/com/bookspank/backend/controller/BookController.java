@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookspank.backend.model.Book;
 import com.bookspank.backend.service.BookService;
 
 @RestController
-@RequestMapping("/user")
-
+@RequestMapping("/books")
 public class BookController {
 
     private final BookService bookService;
@@ -21,14 +21,11 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/")
-    public List<Book> index() {
-
-        // TODO: Add params
-        List<Book> bookList = this.bookService.getAllBooks(10, 0);
-        System.out.println("Testing logging");
-
-        return bookList;
+    @GetMapping
+    public List<Book> getBooks(
+            @RequestParam Integer offset,
+            @RequestParam Integer limit) {
+        return this.bookService.getBooks(offset, limit);
     }
 
 }

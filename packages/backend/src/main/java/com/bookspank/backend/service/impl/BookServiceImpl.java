@@ -16,8 +16,8 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
-    public List<Book> getAllBooks(Integer offset, Integer limit) {
-        return this.bookRepository.getAllBooks(offset, limit);
+    public List<Book> getBooks(Integer offset, Integer limit) {
+        return this.bookRepository.getBooks(offset, limit);
     }
 
 }
