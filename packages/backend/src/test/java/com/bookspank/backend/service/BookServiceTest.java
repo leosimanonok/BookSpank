@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,10 +32,10 @@ public class BookServiceTest {
     void testGetBooks_empty() {
         List<Book> books = new ArrayList<Book>();
 
-        when(bookRepository.getBooks(0, 10))
+        when(bookRepository.getBooks(10, 0))
                 .thenReturn(books);
 
-        List<Book> result = bookService.getBooks(0, 10);
+        List<Book> result = bookService.getBooks(10, 0);
 
         assertNotNull(result);
         assertTrue(result.isEmpty());
@@ -49,10 +48,70 @@ public class BookServiceTest {
         books.add(new Book());
         books.add(new Book());
 
-        when(bookRepository.getBooks(0, 10))
+        when(bookRepository.getBooks(10, 0))
                 .thenReturn(books);
 
-        List<Book> result = bookService.getBooks(0, 10);
+        List<Book> result = bookService.getBooks(10, 0);
+
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+        assertEquals(books.size(), result.size());
+    }
+
+    @Test
+    void testGetCompletedBooks_empty() {
+        List<Book> books = new ArrayList<Book>();
+
+        when(bookRepository.getCompletedBooks(10, 0))
+                .thenReturn(books);
+
+        List<Book> result = bookService.getCompletedBooks(10, 0);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void testGetCompletedBooks() {
+        List<Book> books = new ArrayList<Book>();
+
+        books.add(new Book());
+        books.add(new Book());
+
+        when(bookRepository.getCompletedBooks(10, 0))
+                .thenReturn(books);
+
+        List<Book> result = bookService.getCompletedBooks(10, 0);
+
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+        assertEquals(books.size(), result.size());
+    }
+
+    @Test
+    void testGetUserBooks_empty() {
+        List<Book> books = new ArrayList<Book>();
+
+        when(bookRepository.getUserBooks(1, 10, 0))
+                .thenReturn(books);
+
+        List<Book> result = bookService.getUserBooks(1, 10, 0);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void testGetUserBooks() {
+        List<Book> books = new ArrayList<Book>();
+
+        books.add(new Book());
+        books.add(new Book());
+
+        when(bookRepository.getUserBooks(1, 10, 0))
+                .thenReturn(books);
+
+        List<Book> result = bookService.getUserBooks(1, 10, 0);
 
         assertNotNull(result);
         assertFalse(result.isEmpty());

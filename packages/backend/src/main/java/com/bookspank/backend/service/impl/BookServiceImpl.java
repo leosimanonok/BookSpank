@@ -16,8 +16,19 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
-    public List<Book> getBooks(Integer offset, Integer limit) {
-        return this.bookRepository.getBooks(offset, limit);
+    @Override
+    public List<Book> getBooks(Integer limit, Integer offset) {
+        return this.bookRepository.getBooks(limit, offset);
+    }
+
+    @Override
+    public List<Book> getCompletedBooks(Integer limit, Integer offset) {
+        return this.bookRepository.getCompletedBooks(limit, offset);
+    }
+
+    @Override
+    public List<Book> getUserBooks(Integer userId, Integer limit, Integer offset) {
+        return this.bookRepository.getUserBooks(userId, limit, offset);
     }
 
 }
