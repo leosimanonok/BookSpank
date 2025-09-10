@@ -28,6 +28,12 @@
       ],
       "@/auth/*": [
         "../auth/*"
+      ],
+      "@/service/*": [
+        "./lib/service/*"
+      ],
+      "@/model/*": [
+        "./lib/model/*"
       ]
     }
   },
