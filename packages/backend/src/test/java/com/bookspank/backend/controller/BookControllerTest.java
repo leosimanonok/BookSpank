@@ -30,7 +30,7 @@ public class BookControllerTest {
     @Test
     void testGetBooks_success() throws Exception {
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book(1, "MockTitle", "MockAuthor", "MockISBN", "MockOLID", 1));
+        bookList.add(new Book(1, "MockTitle", "MockAuthor", 100, 1));
 
         when(bookService.getBooks(10, 0)).thenReturn(bookList);
 
@@ -71,7 +71,7 @@ public class BookControllerTest {
     @Test
     void testGetCompletedBooks_success() throws Exception {
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book(1, "MockTitle", "MockAuthor", "MockISBN", "MockOLID", 1, LocalDate.now(),
+        bookList.add(new Book(1, "MockTitle", "MockAuthor", 100, 1, LocalDate.now(),
                 LocalDate.now().plusDays(10)));
 
         when(bookService.getCompletedBooks(10, 0)).thenReturn(bookList);
@@ -133,7 +133,7 @@ public class BookControllerTest {
     @Test
     void testGetUserBooks_success() throws Exception {
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book(1, "MockTitle", "MockAuthor", "MockISBN", "MockOLID", 1, LocalDate.now(),
+        bookList.add(new Book(1, "MockTitle", "MockAuthor", 100, 1, LocalDate.now(),
                 LocalDate.now().plusDays(10)));
 
         when(bookService.getUserBooks(1, 10, 0)).thenReturn(bookList);

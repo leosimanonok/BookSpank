@@ -11,8 +11,7 @@ public class Book {
     private Integer id;
     private String title;
     private String author;
-    private String isbn;
-    private String olid;
+    private Integer cover_id;
     private LocalDate started;
     private LocalDate finished;
     private Integer selectedBy;
@@ -21,14 +20,12 @@ public class Book {
             Integer id,
             String title,
             String author,
-            String isbn,
-            String olid,
+            Integer cover_id,
             Integer selectedBy) {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.isbn = isbn;
-        this.olid = olid;
+        this.cover_id = cover_id;
         this.selectedBy = selectedBy;
     }
 
@@ -36,16 +33,13 @@ public class Book {
             Integer id,
             String title,
             String author,
-            String isbn,
-            String olid,
+            Integer cover_id,
             Integer selectedBy,
             LocalDate started) {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.isbn = isbn;
-        this.olid = olid;
-
+        this.cover_id = cover_id;
         this.selectedBy = selectedBy;
         this.started = started;
     }
@@ -54,8 +48,7 @@ public class Book {
             Integer id,
             String title,
             String author,
-            String isbn,
-            String olid,
+            Integer cover_id,
             Integer selectedBy,
             LocalDate started,
             LocalDate finished) {
@@ -69,8 +62,7 @@ public class Book {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.isbn = isbn;
-        this.olid = olid;
+        this.cover_id = cover_id;
         this.selectedBy = selectedBy;
         this.started = started;
         this.finished = finished;

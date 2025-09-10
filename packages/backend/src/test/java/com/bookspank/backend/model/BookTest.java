@@ -14,7 +14,7 @@ public class BookTest {
         LocalDate finished = LocalDate.of(2025, 9, 9);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Book(1, "Title", "Author", "ISBN", "OLID", 1, started, finished);
+            new Book(1, "Title", "Author", 100, 1, started, finished);
         });
     }
 
@@ -23,6 +23,6 @@ public class BookTest {
         LocalDate started = LocalDate.of(2025, 9, 9);
         LocalDate finished = LocalDate.of(2025, 9, 10);
 
-        new Book(1, "Title", "Author", "ISBN", "OLID", 1, started, finished);
+        new Book(1, "Title", "Author", 100, 1, started, finished);
     }
 }
