@@ -20,6 +20,8 @@ export class OpenLibraryService {
 
         params.append("limit", `${limit}`);
         params.append("offset", `${offset}`);
+        // what we want back
+        params.append("fields", "title,author_name,cover_i");
 
         const res = await fetch(this.generateUrl(this.searchUrl, params), {
             headers: this.headers,
@@ -27,15 +29,11 @@ export class OpenLibraryService {
 
         const data = await res.json();
 
-        return data.docs.map(x => {
-            return {
-                title: x.title,
-                author: x.author_name,
-                isbn: x.isbn,
-                olid: x.olid,
-                coverId: x.cover_i,
-            }
-        });
+        return data.docs.map((x: any) => ({
+            title: x.title,
+            author: x.author_name?.[0] ?? "Unknown",
+            coverId: x.cover_i ?? null
+        }));
 
     }
 

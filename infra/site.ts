@@ -10,6 +10,7 @@ export const site = new sst.aws.Nextjs("MySite", {
         NEXT_PUBLIC_STAGE: $app.stage,
         NEXT_PUBLIC_SITE_URL: $app.stage === "prod" ? "bookspank.com" : "localhost:3000",
         NEXT_PUBLIC_AUTH_URL: auth.url,
+        NEXT_PUBLIC_API_URL: backend.url,
     },
     link: [backend, auth],
     vpc
