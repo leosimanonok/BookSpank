@@ -22,10 +22,8 @@ public class BookRepository {
                         BOOKS.ID,
                         BOOKS.TITLE,
                         BOOKS.AUTHOR,
-                        BOOKS.ISBN,
                         BOOKS.STARTED,
                         BOOKS.FINISHED,
-                        BOOKS.OLID,
                         BOOKS.SELECTED_BY)
                 .from(BOOKS)
                 .limit(limit)
@@ -35,8 +33,7 @@ public class BookRepository {
                         record.get(BOOKS.ID),
                         record.get(BOOKS.TITLE),
                         record.get(BOOKS.AUTHOR),
-                        record.get(BOOKS.ISBN),
-                        record.get(BOOKS.OLID),
+                        record.get(BOOKS.COVER_ID),
                         record.get(BOOKS.SELECTED_BY),
                         record.get(BOOKS.STARTED),
                         record.get(BOOKS.FINISHED)));
@@ -48,10 +45,9 @@ public class BookRepository {
                         BOOKS.ID,
                         BOOKS.TITLE,
                         BOOKS.AUTHOR,
-                        BOOKS.ISBN,
+                        BOOKS.COVER_ID,
                         BOOKS.STARTED,
                         BOOKS.FINISHED,
-                        BOOKS.OLID,
                         BOOKS.SELECTED_BY)
                 .from(BOOKS)
                 .where(BOOKS.STARTED.isNotNull(), BOOKS.FINISHED.isNotNull())
@@ -62,8 +58,7 @@ public class BookRepository {
                         record.get(BOOKS.ID),
                         record.get(BOOKS.TITLE),
                         record.get(BOOKS.AUTHOR),
-                        record.get(BOOKS.ISBN),
-                        record.get(BOOKS.OLID),
+                        record.get(BOOKS.COVER_ID),
                         record.get(BOOKS.SELECTED_BY),
                         record.get(BOOKS.STARTED),
                         record.get(BOOKS.FINISHED)));
@@ -75,10 +70,9 @@ public class BookRepository {
                         BOOKS.ID,
                         BOOKS.TITLE,
                         BOOKS.AUTHOR,
-                        BOOKS.ISBN,
+                        BOOKS.COVER_ID,
                         BOOKS.STARTED,
                         BOOKS.FINISHED,
-                        BOOKS.OLID,
                         BOOKS.SELECTED_BY)
                 .from(BOOKS)
                 .where(BOOKS.SELECTED_BY.eq(userId))
@@ -89,8 +83,8 @@ public class BookRepository {
                         record.get(BOOKS.ID),
                         record.get(BOOKS.TITLE),
                         record.get(BOOKS.AUTHOR),
-                        record.get(BOOKS.ISBN),
-                        record.get(BOOKS.OLID),
+                        record.get(BOOKS.COVER_ID),
+
                         record.get(BOOKS.SELECTED_BY),
                         record.get(BOOKS.STARTED),
                         record.get(BOOKS.FINISHED)));

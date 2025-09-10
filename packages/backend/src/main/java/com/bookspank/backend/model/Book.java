@@ -14,19 +14,19 @@ public class Book {
     private Integer cover_id;
     private LocalDate started;
     private LocalDate finished;
-    private Integer selectedBy;
+    private Integer selected_by;
 
     public Book(
             Integer id,
             String title,
             String author,
             Integer cover_id,
-            Integer selectedBy) {
+            Integer selected_by) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.cover_id = cover_id;
-        this.selectedBy = selectedBy;
+        this.selected_by = selected_by;
     }
 
     public Book(
@@ -34,13 +34,13 @@ public class Book {
             String title,
             String author,
             Integer cover_id,
-            Integer selectedBy,
+            Integer selected_by,
             LocalDate started) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.cover_id = cover_id;
-        this.selectedBy = selectedBy;
+        this.selected_by = selected_by;
         this.started = started;
     }
 
@@ -49,7 +49,7 @@ public class Book {
             String title,
             String author,
             Integer cover_id,
-            Integer selectedBy,
+            Integer selected_by,
             LocalDate started,
             LocalDate finished) {
 
@@ -63,7 +63,7 @@ public class Book {
         this.title = title;
         this.author = author;
         this.cover_id = cover_id;
-        this.selectedBy = selectedBy;
+        this.selected_by = selected_by;
         this.started = started;
         this.finished = finished;
     }
