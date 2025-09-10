@@ -14,6 +14,6 @@ export async function GET(req: NextRequest) {
         return login();
     }
     else {
-        redirect("/spankers-only");
+        redirect("/dashboard");
     }
 }

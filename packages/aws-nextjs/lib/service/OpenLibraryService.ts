@@ -3,23 +3,25 @@ import { OpenLibrarySearchResponse } from "../dto/OpenLibrarySearchResponse";
 export class OpenLibraryService {
 
     static async search(input: {
-        title?: string,
-        author?: string,
-    }, limit: number, offset: number): Promise<OpenLibrarySearchResponse[]> {
-        if (typeof input.title === "undefined" && typeof input.author === "undefined") {
+        title: string | null,
+        author: string | null,
+        limit: number,
+        offset: number,
+    }): Promise<OpenLibrarySearchResponse[]> {
+        if (input.title === null && input.author === null) {
             throw new Error("Need title or author to search...");
         }
 
         let params = new URLSearchParams();
-        if (typeof input.title !== "undefined") {
+        if (input.title !== null) {
             params.append("title", input.title);
         }
-        if (typeof input.author !== "undefined") {
+        if (input.author !== null) {
             params.append("author", input.author);
         }
 
-        params.append("limit", `${limit}`);
-        params.append("offset", `${offset}`);
+        params.append("limit", `${input.limit}`);
+        params.append("offset", `${input.offset}`);
         // what we want back
         params.append("fields", "title,author_name,cover_i");
 
