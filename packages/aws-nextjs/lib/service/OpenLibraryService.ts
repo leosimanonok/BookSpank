@@ -34,7 +34,7 @@ export class OpenLibraryService {
         return data.docs.map((x: any) => ({
             title: x.title,
             author: x.author_name?.[0] ?? "Unknown",
-            coverId: x.cover_i ?? null
+            coverId: x.cover_i ?? null,
         }));
 
     }

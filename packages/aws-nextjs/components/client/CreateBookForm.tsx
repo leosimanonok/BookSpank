@@ -3,6 +3,7 @@ import { Card } from "./base/Card";
 import { Label } from "./base/Label";
 import { Input } from "./base/Input";
 import { Button } from "./base/Button";
+import { OpenLibrarySearchResponse } from "@/lib/dto/OpenLibrarySearchResponse";
 
 
 export type BookSearchForm = {
@@ -16,13 +17,19 @@ export type BookCreateForm = BookSearchForm & {
 }
 
 
+
 export default function CreateBookForm() {
     const [searchForm, setSearchForm] = useState<BookSearchForm>({
         title: "",
         author: "",
     });
 
-    const [isSearching, setIsSearching] = useState(false);
+    const LIMIT = 10;
+    const [offset, setOffset] = useState(0);
+    const [searching, setSearching] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
+    const [booksRemaining, setBooksRemaining] = useState(true);
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement>
@@ -30,6 +37,49 @@ export default function CreateBookForm() {
         const { name, value } = e.target;
         setSearchForm((prev) => ({ ...prev, [name]: value }));
     };
+
+
+    const search = async () => {
+        if (searching) return;
+
+        if (!searchForm.author && !searchForm.title) {
+            alert("Either author or title is required...");
+        }
+
+        setSearching(true);
+
+        try {
+            const params = new URLSearchParams();
+
+            if (searchForm.author) {
+                params.append("author", searchForm.author);
+            }
+            if (searchForm.title) {
+                params.append("title", searchForm.title);
+            }
+
+            params.append("limit", LIMIT.toString());
+            params.append("offset", offset.toString());
+
+            const url = new URL("/api/openlibrary");
+
+            url.search = params.toString();
+
+            const res = await fetch(url);
+
+            if (!res.ok) {
+                const { error } = await res.json();
+                setError(true);
+                setErrorMsg(error);
+                return;
+            }
+
+            const books: OpenLibrarySearchResponse[] = await res.json();
+        }
+        finally {
+            setSearching(false);
+        }
+    }
 
 
 
@@ -61,8 +111,10 @@ export default function CreateBookForm() {
                             onChange={handleChange}
                         > </Input>
                     </div>
-                    <Button>
-                        {isSearching ? "Searching..." : "Search"}
+                    <Button
+                        disabled={searching}>
+                        {searching ? "Searching..." : "Search"}
+
                     </Button>
                 </div>
             </Card>

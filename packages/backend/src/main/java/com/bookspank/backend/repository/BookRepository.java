@@ -84,7 +84,6 @@ public class BookRepository {
                         record.get(BOOKS.TITLE),
                         record.get(BOOKS.AUTHOR),
                         record.get(BOOKS.COVER_ID),
-
                         record.get(BOOKS.SELECTED_BY),
                         record.get(BOOKS.STARTED),
                         record.get(BOOKS.FINISHED)));

@@ -5,4 +5,7 @@ type props = {
 }
 
 
-export function BookCard(props: props)
+export function BookCard(props: props) {
+
+
+}
