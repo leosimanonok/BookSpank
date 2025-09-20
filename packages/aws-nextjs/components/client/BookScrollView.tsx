@@ -3,7 +3,7 @@
 import { Book } from "@/lib/model/Book";
 import { useState } from "react";
 import { Card } from "./base/Card";
-import useFetchCompletedBooks from "@/hooks/useFetchCompletedBooks";
+import useFetchCompletedBooks from "@/lib/hook/useFetchCompletedBooks";
 
 
 export function BookScrollView(

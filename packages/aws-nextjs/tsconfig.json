@@ -30,13 +30,17 @@
         "../auth/*"
       ],
       "@/service/*": [
-        "./lib/service/*"
+        "./lib/service/*",
+        "./lib/service/impl/*"
       ],
       "@/model/*": [
         "./lib/model/*"
       ],
-      "@/hooks/*": [
-        "./lib/hooks/*"
+      "@/hook/*": [
+        "./lib/hook/*"
+      ],
+      "@/context/*": [
+        "./lib/context/*"
       ]
     }
   },
