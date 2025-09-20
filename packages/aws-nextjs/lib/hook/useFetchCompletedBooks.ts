@@ -7,7 +7,6 @@ export default function useFetchCompletedBooks() {
 
     const bookService = useBookService(); // get the service from context
 
-
     const PAGE_SIZE = 20;
     const [books, setBooks] = useState<Book[]>([]);
     const [loading, setLoading] = useState(false);

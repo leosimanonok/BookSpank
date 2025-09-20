@@ -10,7 +10,5 @@ type BookServiceProviderProps = {
 };
 
 export const BookServiceProvider = ({ children, service }: BookServiceProviderProps) => {
-    const bookService = new BookService();
-
-    return <BookServiceContext value={bookService}>{children}</BookServiceContext>
+    return <BookServiceContext value={service}>{children}</BookServiceContext>
 };
