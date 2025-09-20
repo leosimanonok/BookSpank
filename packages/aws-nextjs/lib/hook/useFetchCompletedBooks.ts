@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { Book } from "../model/Book";
-import { IBookService } from "../service/BookService";
+import { useBookService } from "@/hook/useBookService";
 
 
-export default function useFetchCompletedBooks(bookSerice: IBookService) {
+export default function useFetchCompletedBooks() {
+
+    const bookService = useBookService(); // get the service from context
+
 
     const PAGE_SIZE = 20;
     const [books, setBooks] = useState<Book[]>([]);
@@ -15,7 +18,7 @@ export default function useFetchCompletedBooks(bookSerice: IBookService) {
         setLoading(true);
 
         try {
-            const moreBooks = await bookSerice.getCompleted(PAGE_SIZE, books.length);
+            const moreBooks = await bookService.getCompleted(PAGE_SIZE, books.length);
 
             if (moreBooks.length < PAGE_SIZE) {
                 setHasMoreBooks(false);
