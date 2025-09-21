@@ -51,7 +51,7 @@ public class BookRepository {
                                                 BOOKS.SELECTED_BY)
                                 .from(BOOKS)
                                 .where(BOOKS.STARTED.isNotNull(), BOOKS.FINISHED.isNotNull())
-                                .orderBy(BOOKS.STARTED.desc())
+                                .orderBy(BOOKS.FINISHED.desc())
                                 .limit(limit)
                                 .offset(offset)
                                 .fetch()
