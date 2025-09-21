@@ -54,9 +54,9 @@ export function CompletedBookScrollView() {
             ))}
 
             {/* Scroll div at the bottom */}
-            <div ref={scrollRef} className="h-8" />
+            {hasMoreBooks && <div ref={scrollRef} className="h-8" />}
 
-            {loading && <p className="mt-2 text-sm text-gray-500">Loading books...</p>}
+            {loading && <p className="mt-2 text-sm text-black text-center">Loading more books...</p>}
         </Card>
     )
 }

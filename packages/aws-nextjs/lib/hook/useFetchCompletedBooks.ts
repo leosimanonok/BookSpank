@@ -13,7 +13,7 @@ export default function useFetchCompletedBooks() {
     const [hasMoreBooks, setHasMoreBooks] = useState(true);
 
     const loadBooks = async () => {
-        if (!hasMoreBooks) return;
+        if (!hasMoreBooks || loading) return;
         setLoading(true);
 
         try {
