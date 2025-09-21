@@ -1,9 +1,5 @@
-import { IBookService } from "@/service/BookService";
-import { useContext } from "react";
-import { BookServiceContext } from "@/context/BookServiceContext";
+import { BookService } from "@/service/BookServiceImpl";
 
-export const useBookService = (): IBookService => {
-    const service = useContext(BookServiceContext);
-    if (!service) throw new Error("BookService not provided");
-    return service;
+export const useBookService = () => {
+    return new BookService()
 };

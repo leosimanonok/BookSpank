@@ -1,20 +1,15 @@
-import { CompletedBookScrollView } from "@/components/client/BookScrollView";
-import { BookServiceProvider } from "@/lib/context/BookServiceContext";
-import { BookService } from "@/lib/service/impl/BookServiceImpl";
+import { CompletedBookScrollView } from "@/components/client/CompletedBookScrollView";
 
-
-/**
- * Get init books, then 
- * @returns 
- */
 export default function SpankBank() {
 
     return (
-        <BookServiceProvider service={new BookService()}>
-            <div>
-                <h3> The Spank Bank </h3>
+        <>
+            <div className="flex flex-col items-center justify-center min-h-screen p-4">
+                <div>
+                    <h3 className="text-xl font-semibold mb-4"> The Spank Bank </h3>
+                </div>
+                <CompletedBookScrollView />
             </div>
-            <CompletedBookScrollView />
-        </BookServiceProvider>
+        </>
     )
 }

@@ -48,7 +48,7 @@ export function CompletedBookScrollView() {
     }
 
     return (
-        <Card>
+        <Card className="w-2/3 mx-auto">
             {books.map((b) => (
                 <BookCard key={b.id} book={b} />
             ))}

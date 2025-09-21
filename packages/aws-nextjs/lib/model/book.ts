@@ -23,6 +23,14 @@ export class Book {
     }
 
     public static fromJSON(json: any): Book {
+        if (
+            !json.id ||
+            !json.title ||
+            !json.author
+        ) {
+            throw new Error("Invalid json for book creation...");
+        }
+
         const started = json.started ? new Date(json.started) : undefined;
         const finished = json.finished ? new Date(json.finished) : undefined;
 

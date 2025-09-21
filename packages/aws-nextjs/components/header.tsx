@@ -7,7 +7,7 @@ export default function Header() {
             <header>
                 <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between pt-5">
                     <Link
-                        href="/spank-bank"
+                        href="/spankbank"
                         className="transition-all duration-200 font-medium px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-primary text-foreground hover:text-primary hover:bg-primary/10 cursor-pointer"
                     >
                         Spank Bank
