@@ -27,11 +27,11 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: "Bad Request - Offset must be an integer..." }, { status: 400 });
     }
 
-    if (!process.env.NEXT_PUBLIC_BAKEND_API_URL) {
+    if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
         throw new Error("Missing backend url...");
     }
 
-    const backendQuery = new URL(process.env.NEXT_PUBLIC_BAKEND_API_URL + "/books/completed");
+    const backendQuery = new URL(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/books/completed");
     const params = new URLSearchParams();
     params.set("limit", limit.toString());
     params.set("offset", offset.toString());

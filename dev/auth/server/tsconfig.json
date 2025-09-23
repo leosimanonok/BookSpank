@@ -1,12 +1,22 @@
 {
     "compilerOptions": {
-        "target": "ES2017",
-        "module": "esnext",
-        "moduleResolution": "bundler",
+        "target": "ES2022",
+        "module": "nodenext",
+        "moduleResolution": "nodenext", // key change: allows Node-style ES modules
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "outDir": "dist",
+        "baseUrl": ".", // for path aliases
         "paths": {
-            "@/realAuth/*": [
-                "../../../packages/auth/*"
+            "@/*": [
+                "./*"
             ]
-        }
+        },
+        "lib": [
+            "ES2022",
+            "DOM"
+        ] // includes Blob, File, console, etc.
     }
 }

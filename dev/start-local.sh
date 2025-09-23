@@ -10,7 +10,7 @@ export NODE_ENV=development
 export NEXT_PUBLIC_STAGE=local
 export NEXT_PUBLIC_SITE_URL=http://localhost:3000
 export NEXT_PUBLIC_AUTH_URL=http://localhost:3001
-export NEXT_PUBLIC_BAKEND_API_URL=http://localhost:
+export NEXT_PUBLIC_BACKEND_API_URL=http://localhost:8080
 
 # for jumping between dirs
 JAVA_DIR="../packages/backend"
@@ -66,6 +66,7 @@ echo "   Auth: http://localhost:3001"
 echo "🔧 Backend: http://localhost:8080"
 echo "💾 Database: localhost:5432"
 echo ""
+echo "💡 Authentication is mocked for local development"
 echo "🛑 Press Ctrl+C to stop all services"
 
 # Wait for frontend to exit
