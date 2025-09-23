@@ -12,6 +12,13 @@ export NEXT_PUBLIC_SITE_URL=http://localhost:3000
 export NEXT_PUBLIC_AUTH_URL=http://localhost:3001
 export NEXT_PUBLIC_BAKEND_API_URL=http://localhost:8080
 
+cleanup() {
+  echo
+  echo "🛑 Stopping all containers..."
+  docker compose down
+}
+trap cleanup SIGINT SIGTERM
+
 echo "📦 Starting PostgreSQL database..."
 cd packages
 docker compose up -d db
