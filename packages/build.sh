@@ -4,12 +4,12 @@ set -e
 cleanup() {
   echo
   echo "Stopping containers..."
-  docker-compose down
+  docker compose down
 }
 trap cleanup SIGINT SIGTERM
 
 # 1. Start the database
-docker-compose up -d db
+docker compose up -d db
 
 # 2. Wait for DB ready
 until docker exec backend-db pg_isready -U bookspank -d bookspank_dev > /dev/null 2>&1; do
@@ -35,4 +35,4 @@ echo "PostgreSQL is ready!"
 )
 
 # 5. Start backend
-docker-compose up --build backend
+docker compose up --build backend

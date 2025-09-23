@@ -1,11 +1,39 @@
-import { Resource } from "sst"
-import { createClient } from "@openauthjs/openauth/client"
 import { cookies as getCookies } from "next/headers"
 
-export const client = createClient({
-    clientID: "nextjs",
-    issuer: Resource.MyAuth.url
-})
+// Mock client for local development when SST resources aren't available
+const mockClient = {
+    verify: async () => ({
+        err: false,
+        subject: {
+            type: "user",
+            properties: {
+                id: "local-user-123",
+                email: "local@example.com"
+            }
+        },
+        tokens: null
+    }),
+    authorize: async (redirectUrl: string) => ({
+        url: `${redirectUrl}?code=mock-code`
+    })
+};
+
+// Try to use SST resources, fall back to mock if not available
+let client: typeof mockClient;
+
+try {
+    const { Resource } = require("sst");
+    const { createClient } = require("@openauthjs/openauth/client");
+    client = createClient({
+        clientID: "nextjs",
+        issuer: Resource.MyAuth.url
+    });
+} catch (error) {
+    console.log("SST not available, using mock authentication for local development");
+    client = mockClient;
+}
+
+export { client };
 
 export async function setTokens(access: string, refresh: string) {
     const cookies = await getCookies()
