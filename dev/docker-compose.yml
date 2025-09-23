@@ -15,7 +15,7 @@ services:
 
   backend:
     build:
-      context: ./backend
+      context: ../packages/backend
       dockerfile: Dockerfile
     container_name: backend-app
     environment:
@@ -28,7 +28,8 @@ services:
   auth: 
     build: 
       context: ./auth
-      dockerfile: DockerFile
+      dockerfile: Dockerfile
+    container_name: backend-auth
     ports: 
       - "3001:3001"
 
