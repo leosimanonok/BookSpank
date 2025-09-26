@@ -1,0 +1,22 @@
+{
+  "name": "dev-auth-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@hono/node-server": "^1.19.4",
+    "@openauthjs/openauth": "^0.4.3",
+    "hono": "^4.9.8",
+    "valibot": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "typescript": "^5.9.2"
+  },
+  "type": "module"
+}

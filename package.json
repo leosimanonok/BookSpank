@@ -4,7 +4,9 @@
   "description": "Website and backend for BookSpank.com",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:local": "./dev/start-local.sh",
+    "dev:aws": "npx sst dev"
   },
   "repository": {
     "type": "git",
