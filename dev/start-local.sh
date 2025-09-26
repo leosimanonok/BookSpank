@@ -10,18 +10,25 @@ export NODE_ENV=development
 export NEXT_PUBLIC_STAGE=local
 export NEXT_PUBLIC_SITE_URL=http://localhost:3000
 export NEXT_PUBLIC_AUTH_URL=http://localhost:3001
-export NEXT_PUBLIC_BAKEND_API_URL=http://localhost:8080
+export NEXT_PUBLIC_BACKEND_API_URL=http://localhost:8080
+
+# git root
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# for jumping between dirs
+JAVA_DIR="${REPO_ROOT}/packages/backend"
+NEXTJS_DIR="${REPO_ROOT}/packages/aws-nextjs"
 
 cleanup() {
   echo
   echo "🛑 Stopping all containers..."
-  docker compose down
+  docker compose -f "${REPO_ROOT}/dev/docker-compose.yml" down
 }
 trap cleanup SIGINT SIGTERM
 
 echo "📦 Starting PostgreSQL database..."
-cd packages
-docker compose up -d db
+# cd packages
+docker compose -f "${REPO_ROOT}/dev/docker-compose.yml" up -d db
 
 echo "⏳ Waiting for database to be ready..."
 until docker exec backend-db pg_isready -U bookspank -d bookspank_dev > /dev/null 2>&1; do
@@ -31,7 +38,7 @@ done
 echo "✅ PostgreSQL is ready!"
 
 echo "🔄 Running database migrations..."
-cd backend
+cd $JAVA_DIR
 mvn org.flywaydb:flyway-maven-plugin:10.20.0:migrate \
   -Dflyway.url=jdbc:postgresql://localhost:5432/bookspank_dev \
   -Dflyway.user=bookspank \
@@ -42,16 +49,23 @@ echo "🏗️ Generating jOOQ code..."
 mvn jooq-codegen:generate
 
 echo "🔨 Building and starting backend..."
-cd ..
-docker compose up --build -d backend
+cd -
+docker compose -f "${REPO_ROOT}/dev/docker-compose.yml" up --build -d backend
 
 echo "🌐 Starting Next.js frontend..."
-cd ../packages/aws-nextjs
+cd $NEXTJS_DIR
 npm run dev &
+echo "Frontend running..."
+
+cd -
+echo "Starting auth server..."
+docker compose -f "${REPO_ROOT}/dev/docker-compose.yml" up --build -d auth
+echo "Auth server running..."
 
 echo ""
 echo "✅ Local development environment is ready!"
 echo "📍 Frontend: http://localhost:3000"
+echo "   Auth: http://localhost:3001"
 echo "🔧 Backend: http://localhost:8080"
 echo "💾 Database: localhost:5432"
 echo ""

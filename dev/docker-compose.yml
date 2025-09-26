@@ -3,7 +3,7 @@ services:
   ## dont love that db is together with backend - need to think about
   db:
     image: postgres:15
-    container_name: backend-db
+    container_name: backend-db ## could this naming update be the reason automated type gen wasnt working?
     environment:
       POSTGRES_USER: bookspank
       POSTGRES_PASSWORD: password
@@ -12,18 +12,10 @@ services:
       - "5432:5432"
     volumes:
       - backend-db-data:/var/lib/postgresql/data
-      - ./database:/docker-entrypoint-initdb.d
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U bookspank -d bookspank_dev"]
-      interval: 10s
-      retries: 5
-      start_period: 30s
-      timeout: 10s
-      
 
   backend:
     build:
-      context: ./backend
+      context: ../packages/backend
       dockerfile: Dockerfile
     container_name: backend-app
     environment:
@@ -32,10 +24,14 @@ services:
       SPRING_DATASOURCE_PASSWORD: password
     ports:
       - "8080:8080"
-    depends_on:
-      db:
-        condition: service_healthy
-        restart: true
+
+  auth: 
+    build: 
+      context: ./auth
+      dockerfile: Dockerfile
+    container_name: backend-auth
+    ports: 
+      - "3001:3001"
 
 volumes:
   backend-db-data:
