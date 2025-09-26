@@ -90,4 +90,28 @@ public class BookRepository {
                                                 record.get(BOOKS.FINISHED)));
         }
 
+        public Book getCurrentBook() {
+                return this.dsl
+                                .select(
+                                                BOOKS.ID,
+                                                BOOKS.TITLE,
+                                                BOOKS.AUTHOR,
+                                                BOOKS.COVER_ID,
+                                                BOOKS.STARTED,
+                                                BOOKS.FINISHED,
+                                                BOOKS.SELECTED_BY)
+                                .from(BOOKS)
+                                .where(BOOKS.STARTED.isNotNull(), BOOKS.FINISHED.isNull())
+                                .orderBy(BOOKS.STARTED.desc())
+                                .limit(1)
+                                .fetchOne(record -> new Book(
+                                                record.get(BOOKS.ID),
+                                                record.get(BOOKS.TITLE),
+                                                record.get(BOOKS.AUTHOR),
+                                                record.get(BOOKS.COVER_ID),
+                                                record.get(BOOKS.SELECTED_BY),
+                                                record.get(BOOKS.STARTED),
+                                                record.get(BOOKS.FINISHED)));
+        }
+
 }
