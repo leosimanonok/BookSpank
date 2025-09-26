@@ -1,6 +1,6 @@
 
 
-import { Book } from "@/model/Book";
+import { Book } from "@/model/book";
 import { IBookService } from "../BookService";
 
 export class BookService implements IBookService {
@@ -42,6 +42,25 @@ export class BookService implements IBookService {
 
         const data = await res.json();
         return data;
+    }
+
+    async getCurrentBook(): Promise<Book | null> {
+        const res = await fetch(`${this._url}/books/current`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!res.ok) {
+            if (res.status === 404) {
+                return null;
+            }
+            throw new Error(`Failed to fetch current book: ${res.status}`);
+        }
+
+        const data = await res.json();
+        return data ? Book.fromJSON(data) : null;
     }
 
 

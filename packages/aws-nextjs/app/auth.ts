@@ -8,8 +8,8 @@ const mockClient = {
         subject: {
             type: "user",
             properties: {
-                id: "local-user-123",
-                email: "local@example.com"
+                id: "neumann",
+                email: "neumann@conscious.com"
             }
         },
         tokens: null
