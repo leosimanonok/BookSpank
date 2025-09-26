@@ -1,4 +1,4 @@
-import { CompletedBookScrollView } from "@/components/client/CompletedBookScrollView";
+import { CompletedBookScrollView } from "@/lib/components/client/CompletedBookScrollView";
 
 export default function SpankBank() {
 

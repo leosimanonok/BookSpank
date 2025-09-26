@@ -1,4 +1,4 @@
-import { number, object } from "valibot"
+import { number, object, string } from "valibot"
 import { createSubjects } from "@openauthjs/openauth/subject"
 
 /**
