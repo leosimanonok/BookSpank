@@ -31,11 +31,14 @@ echo "📦 Starting PostgreSQL database..."
 docker compose -f "${REPO_ROOT}/dev/docker-compose.yml" up -d db
 
 echo "⏳ Waiting for database to be ready..."
-until docker exec backend-db pg_isready -U bookspank -d bookspank_dev > /dev/null 2>&1; do
+until docker exec backend-db pg_isready -U bookspank > /dev/null 2>&1; do
   echo -n "."
   sleep 2
 done
 echo "✅ PostgreSQL is ready!"
+
+echo "🔧 Ensuring bookspank_dev database exists..."
+docker exec backend-db psql -U bookspank -d postgres -c "CREATE DATABASE bookspank_dev;" 2>&1 || echo "Database bookspank_dev already exists or was created automatically"
 
 echo "🔄 Running database migrations..."
 cd $JAVA_DIR

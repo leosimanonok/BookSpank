@@ -1,10 +1,8 @@
-import { Book } from "@/model/book";
+import { Book } from "@/model/Book";
 
 export interface IBookService {
 
     getCompleted(limit: number, offset: number): Promise<Book[]>;
 
-    getUserBooks(userId: number, limit: number, offset: number): Promise<Book[]>;
-
-    getCurrentBook(): Promise<Book | null>;
+    getUserBooks(userId: number, limit: number, offset: number): Promise<Book[]>
 }

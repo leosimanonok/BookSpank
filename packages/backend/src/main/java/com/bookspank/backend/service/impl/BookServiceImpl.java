@@ -31,9 +31,4 @@ public class BookServiceImpl implements BookService {
         return this.bookRepository.getUserBooks(userId, limit, offset);
     }
 
-    @Override
-    public Book getCurrentBook() {
-        return this.bookRepository.getCurrentBook();
-    }
-
 }

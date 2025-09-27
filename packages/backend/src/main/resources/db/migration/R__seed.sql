@@ -3,8 +3,7 @@ VALUES ('lsimanonok', 'leo@simanonok.com'),
         ('mcatalano', 'mattcat26@gmail.com'),
         ('sminix', 'supersam5699@gmail.com'),
         ('qurell', 'quinn@urell.com'),
-        ('gharris', 'gabe@harris.com')
-ON CONFLICT (username, email) DO NOTHING;
+        ('gharris', 'gabe@harris.com');
 
 INSERT INTO books (title, author, started, finished, selected_by)
 VALUES ('The Road', 'Cormac McCarthy', '2025-09-18', NULL, 'gharris'),
@@ -20,8 +19,4 @@ VALUES ('The Road', 'Cormac McCarthy', '2025-09-18', NULL, 'gharris'),
         ('Capital Vol. 1', 'Karl Marx', NULL, '2025-07-03', 'qurell'),
         ('Manufacturing Consent: The Political Economy of the Mass Media', 'Edward S. Herman and Noam Chomsky', NULL, '2025-08-17', 'lsimanonok'),
         ('A Testament of Hope: The Essential Writings and Speeches', 'Martin Luther King Jr.', NULL, NULL, 'lsimanonok'),
-        ('Catch-22', 'Joseph Heller', NULL, '2025-09-15', 'sminix')
-ON CONFLICT (title, author) DO NOTHING;
-
-INSERT INTO books (title, author, started, finished, selected_by)
-VALUES ()
+        ('Catch-22', 'Joseph Heller', NULL, '2025-09-15', 'sminix');
