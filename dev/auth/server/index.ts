@@ -5,10 +5,15 @@ import { MemoryStorage } from "@openauthjs/openauth/storage/memory"
 import { subjects } from "./subjects.js"
 import { serve } from "@hono/node-server";
 
+
 async function getUser(email: string) {
     // Get user from database and return user ID
-    return 123;
+    return {
+        id: 111,
+        username: "test"
+    }
 }
+
 
 const app = issuer({
     subjects,
@@ -24,9 +29,8 @@ const app = issuer({
     },
     success: async (ctx, value) => {
         if (value.provider === "code") {
-            return ctx.subject("user", {
-                id: await getUser(value.claims.email)
-            })
+            const user = await getUser(value.claims.email);
+            return ctx.subject("user", user)
         }
         throw new Error("Invalid provider")
     },

@@ -36,6 +36,11 @@ vpc to hold all of it defined and linked in this folder. As I mentioned, I haven
 The whole purpose of making this was really to get some practice with SpringBoot, so this setup is way more than we really need. I've got tests setup that 
 you can run with ```mvn test```, but it will require you to have the generated types, see above.
 
+### Local Auth
+When you go through the auth flow, we dont have an email address setup to send. You can find your login code
+in the Docker container logs
+![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/leosimanonok/Desktop/Screenshot%202025-09-27%20at%201.12.06%E2%80%AFPM.png?version%3D1758996825935)
+
 ## Misc
 - run jooq db code gen ```mvn jooq-codegen:generate```
 - docker connect ``` psql -h localhost -U bookspank -d bookspank_dev ``
