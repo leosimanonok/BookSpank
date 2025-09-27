@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Book } from "../model/Book";
+import { Book } from "@/model/Book"
 import { useBookService } from "@/hook/useBookService";
 
 

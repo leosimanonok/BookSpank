@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "../actions";
 import { BookService } from "@/service/BookServiceImpl";
+import { UserBookScrollView } from "@/lib/components/client/UserBookScrollView";
 
 /**
  * Page that allows signed in users to add books to their list
@@ -21,6 +22,7 @@ export async function Dashboard() {
     return (
         <div>
             <p> Dashboard for {subject.properties.username} </p>
+            <UserBookScrollView userId={subject.properties.id} />
         </div>
     )
 

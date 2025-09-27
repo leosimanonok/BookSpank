@@ -1,6 +1,6 @@
 
 
-import { Book } from "@/model/book";
+import { Book } from "@/model/Book";
 import { IBookService } from "../BookService";
 
 export class BookService implements IBookService {

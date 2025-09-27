@@ -1,4 +1,4 @@
-import { Book } from "@/model/book";
+import { Book } from "@/model/Book";
 
 export interface IBookService {
 

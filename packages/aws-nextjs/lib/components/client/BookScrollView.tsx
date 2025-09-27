@@ -1,10 +1,9 @@
 "use client";
 
 import { Card } from "./base/Card";
-import useFetchCompletedBooks from "@/lib/hook/useFetchCompletedBooks";
 import { BookCard } from "./BookCard";
 import { useEffect, useRef } from "react";
-import { Book } from "@/lib/model/Book";
+import { Book } from "@/model/Book"
 
 
 interface BookScrollViewProps {
