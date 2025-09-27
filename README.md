@@ -39,7 +39,8 @@ you can run with ```mvn test```, but it will require you to have the generated t
 ### Local Auth
 When you go through the auth flow, we dont have an email address setup to send. You can find your login code
 in the Docker container logs
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/leosimanonok/Desktop/Screenshot%202025-09-27%20at%201.12.06%E2%80%AFPM.png?version%3D1758996825935)
+
+<img width="1460" height="883" alt="Screenshot 2025-09-27 at 1 12 06 PM" src="https://github.com/user-attachments/assets/e5e5d62a-efac-417b-80d5-f8dd42879c39" />
 
 ## Misc
 - run jooq db code gen ```mvn jooq-codegen:generate```
