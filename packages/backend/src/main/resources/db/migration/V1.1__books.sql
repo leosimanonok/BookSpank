@@ -7,6 +7,6 @@ CREATE TABLE books (
     cover_id INTEGER NULL,
     started DATE,
     finished DATE,
-    selected_by VARCHAR(255) NOT NULL REFERENCES users(username),
+    selected_by INT NOT NULL REFERENCES users(id),
     UNIQUE(title, author)
 );
