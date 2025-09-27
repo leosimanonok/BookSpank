@@ -1,7 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { auth } from "@/app/actions";
 
-export default function Header() {
+export default async function Header() {
+
+    const user = await auth();
+
     return (
         <>
             <header>
@@ -29,11 +33,26 @@ export default function Header() {
                     >
                         News Letter
                     </Link>
-                    <Link href="/login"
-                        className="transition-all duration-200 font-medium px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-primary text-foreground hover:text-primary hover:bg-primary/10 cursor-pointer"
-                    >
-                        Spankers Only
-                    </Link>
+                    {user ?
+                        (
+                            <>
+                                <Link href="/dashboard"
+                                    className="transition-all duration-200 font-medium px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-primary text-foreground hover:text-primary hover:bg-primary/10 cursor-pointer"
+                                >
+                                    Dashboard
+                                </Link>
+                            </>
+                        ) :
+                        (
+                            <>
+                                <Link href="/login"
+                                    className="transition-all duration-200 font-medium px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-primary text-foreground hover:text-primary hover:bg-primary/10 cursor-pointer"
+                                >
+                                    Spankers Only
+                                </Link>
+                            </>
+                        )}
+
                 </div>
             </header>
         </>

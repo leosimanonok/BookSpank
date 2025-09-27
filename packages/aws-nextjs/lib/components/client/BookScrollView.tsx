@@ -4,11 +4,21 @@ import { Card } from "./base/Card";
 import useFetchCompletedBooks from "@/lib/hook/useFetchCompletedBooks";
 import { BookCard } from "./BookCard";
 import { useEffect, useRef } from "react";
+import { Book } from "@/lib/model/Book";
 
 
-export function CompletedBookScrollView() {
+interface BookScrollViewProps {
+    fetchHook: () => {
+        books: Book[];
+        loading: boolean;
+        hasMoreBooks: boolean;
+        loadMoreBooks: () => void;
+    };
+}
 
-    const { books, loading, hasMoreBooks, loadMoreBooks } = useFetchCompletedBooks();
+export function BookScrollView({ fetchHook }: BookScrollViewProps) {
+
+    const { books, loading, hasMoreBooks, loadMoreBooks } = fetchHook();
 
     const scrollRef = useRef<HTMLDivElement | null>(null);
 
