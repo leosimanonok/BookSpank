@@ -37,6 +37,12 @@ until docker exec backend-db pg_isready -U bookspank > /dev/null 2>&1; do
 done
 echo "✅ PostgreSQL is ready!"
 
+# If requested, wipe db
+if [ "$1" == "wipe-db" ]; then
+  echo "🧹 Wiping existing database..."
+  PGPASSWORD=password psql -h localhost -U bookspank -d postgres -c "DROP DATABASE bookspank_dev;" 2>&1 && echo "🧹 Dropped existing bookspank_dev database" || echo "No existing bookspank_dev database to drop"
+fi
+
 echo "🔧 Ensuring bookspank_dev database exists..."
 docker exec backend-db psql -U bookspank -d postgres -c "CREATE DATABASE bookspank_dev;" 2>&1 || echo "Database bookspank_dev already exists or was created automatically"
 

@@ -20,6 +20,7 @@ Once you clone,
 - run ```npm install``` in the top directory
 - run ```mvn clean install``` in the /packages/backend directory
 - run ```npx sst dev``` in the top directory to start everything and get the sst multiplexer
+- run ```npm run dev:local``` to run locally
 
 #### Note
 The backend setup is a little bit janky at the moment. I'm using a java tool to run migrations and another tool to generate types from those migrations.
@@ -39,3 +40,4 @@ you can run with ```mvn test```, but it will require you to have the generated t
 ## Misc
 - run jooq db code gen ```mvn jooq-codegen:generate```
 - docker connect ``` psql -h localhost -U bookspank -d bookspank_dev ``
+- To make changes to the flyway migrations locally, run ``` npm run dev:local wipe-db ``` to delete the database locally and start fresh
