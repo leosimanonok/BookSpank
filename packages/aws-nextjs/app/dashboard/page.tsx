@@ -20,7 +20,7 @@ export async function Dashboard() {
 
     return (
         <div>
-            <p> TESTING </p>
+            <p> Dashboard for {subject.properties.username} </p>
         </div>
     )
 
