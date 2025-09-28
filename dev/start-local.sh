@@ -55,7 +55,10 @@ mvn org.flywaydb:flyway-maven-plugin:10.20.0:migrate \
   -Dflyway.locations=filesystem:src/main/resources/db/migration
 
 echo "🏗️ Generating jOOQ code..."
-mvn jooq-codegen:generate
+mvn jooq-codegen:generate \
+  -Ddb.url=jdbc:postgresql://localhost:5432/bookspank_dev \
+  -Ddb.user=bookspank \
+  -Ddb.password=password
 
 echo "🔨 Building and starting backend..."
 cd -
