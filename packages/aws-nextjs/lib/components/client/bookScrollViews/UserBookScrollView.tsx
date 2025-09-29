@@ -1,3 +1,4 @@
+"use client";
 import { BookScrollView } from "./BookScrollView";
 import useFetchUserBooks from "@/lib/hook/useFetchUserBooks";
 

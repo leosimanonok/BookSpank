@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { auth } from "../actions";
-import { BookService } from "@/service/BookServiceImpl";
 import { UserBookScrollView } from "@/lib/components/client/bookScrollViews/UserBookScrollView";
 import { Card } from "@/lib/components/client/base/Card";
 import { OpenLibBookScrollView } from "@/lib/components/client/bookScrollViews/OpenLibBookScrollView";
@@ -8,7 +7,7 @@ import { OpenLibBookScrollView } from "@/lib/components/client/bookScrollViews/O
 /**
  * Page that allows signed in users to add books to their list
  */
-export async function Dashboard() {
+export default async function Dashboard() {
 
     const subject = await auth();
 
@@ -21,7 +20,7 @@ export async function Dashboard() {
         <div>
             <p> Dashboard for {subject.properties.username} </p>
 
-            <Card>
+            <Card className="bg-grey">
                 <h2> Find new Books</h2>
                 <OpenLibBookScrollView />
             </Card>

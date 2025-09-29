@@ -14,10 +14,10 @@ export class OpenLibraryService implements IOpenLibraryService {
         }
 
         let params = new URLSearchParams();
-        if (input.title !== null) {
+        if (input.title) {
             params.append("title", input.title);
         }
-        if (input.author !== null) {
+        if (input.author) {
             params.append("author", input.author);
         }
 
@@ -31,6 +31,8 @@ export class OpenLibraryService implements IOpenLibraryService {
         });
 
         const data = await res.json();
+
+        console.dir(data);
 
         return data.docs.map((x: any) => ({
             title: x.title,

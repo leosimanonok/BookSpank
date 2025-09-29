@@ -24,7 +24,9 @@ export function OpenLibBookScrollView() {
 
     // Infinite scroll observer
     useEffect(() => {
-        if (!scrollRef.current || !hasMoreBooks) return;
+        if (!scrollRef.current || !hasMoreBooks || loading) return;
+
+        console.log(`In scroll effect`);
 
         const observer = new IntersectionObserver(
             async ([entry]) => {
@@ -43,7 +45,7 @@ export function OpenLibBookScrollView() {
     }, [loading, hasMoreBooks, loadMoreBooks]);
 
     return (
-        <Card>
+        <Card className="bg-red">
             <h1> Search for a Book</h1>
             <Label>Title:</Label>
             <Input
@@ -58,31 +60,17 @@ export function OpenLibBookScrollView() {
                 onChange={(e) => setAuthor(e.target.value)}
             />
             {/* if books avail, show */}
-            {
-                books.length
-                    ? (
-                        <Card className="w-2/3 mx-auto">
-                            {books.map((b) => (
-                                <OpenLibBookCard key={b.title} book={b} />
-                            ))}
 
-                            {/* Scroll div at the bottom */}
-                            {hasMoreBooks && <div ref={scrollRef} className="h-8" />}
+            <Card className="w-2/3 mx-auto">
+                {books.map((b) => (
+                    <OpenLibBookCard key={b.title} book={b} />
+                ))}
 
-                            {loading && <p className="mt-2 text-sm text-black text-center">Loading more books...</p>}
-                        </Card>
-                    )
-                    : (
-                        <Card>
-                            {loading ?
-                                <p>Loading books...</p>
-                                :
-                                <p>No books found...</p>
-                            }
-                        </Card>
-                    )
-            }
+                {/* Scroll div at the bottom */}
+                <div ref={scrollRef} className="h-px w-full invisible" />
 
+                {loading && <p className="mt-2 text-sm text-black text-center">Loading more books...</p>}
+            </Card>
         </Card>
     )
 }

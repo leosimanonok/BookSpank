@@ -18,7 +18,9 @@ export function OpenLibBookCard(props: props) {
             <h3>{props.book.title}</h3>
             <Label>By: {props.book.author}</Label>
             <Image src={props.book.coverUrls?.M ?? "/file.svg"}
-                alt={`${props.book.title}-img`} />
+                alt={`${props.book.title}-img`}
+                width={200}
+                height={200} />
         </Card>
     )
 }
