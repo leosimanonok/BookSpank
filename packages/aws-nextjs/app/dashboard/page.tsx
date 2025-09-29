@@ -3,6 +3,7 @@ import { auth } from "../actions";
 import { BookService } from "@/service/BookServiceImpl";
 import { UserBookScrollView } from "@/lib/components/client/bookScrollViews/UserBookScrollView";
 import { Card } from "@/lib/components/client/base/Card";
+import { OpenLibBookScrollView } from "@/lib/components/client/bookScrollViews/OpenLibBookScrollView";
 
 /**
  * Page that allows signed in users to add books to their list
@@ -22,7 +23,7 @@ export async function Dashboard() {
 
             <Card>
                 <h2> Find new Books</h2>
-                <
+                <OpenLibBookScrollView />
             </Card>
 
             <Card>

@@ -36,6 +36,12 @@ export class OpenLibraryService implements IOpenLibraryService {
             title: x.title,
             author: x.author_name?.[0] ?? "Unknown",
             coverId: x.cover_i ?? null,
+            coverUrls: x.cover_i ? {
+                S: this.getCoverImageUrl(x.cover_i, "S"),
+                M: this.getCoverImageUrl(x.cover_i, "M"),
+                L: this.getCoverImageUrl(x.cover_i, "L"),
+            }
+                : null
         }));
 
     }
@@ -47,7 +53,7 @@ export class OpenLibraryService implements IOpenLibraryService {
     }
 
 
-    getCoverImageUrl(coverId: number, size: "S" | "M" | "L"): string {
+    private getCoverImageUrl(coverId: number, size: "S" | "M" | "L"): string {
         return `${this.coverUrl}/${coverId}-${size}.jpg`;
     }
 

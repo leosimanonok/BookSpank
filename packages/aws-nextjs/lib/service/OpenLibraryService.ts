@@ -9,5 +9,4 @@ export interface IOpenLibraryService {
         offset: number,
     }): Promise<OpenLibrarySearchResponse[]>;
 
-    getCoverImageUrl(coverId: number, size: "S" | "M" | "L"): string;
 }
