@@ -25,11 +25,11 @@ export default async function Dashboard() {
                 <OpenLibBookScrollView />
             </Card>
 
-            <Card>
+            {/* <Card>
                 <h2> Books on Your List </h2>
                 <UserBookScrollView userId={subject.properties.id} />
 
-            </Card>
+            </Card> */}
         </div>
     )
 

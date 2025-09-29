@@ -1,4 +1,5 @@
 export type OpenLibrarySearchResponse = {
+    id: string,
     title: string,
     author: string,
     coverId: number | null,

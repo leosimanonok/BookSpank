@@ -63,13 +63,14 @@ export function OpenLibBookScrollView() {
 
             <Card className="w-2/3 mx-auto">
                 {books.map((b) => (
-                    <OpenLibBookCard key={b.title} book={b} />
+                    <OpenLibBookCard key={b.id} book={b} />
                 ))}
 
                 {/* Scroll div at the bottom */}
                 <div ref={scrollRef} className="h-px w-full invisible" />
 
                 {loading && <p className="mt-2 text-sm text-black text-center">Loading more books...</p>}
+                {!hasMoreBooks && !loading && <p className="mt-2 text-sm text-black text-center">No more matching books...</p>}
             </Card>
         </Card>
     )

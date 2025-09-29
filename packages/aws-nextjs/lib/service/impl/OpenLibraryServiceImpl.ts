@@ -8,7 +8,9 @@ export class OpenLibraryService implements IOpenLibraryService {
         author: string | null,
         limit: number,
         offset: number,
-    }): Promise<OpenLibrarySearchResponse[]> {
+    },
+        opts?: { signal?: AbortSignal }
+    ): Promise<OpenLibrarySearchResponse[]> {
         if (input.title === null && input.author === null) {
             throw new Error("Need title or author to search...");
         }
@@ -24,10 +26,11 @@ export class OpenLibraryService implements IOpenLibraryService {
         params.append("limit", `${input.limit}`);
         params.append("offset", `${input.offset}`);
         // what we want back
-        params.append("fields", "title,author_name,cover_i");
+        params.append("fields", "key,title,author_name,cover_i");
 
         const res = await fetch(this.generateUrl(this.searchUrl, params), {
             headers: this.headers,
+            signal: opts?.signal,
         });
 
         const data = await res.json();
@@ -35,6 +38,7 @@ export class OpenLibraryService implements IOpenLibraryService {
         console.dir(data);
 
         return data.docs.map((x: any) => ({
+            id: x.key,
             title: x.title,
             author: x.author_name?.[0] ?? "Unknown",
             coverId: x.cover_i ?? null,
