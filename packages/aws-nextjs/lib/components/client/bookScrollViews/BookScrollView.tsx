@@ -1,7 +1,7 @@
 "use client";
 
-import { Card } from "./base/Card";
-import { BookCard } from "./BookCard";
+import { Card } from "../base/Card";
+import { BookCard } from "../BookCard";
 import { useEffect, useRef } from "react";
 import { Book } from "@/model/Book"
 

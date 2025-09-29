@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { Book } from "@/model/Book"
-import { useBookService } from "@/hook/useBookService";
-
 
 interface FetchBooksProps {
     fetchBooks(limit: number, offset: number): Promise<Book[]>;
