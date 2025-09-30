@@ -1,10 +1,9 @@
 "use client";
 
-import { Card } from "./base/Card";
-import useFetchCompletedBooks from "@/lib/hook/useFetchCompletedBooks";
-import { BookCard } from "./BookCard";
+import { Card } from "../base/Card";
+import { BookCard } from "../BookCard";
 import { useEffect, useRef } from "react";
-import { Book } from "@/lib/model/Book";
+import { Book } from "@/model/Book"
 
 
 interface BookScrollViewProps {
@@ -45,15 +44,9 @@ export function BookScrollView({ fetchHook }: BookScrollViewProps) {
 
     if (!books.length) {
         return (
-            <>
-                <Card>
-                    {loading ?
-                        <p>Loading books...</p>
-                        :
-                        <p>No books found...</p>
-                    }
-                </Card>
-            </>
+            <div className="flex justify-center">
+                <p >{loading ? "Loading books..." : "No books found..."}</p>
+            </div>
         )
     }
 

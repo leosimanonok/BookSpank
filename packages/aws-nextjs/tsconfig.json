@@ -41,6 +41,9 @@
       ],
       "@/context/*": [
         "./lib/context/*"
+      ],
+      "@/dto/*": [
+        "./lib/dto/*"
       ]
     }
   },

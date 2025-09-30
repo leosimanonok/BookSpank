@@ -1,9 +1,26 @@
 
 
-import { Book } from "@/model/book";
+import { Book } from "@/model/Book";
 import { IBookService } from "../BookService";
+import { OpenLibrarySearchResponse } from "@/lib/dto/OpenLibrarySearchResponse";
 
 export class BookService implements IBookService {
+    async addBook(userId: number, bookInfo: OpenLibrarySearchResponse): Promise<void> {
+        const res = await fetch(`${this._url}/books/user/${userId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(bookInfo),
+        });
+
+        if (!res.ok) {
+            if (res.status === 409) {
+                throw new Error(`Duplicate entry...`);
+            }
+            throw new Error(`Failed to add book: ${res.status}`);
+        }
+    }
 
     async getCompleted(limit: number, offset: number): Promise<Book[]> {
         this.checkLimitOffset(limit, offset);
@@ -40,8 +57,10 @@ export class BookService implements IBookService {
             throw new Error(`Failed to fetch books: ${res.status}`);
         }
 
-        const data = await res.json();
-        return data;
+        const data: any[] = await res.json();
+        const books: Book[] = data.map(raw => Book.fromJSON(raw));
+
+        return books;
     }
 
 

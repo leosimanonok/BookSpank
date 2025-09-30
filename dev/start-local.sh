@@ -23,6 +23,11 @@ cleanup() {
   echo
   echo "🛑 Stopping all containers..."
   docker compose -f "${REPO_ROOT}/dev/docker-compose.yml" down
+
+  echo "🛑 Killing frontend process..."
+  if [[ ! -z "$FRONTEND_PID" ]]; then
+    kill -9 $FRONTEND_PID 2>/dev/null || true
+  fi
 }
 trap cleanup SIGINT SIGTERM
 
@@ -55,6 +60,7 @@ docker compose -f "${REPO_ROOT}/dev/docker-compose.yml" up --build -d backend
 echo "🌐 Starting Next.js frontend..."
 cd $NEXTJS_DIR
 npm run dev &
+FRONTEND_PID=$!
 echo "Frontend running..."
 
 cd -

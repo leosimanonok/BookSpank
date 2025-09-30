@@ -1,4 +1,4 @@
-import { Book } from "@/lib/model/Book";
+import { Book } from "@/model/Book"
 import { Card } from "./base/Card";
 import { Label } from "./base/Label";
 

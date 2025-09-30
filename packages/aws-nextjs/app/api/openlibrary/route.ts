@@ -1,5 +1,5 @@
 import { auth } from "@/app/actions";
-import { OpenLibraryService } from "@/lib/service/OpenLibraryService";
+import { OpenLibraryService } from "@/lib/service/impl/OpenLibraryServiceImpl";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -44,7 +44,9 @@ export async function GET(req: NextRequest) {
         );
     }
 
-    const searchRes = await OpenLibraryService.search({
+    const openLibService = new OpenLibraryService();
+
+    const searchRes = await openLibService.search({
         title,
         author,
         limit,

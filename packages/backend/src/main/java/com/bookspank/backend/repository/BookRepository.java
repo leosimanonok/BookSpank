@@ -6,9 +6,13 @@ import static com.bookspank.jooq.tables.Books.BOOKS;
 
 import java.util.List;
 
+import com.bookspank.backend.dto.PostBookForm;
 import com.bookspank.backend.model.Book;
 
 import lombok.RequiredArgsConstructor;
+
+import org.jooq.exception.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 
 @Repository
 @RequiredArgsConstructor
@@ -51,7 +55,7 @@ public class BookRepository {
                                                 BOOKS.SELECTED_BY)
                                 .from(BOOKS)
                                 .where(BOOKS.STARTED.isNotNull(), BOOKS.FINISHED.isNotNull())
-                                .orderBy(BOOKS.FINISHED.desc())
+                                .orderBy(BOOKS.FINISHED.desc(), BOOKS.ID.asc())
                                 .limit(limit)
                                 .offset(offset)
                                 .fetch()
@@ -88,6 +92,24 @@ public class BookRepository {
                                                 record.get(BOOKS.SELECTED_BY),
                                                 record.get(BOOKS.STARTED),
                                                 record.get(BOOKS.FINISHED)));
+        }
+
+        public void postUserBook(Integer userId, PostBookForm form) {
+                try {
+                        this.dsl
+                                        .insertInto(BOOKS)
+                                        .set(BOOKS.SELECTED_BY, userId)
+                                        .set(BOOKS.TITLE, form.getTitle())
+                                        .set(BOOKS.AUTHOR, form.getAuthor())
+                                        .set(BOOKS.COVER_ID, form.getCover_id()) // nullable
+                                        .execute();
+                } catch (DataAccessException e) {
+                        if (e.getCause() instanceof java.sql.SQLIntegrityConstraintViolationException) {
+                                // Duplicate entry detected
+                                throw new DuplicateKeyException("Book already exists", e);
+                        }
+                        throw e; // rethrow other exceptions
+                }
         }
 
 }
