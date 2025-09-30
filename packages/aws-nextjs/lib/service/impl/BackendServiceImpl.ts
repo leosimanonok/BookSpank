@@ -23,7 +23,21 @@ export class BackendService implements IBackendService {
         return fetch(backendQuery);
     }
     postUserBook(userId: number, bookInfo: OpenLibrarySearchResponse): Promise<Response> {
-        throw new Error("Method not implemented.");
+        const backendQuery = new URL(process.env.NEXT_PUBLIC_BACKEND_API_URL + `/books/user/${userId}`);
+        const { title, author, coverId } = bookInfo;
+        return fetch(backendQuery, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(
+                {
+                    title,
+                    author,
+                    cover_id: coverId
+                }
+            )
+        });
     }
 
 }
