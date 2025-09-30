@@ -14,13 +14,18 @@ export function OpenLibBookCard(props: props) {
     const { added, error, loading, addBook } = useAddBook();
 
     return (
-        <Card className="bg-accent flex flex-col">
-            <h3>{props.book.title}</h3>
-            <Label>Author: {props.book.author}</Label>
-            <Image src={props.book.coverUrls?.M ?? "/file.svg"}
+        <Card className="bg-accent flex flex-col justify-center p-4 text-center items-center">
+            <div className="mb-4">
+                <h3 className="text-center">{props.book.title}</h3>
+                <Label>Author: {props.book.author}</Label>
+            </div>
+
+            <Image className="mb-4" src={props.book.coverUrls?.M ?? "/file.svg"}
                 alt={`${props.book.title}-img`}
-                width={200}
-                height={200} />
+                width={200}           // max width
+                height={200}          // max height
+                style={{ width: "auto", height: "200px" }}
+            />
             <Button
                 disabled={loading || added}
                 onClick={() => addBook(props.book)}>

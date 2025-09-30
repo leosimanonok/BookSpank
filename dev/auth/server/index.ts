@@ -46,6 +46,7 @@ const app = issuer({
     providers: {
         code: CodeProvider(
             CodeUI({
+                // TODO: Check valid email here?
                 sendCode: async (email, code) => {
                     console.log(email, code)
                 },

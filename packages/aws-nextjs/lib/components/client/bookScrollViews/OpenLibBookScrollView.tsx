@@ -46,19 +46,22 @@ export function OpenLibBookScrollView() {
 
     return (
         <Card className="bg-red p-5">
-            <h1 className="text-2xl"> Search for a Book</h1>
-            <Label>Title:</Label>
-            <Input
-                name="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-            />
-            <Label>Author:</Label>
-            <Input
-                name="author"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
-            />
+            <div className="mb-4">
+                <h1 className="text-2xl"> Search for a Book</h1>
+                <Label>Title:</Label>
+                <Input
+                    name="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                <Label>Author:</Label>
+                <Input
+                    name="author"
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
+                />
+            </div>
+
             {/* if books avail, show */}
 
             {books.length > 0 && (
