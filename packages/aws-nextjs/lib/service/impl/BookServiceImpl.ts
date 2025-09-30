@@ -2,8 +2,24 @@
 
 import { Book } from "@/model/Book";
 import { IBookService } from "../BookService";
+import { OpenLibrarySearchResponse } from "@/lib/dto/OpenLibrarySearchResponse";
 
 export class BookService implements IBookService {
+    async addBook(userId: number, bookInfo: OpenLibrarySearchResponse): Promise<void> {
+        const res = await fetch(`${this._url}/books/user/${userId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!res.ok) {
+            if (res.status === 409) {
+                throw new Error(`Duplicate entry...`);
+            }
+            throw new Error(`Failed to add book: ${res.status}`);
+        }
+    }
 
     async getCompleted(limit: number, offset: number): Promise<Book[]> {
         this.checkLimitOffset(limit, offset);
