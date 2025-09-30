@@ -12,4 +12,6 @@ export interface IBackendService {
 
     postUserBook(userId: number, bookInfo: OpenLibrarySearchResponse): Promise<Response>;
 
+    getUser(email: string): Promise<{ userId: number; username: string } | null>;
+
 }

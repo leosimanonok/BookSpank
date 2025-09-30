@@ -57,8 +57,10 @@ export class BookService implements IBookService {
             throw new Error(`Failed to fetch books: ${res.status}`);
         }
 
-        const data = await res.json();
-        return data;
+        const data: any[] = await res.json();
+        const books: Book[] = data.map(raw => Book.fromJSON(raw));
+
+        return books;
     }
 
 
