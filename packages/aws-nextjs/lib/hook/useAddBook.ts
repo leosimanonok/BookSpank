@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { OpenLibrarySearchResponse } from "../dto/OpenLibrarySearchResponse";
 import { useBookService } from "./useBookService";
+import { useUser } from "../context/UserContext";
 
-type AddBookProps = {
-    userId: number;
-}
 
-export default function useAddBook({ userId }: AddBookProps) {
+export default function useAddBook() {
     const bookService = useBookService();
+    const { user } = useUser();
 
     const [added, setAdded] = useState(false);
     const [error, setError] = useState("");
@@ -16,7 +15,7 @@ export default function useAddBook({ userId }: AddBookProps) {
     const addBook = async (book: OpenLibrarySearchResponse) => {
         setLoading(true);
         try {
-            const res = await bookService.addBook(userId, book);
+            const res = await bookService.addBook(user.id, book);
             setAdded(true);
         }
         catch (err) {

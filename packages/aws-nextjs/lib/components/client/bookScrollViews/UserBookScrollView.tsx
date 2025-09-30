@@ -1,11 +1,9 @@
 "use client";
+import { useUser } from "@/lib/context/UserContext";
 import { BookScrollView } from "./BookScrollView";
 import useFetchUserBooks from "@/lib/hook/useFetchUserBooks";
 
-type UserBookScrollViewProps = {
-    userId: number;
-}
-
-export function UserBookScrollView({ userId }: UserBookScrollViewProps) {
-    return <BookScrollView fetchHook={() => useFetchUserBooks(userId)} />;
+export function UserBookScrollView() {
+    const { user } = useUser();
+    return <BookScrollView fetchHook={() => useFetchUserBooks(user.id)} />;
 }

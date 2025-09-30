@@ -1,3 +1,4 @@
+import { UserProvider } from "@/lib/context/UserContext";
 import { auth, login } from "../actions";
 import { Dashboard } from "@/lib/components/client/Dashboard";
 
@@ -15,9 +16,13 @@ export default async function DashboardPage() {
 
 
     return (
-        <div>
-            <Dashboard userId={subject.properties.id} username={subject.properties.username} />
-        </div>
+        // allows access to user info in child component hooks
+        <UserProvider initialUser={{ id: subject.properties.id, username: subject.properties.username }}>
+            <div>
+                <Dashboard />
+            </div>
+        </UserProvider>
+
     )
 
 }

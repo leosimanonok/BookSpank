@@ -11,6 +11,7 @@ export class BookService implements IBookService {
             headers: {
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify(bookInfo),
         });
 
         if (!res.ok) {

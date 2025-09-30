@@ -53,7 +53,7 @@ export default function useFetchOpenLibBooks() {
             console.log(`Total books: ${books.length + moreBooks.length}`);
         }
         catch (err) {
-            if (err.name === "AbortError") {
+            if (err instanceof Error && err.name === "AbortError") {
                 console.log("Fetch aborted...");
             }
             else {

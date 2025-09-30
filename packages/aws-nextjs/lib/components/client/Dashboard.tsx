@@ -4,19 +4,18 @@ import { useState } from "react";
 import { Button } from "./base/Button";
 import { OpenLibBookScrollView } from "./bookScrollViews/OpenLibBookScrollView";
 import { UserBookScrollView } from "./bookScrollViews/UserBookScrollView";
+import { useUser } from "@/lib/context/UserContext";
 
-type DashboardProps = {
-    username: string;
-    userId: number;
-}
-
-export function Dashboard({ username, userId }: DashboardProps) {
+export function Dashboard() {
     const [tab, setTab] = useState<"search" | "view">("view");
+
+
+    const { user } = useUser();
 
     return (
         <div className="flex flex-col items-center">
             {/* Centered, larger text */}
-            <h1 className="text-4xl font-bold text-center mb-6">{username}'s Dashboard</h1>
+            <h1 className="text-4xl font-bold text-center mb-6">{user.username}'s Dashboard</h1>
 
             <div className="flex gap-4">
                 <Button className="border-white border-2"
@@ -36,7 +35,7 @@ export function Dashboard({ username, userId }: DashboardProps) {
                     <OpenLibBookScrollView />
                 </div>
                 <div className={tab === "view" ? "block" : "hidden"}>
-                    <UserBookScrollView userId={userId} />
+                    <UserBookScrollView />
                 </div>
             </div>
 
