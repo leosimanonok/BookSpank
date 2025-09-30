@@ -30,7 +30,7 @@ echo "📦 Starting PostgreSQL database..."
 # cd packages
 docker compose -f "${REPO_ROOT}/dev/docker-compose.yml" up -d db
 
-echo "⏳ Waiting for database to be ready..."
+echo "⏳ Waiting for postgres to be ready..."
 until docker exec backend-db pg_isready -U bookspank > /dev/null 2>&1; do
   echo -n "."
   sleep 2

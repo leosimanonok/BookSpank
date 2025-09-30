@@ -2,9 +2,7 @@ version: "3.9"
 services:
   ## dont love that db is together with backend - need to think about
   db:
-    build:
-      context: ../packages/database
-      dockerfile: Dockerfile
+    image: postgres:15
     container_name: backend-db ## could this naming update be the reason automated type gen wasnt working?
     environment:
       POSTGRES_USER: bookspank
