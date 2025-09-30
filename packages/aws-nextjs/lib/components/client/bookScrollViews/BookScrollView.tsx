@@ -44,15 +44,9 @@ export function BookScrollView({ fetchHook }: BookScrollViewProps) {
 
     if (!books.length) {
         return (
-            <>
-                <Card>
-                    {loading ?
-                        <p>Loading books...</p>
-                        :
-                        <p>No books found...</p>
-                    }
-                </Card>
-            </>
+            <div className="flex justify-center">
+                <p >{loading ? "Loading books..." : "No books found..."}</p>
+            </div>
         )
     }
 

@@ -45,8 +45,8 @@ export function OpenLibBookScrollView() {
     }, [loading, hasMoreBooks, loadMoreBooks]);
 
     return (
-        <Card className="bg-red">
-            <h1> Search for a Book</h1>
+        <Card className="bg-red p-5">
+            <h1 className="text-2xl"> Search for a Book</h1>
             <Label>Title:</Label>
             <Input
                 name="title"
@@ -61,17 +61,19 @@ export function OpenLibBookScrollView() {
             />
             {/* if books avail, show */}
 
-            <Card className="w-2/3 mx-auto">
-                {books.map((b) => (
-                    <OpenLibBookCard key={b.id} book={b} />
-                ))}
+            {books.length > 0 && (
+                <Card className="w-2/3 mx-auto">
+                    {books.map((b) => (
+                        <OpenLibBookCard key={b.id} book={b} />
+                    ))}
 
-                {/* Scroll div at the bottom */}
-                <div ref={scrollRef} className="h-px w-full invisible" />
+                    {/* Scroll div at the bottom */}
+                    <div ref={scrollRef} className="h-px w-full invisible" />
 
-                {loading && <p className="mt-2 text-sm text-black text-center">Loading more books...</p>}
-                {!hasMoreBooks && !loading && <p className="mt-2 text-sm text-black text-center">No more matching books...</p>}
-            </Card>
+                    {loading && <p className="mt-2 text-sm text-black text-center">Loading more books...</p>}
+                    {!hasMoreBooks && !loading && <p className="mt-2 text-sm text-black text-center">No more matching books...</p>}
+                </Card>
+            )}
         </Card>
     )
 }

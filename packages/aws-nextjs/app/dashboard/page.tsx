@@ -1,8 +1,4 @@
-import { redirect } from "next/navigation";
-import { auth } from "../actions";
-import { UserBookScrollView } from "@/lib/components/client/bookScrollViews/UserBookScrollView";
-import { Card } from "@/lib/components/client/base/Card";
-import { OpenLibBookScrollView } from "@/lib/components/client/bookScrollViews/OpenLibBookScrollView";
+import { auth, login } from "../actions";
 import { Dashboard } from "@/lib/components/client/Dashboard";
 
 /**
@@ -13,7 +9,8 @@ export default async function DashboardPage() {
     const subject = await auth();
 
     if (!subject) {
-        redirect("/");
+        await login("/dashboard");
+        return null; // next doesnt understand that login only returns redirect for some reason...
     }
 
 

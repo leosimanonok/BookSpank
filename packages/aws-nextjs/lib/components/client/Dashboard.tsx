@@ -14,28 +14,33 @@ export function Dashboard({ username, userId }: DashboardProps) {
     const [tab, setTab] = useState<"search" | "view">("view");
 
     return (
-        <div>
-            <h1>{username}'s Dashboard</h1>
-            <div>
-                <Button
+        <div className="flex flex-col items-center">
+            {/* Centered, larger text */}
+            <h1 className="text-4xl font-bold text-center mb-6">{username}'s Dashboard</h1>
+
+            <div className="flex gap-4">
+                <Button className="border-white border-2"
                     onClick={(e) => setTab("view")}
                     disabled={tab === "view"}>
                     View My Books
                 </Button>
-                <Button
+                <Button className="border-white border-2"
                     onClick={(e) => setTab("search")}
                     disabled={tab === "search"}>
                     Search for Books
                 </Button>
             </div>
 
-            {tab === "search" && (
-                <OpenLibBookScrollView />
-            )}
+            <div className="w-2/3 mt-10">
+                <div className={tab === "search" ? "block" : "hidden"}>
+                    <OpenLibBookScrollView />
+                </div>
+                <div className={tab === "view" ? "block" : "hidden"}>
+                    <UserBookScrollView userId={userId} />
+                </div>
+            </div>
 
-            {tab === "view" && (
-                <UserBookScrollView userId={userId} />
-            )}
+
         </div>
     )
 

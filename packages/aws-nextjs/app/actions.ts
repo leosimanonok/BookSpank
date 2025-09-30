@@ -28,7 +28,7 @@ export async function auth() {
     return verified.subject
 }
 
-export async function login() {
+export async function login(redirectTo?: string): Promise<never> {
     const cookies = await getCookies()
     const accessToken = cookies.get("access_token")
     const refreshToken = cookies.get("refresh_token")
@@ -39,15 +39,21 @@ export async function login() {
         })
         if (!verified.err && verified.tokens) {
             await setTokens(verified.tokens.access, verified.tokens.refresh)
-            redirect("/")
+            redirect(redirectTo ?? "/")
         }
     }
+
+    console.log(`redirectTo in login: ${redirectTo}`);
 
     const headers = await getHeaders()
     const host = headers.get("host")
     const protocol = host?.includes("localhost") ? "http" : "https"
-    const { url } = await client.authorize(`${protocol}://${host}/api/callback`, "code")
-    redirect(url)
+    // include redirectTo in the authorize URL as state or query param
+    const { url } = await client.authorize(
+        `${protocol}://${host}/api/callback?redirectTo=${encodeURIComponent(redirectTo ?? "/")}`,
+        "code"
+    );
+    redirect(url);
 }
 
 export async function logout() {
