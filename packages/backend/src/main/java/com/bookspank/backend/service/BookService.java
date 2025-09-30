@@ -11,4 +11,6 @@ public interface BookService {
 
     public List<Book> getUserBooks(Integer userId, Integer limit, Integer offset);
 
+    public Book getCurrentBook();
+
 }

@@ -44,6 +44,25 @@ export class BookService implements IBookService {
         return data;
     }
 
+    async getCurrentBook(): Promise<Book | null> {
+        const res = await fetch(`${this._url}/books/current`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!res.ok) {
+            if (res.status === 404) {
+                return null;
+            }
+            throw new Error(`Failed to fetch current book: ${res.status}`);
+        }
+
+        const data = await res.json();
+        return Book.fromJSON(data);
+    }
+
 
     private checkLimitOffset(limit: number, offset: number) {
         if (limit <= 0) throw new RangeError("Limit must be greater than 0");
