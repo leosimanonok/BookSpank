@@ -46,4 +46,9 @@ public class BookController {
         return bookService.getUserBooks(userId, limit, offset);
     }
 
+    @GetMapping("/current")
+    public Book getCurrentBook() {
+        return bookService.getCurrentBook();
+    }
+
 }

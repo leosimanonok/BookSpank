@@ -10,3 +10,5 @@ CREATE TABLE books (
     selected_by INT NOT NULL REFERENCES users(id),
     UNIQUE(title, author)
 );
+
+CREATE UNIQUE INDEX enforce_single_null_in_finished ON books ((finished IS NULL)) WHERE finished IS NULL;
