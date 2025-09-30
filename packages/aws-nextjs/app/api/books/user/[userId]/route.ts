@@ -1,3 +1,4 @@
+import { BackendService } from "@/lib/service/impl/BackendServiceImpl";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -41,14 +42,8 @@ export async function GET(req: NextRequest, { params }: { params: Promise<Params
         throw new Error("Missing backend url...");
     }
 
-    const backendQuery = new URL(process.env.NEXT_PUBLIC_BACKEND_API_URL + `/books/user/${userId}`);
-    const backendParams = new URLSearchParams();
-    backendParams.set("limit", limit.toString());
-    backendParams.set("offset", offset.toString());
-
-    backendQuery.search = backendParams.toString();
-
-    const backendRes = await fetch(backendQuery);
+    const backendService = new BackendService();
+    const backendRes = await backendService.getUserBooks(parseInt(userId), limit, offset);
 
     if (!backendRes.ok) {
         console.error(`${backendRes.status} - ${backendRes.statusText}`);
@@ -63,3 +58,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<Params
     return NextResponse.json(backendResJson);
 
 };
+
+export async function POST(req: NextRequest, { params }: { params: Promise<Params> }) {
+
+}
