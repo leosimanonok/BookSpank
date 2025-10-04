@@ -11,25 +11,22 @@ export default function CurrentSpank() {
     const bookService = useBookService();
 
     useEffect(() => {
-        let cancelled = false;
 
         const fetchCurrentBook = async () => {
             try {
                 setLoading(true);
                 const book = await bookService.getCurrentBook();
-                if (!cancelled) setCurrentBook(book);
+                setCurrentBook(book);
             } catch (err) {
-                if (!cancelled) setError(err instanceof Error ? err.message : "Failed to fetch current book");
+                setError(err instanceof Error ? err.message : "Failed to fetch current book");
             } finally {
-                if (!cancelled) setLoading(false);
+                setLoading(false);
             }
         };
 
         fetchCurrentBook();
 
-        return () => {
-            cancelled = true;
-        };
+        return () => {};
     }, []);
 
     return (
