@@ -1,6 +1,7 @@
 package com.bookspank.backend.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public void postUserBook(Integer userId, PostBookForm form) {
         this.bookRepository.postUserBook(userId, form);
+    }
+
+    public Optional<Book> getCurrentBook() {
+        return this.bookRepository.getCurrentBook();
     }
 
 }

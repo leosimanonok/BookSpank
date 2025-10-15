@@ -53,12 +53,6 @@ public class Book {
             LocalDate started,
             LocalDate finished) {
 
-        if (started == null || finished == null)
-            throw new IllegalArgumentException("Start and finish dates cannot be null");
-
-        if (started.isAfter(finished))
-            throw new IllegalArgumentException("Start date must be before finish date");
-
         this.id = id;
         this.title = title;
         this.author = author;
