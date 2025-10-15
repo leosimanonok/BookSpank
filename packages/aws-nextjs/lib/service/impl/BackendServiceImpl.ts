@@ -1,7 +1,11 @@
 import { OpenLibrarySearchResponse } from "@/lib/dto/OpenLibrarySearchResponse";
 import { IBackendService } from "../BackendService";
+import { ClubHistoryService } from "./ClubHistoryServiceImpl";
 
 export class BackendService implements IBackendService {
+    History: ClubHistoryService = new ClubHistoryService();
+
+
     async getUser(email: string): Promise<{ id: number; username: string; } | null> {
 
         const backendQuery = new URL(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users`);

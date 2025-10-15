@@ -1,5 +1,5 @@
 import { ClubHistoryEntry } from "@/lib/model/ClubHistoryEntry";
-import { IClubHistoryService } from "../BackendClubHistoryService";
+import { IClubHistoryService } from "../ClubHistoryService";
 
 
 export class ClubHistoryService implements IClubHistoryService {

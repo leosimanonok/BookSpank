@@ -15,8 +15,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ClubHistoryServiceImpl implements ClubHistoryService {
 
-    private final ClubHistoryRespository respository;
-
     @Override
     public List<ClubHistoryEntry> getClubHistory(Integer limit, Integer offset) {
         return respository.getClubHistory(limit, offset);
@@ -26,4 +24,7 @@ public class ClubHistoryServiceImpl implements ClubHistoryService {
     public Optional<ClubHistoryEntry> getCurrent() {
         return respository.getCurrent();
     }
+
+    private final ClubHistoryRespository respository;
+
 }

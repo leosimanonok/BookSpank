@@ -4,6 +4,7 @@
  */
 
 import { OpenLibrarySearchResponse } from "../dto/OpenLibrarySearchResponse";
+import { IClubHistoryService } from "./ClubHistoryService";
 
 export interface IBackendService {
     getUserBooks(userId: number, limit: number, offset: number): Promise<Response>;
@@ -13,5 +14,7 @@ export interface IBackendService {
     postUserBook(userId: number, bookInfo: OpenLibrarySearchResponse): Promise<Response>;
 
     getUser(email: string): Promise<{ id: number; username: string } | null>;
+
+    History: IClubHistoryService;
 
 }

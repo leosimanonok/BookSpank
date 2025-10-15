@@ -1,8 +1,8 @@
 "use client";
 
-import useFetchCompletedBooks from "@/lib/hook/useFetchCompletedBooks";
+import useFetchClubHistory from "@/lib/hook/useFetchCompletedBooks";
 import { BookScrollView } from "./BookScrollView";
 
 export function CompletedBookScrollView() {
-    return <BookScrollView fetchHook={useFetchCompletedBooks} />;
+    return <BookScrollView fetchHook={useFetchClubHistory} />;
 }
