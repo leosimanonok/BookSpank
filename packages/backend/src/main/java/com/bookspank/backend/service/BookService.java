@@ -1,6 +1,7 @@
 package com.bookspank.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.bookspank.backend.model.Book;
 
@@ -11,6 +12,6 @@ public interface BookService {
 
     public List<Book> getUserBooks(Integer userId, Integer limit, Integer offset);
 
-    public Book getCurrentBook();
+    public Optional<Book> getCurrentBook();
 
 }
