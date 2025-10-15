@@ -1,27 +1,28 @@
-import { redirect } from "next/navigation";
-import { auth } from "../actions";
-import { BookService } from "@/service/BookServiceImpl";
+import { UserProvider } from "@/lib/context/UserContext";
+import { auth, login } from "../actions";
+import { Dashboard } from "@/lib/components/client/Dashboard";
 
 /**
  * Page that allows signed in users to add books to their list
  */
-export async function Dashboard() {
+export default async function DashboardPage() {
 
     const subject = await auth();
 
     if (!subject) {
-        redirect("/");
+        await login("/dashboard");
+        return null; // next doesnt understand that login only returns redirect for some reason...
     }
-
-    const bookService = new BookService();
-
-    const LIMIT = 20;
 
 
     return (
-        <div>
-            <p> Dashboard for {subject.properties.username} </p>
-        </div>
+        // allows access to user info in child component hooks
+        <UserProvider initialUser={{ id: subject.properties.id, username: subject.properties.username }}>
+            <div>
+                <Dashboard />
+            </div>
+        </UserProvider>
+
     )
 
 }

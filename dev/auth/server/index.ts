@@ -6,13 +6,38 @@ import { subjects } from "./subjects.js"
 import { serve } from "@hono/node-server";
 
 
-async function getUser(email: string) {
-    // Get user from database and return user ID
-    return {
-        id: 111,
-        username: "test"
+// Taken from backendService
+async function getUser(email: string): Promise<{ id: number; username: string; } | null> {
+
+    const backendQuery = new URL(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users`);
+    const backendParams = new URLSearchParams();
+    backendParams.set("email", email);
+
+    backendQuery.search = backendParams.toString();
+
+    const res = await fetch(backendQuery, {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (!res.ok) {
+        if (res.status === 404) {
+            return null;
+        }
+        throw new Error(`Failed to fetch user: ${res.statusText}`);
     }
+
+    return res.json();
 }
+
+// async function getUser(email: string) {
+//     // Get user from database and return user ID
+//     return {
+//         id: 111,
+//         username: "test"
+//     }
+// }
 
 
 const app = issuer({
@@ -21,6 +46,7 @@ const app = issuer({
     providers: {
         code: CodeProvider(
             CodeUI({
+                // TODO: Check valid email here?
                 sendCode: async (email, code) => {
                     console.log(email, code)
                 },
@@ -30,6 +56,13 @@ const app = issuer({
     success: async (ctx, value) => {
         if (value.provider === "code") {
             const user = await getUser(value.claims.email);
+
+            console.log("In sucess...");
+            console.dir(user);
+
+            if (user === null) {
+                throw new Error("Invalid email")
+            }
             return ctx.subject("user", user)
         }
         throw new Error("Invalid provider")

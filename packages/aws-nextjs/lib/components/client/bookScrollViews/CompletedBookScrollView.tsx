@@ -1,3 +1,5 @@
+"use client";
+
 import useFetchCompletedBooks from "@/lib/hook/useFetchCompletedBooks";
 import { BookScrollView } from "./BookScrollView";
 
