@@ -6,14 +6,6 @@ import { DynamoStorage } from "@openauthjs/openauth/storage/dynamo"
 import { subjects } from "./subjects"
 import { BackendService } from "@/service/BackendServiceImpl";
 
-async function getUser(email: string) {
-    // Get user from database and return user ID
-    return {
-        id: 111,
-        username: "test"
-    }
-}
-
 const backendService = new BackendService();
 
 const app = issuer({
