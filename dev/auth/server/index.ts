@@ -53,7 +53,6 @@ const app = issuer({
 
                     const user = await getUser(claims.email);
                     if (!user) {
-                        // Rejecting here will cause CodeUI to show an error message
                         throw new Error("SPANKERS ONLY!!!!");
                     }
 
@@ -68,11 +67,8 @@ const app = issuer({
         if (value.provider === "code") {
             const user = await getUser(value.claims.email);
 
-            console.log("In sucess...");
-            console.dir(user);
-
-            if (user === null) {
-                throw new Error("Invalid email")
+            if (!user) {
+                throw new Error("SPANKERS ONLY!!!!");
             }
             return ctx.subject("user", user)
         }

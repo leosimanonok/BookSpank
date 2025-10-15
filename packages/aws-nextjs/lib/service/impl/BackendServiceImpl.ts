@@ -2,7 +2,7 @@ import { OpenLibrarySearchResponse } from "@/lib/dto/OpenLibrarySearchResponse";
 import { IBackendService } from "../BackendService";
 
 export class BackendService implements IBackendService {
-    async getUser(email: string): Promise<{ userId: number; username: string; } | null> {
+    async getUser(email: string): Promise<{ id: number; username: string; } | null> {
 
         const backendQuery = new URL(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users`);
         const backendParams = new URLSearchParams();
