@@ -32,19 +32,12 @@ public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping
-    public List<Book> getBooks(
-            @RequestParam @Min(1) Integer limit,
-            @RequestParam @Min(0) Integer offset) {
-        return this.bookService.getBooks(limit, offset);
-    }
-
-    @GetMapping("/completed")
-    public List<Book> getCompletedBooks(
-            @RequestParam @Min(1) Integer limit,
-            @RequestParam @Min(0) Integer offset) {
-        return this.bookService.getCompletedBooks(limit, offset);
-    }
+    // @GetMapping("/completed")
+    // public List<Book> getCompletedBooks(
+    // @RequestParam @Min(1) Integer limit,
+    // @RequestParam @Min(0) Integer offset) {
+    // return this.bookService.getCompletedBooks(limit, offset);
+    // }
 
     @GetMapping("/user/{userId}")
     public List<Book> getUserBooks(
@@ -67,10 +60,11 @@ public class BookController {
         }
     }
 
-    @GetMapping("/current")
-    public Book getCurrentBook() {
-        return bookService.getCurrentBook()
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Current book not found"));
-    }
+    // @GetMapping("/current")
+    // public Book getCurrentBook() {
+    // return bookService.getCurrentBook()
+    // .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Current
+    // book not found"));
+    // }
 
 }
