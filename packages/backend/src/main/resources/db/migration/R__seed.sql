@@ -349,7 +349,7 @@ VALUES
                 ),
                 '2025-08-17',
                 '2025-09-15'
-        ) ON CONFLICT (book_id, selected_by) DO
+        ) ON CONFLICT (book_id) DO
 UPDATE
 SET
         started = EXCLUDED.started,
