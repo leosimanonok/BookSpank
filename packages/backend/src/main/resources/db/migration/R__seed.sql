@@ -13,40 +13,58 @@ SET
 
 -- Insert books metadata only
 INSERT INTO
-        books (title, author)
+        books (title, author, cover_id)
 VALUES
-        ('The Road', 'Cormac McCarthy'),
+        ('The Road', 'Cormac McCarthy', 14818120),
         (
                 'The Origins and History of Consciousness',
-                'Erich Neumann'
+                'Erich Neumann',
+                7148804
         ),
-        ('A Brief History of Time', 'Stephen Hawking'),
-        ('The Alchemist', 'Paulo Coelho'),
-        ('The Stranger', 'Albert Camus'),
-        ('Meditations', 'Marcus Aurelius'),
-        ('Mans Search for Meaning', 'Viktor E. Frankl'),
+        (
+                'A Brief History of Time',
+                'Stephen Hawking',
+                15104429
+        ),
+        ('The Alchemist', 'Paulo Coelho', 15121528),
+        ('The Stranger', 'Albert Camus', 15118287),
+        ('Meditations', 'Marcus Aurelius', 5559829),
+        (
+                'Mans Search for Meaning',
+                'Viktor E. Frankl',
+                15102812
+        ),
         (
                 'Gun Country: Gun Capitalism, Culture, and Control in Cold War America',
-                'Andrew C. McKevitt'
+                'Andrew C. McKevitt',
+                NULL
         ),
         (
                 'A Testament of Hope: The Essential Writings and Speeches',
-                'Martin Luther King Jr.'
+                'Martin Luther King Jr.',
+                32251
         ),
         (
                 'Anti-Intellectualism in American Life',
-                'Richard Hofstadter'
+                'Richard Hofstadter',
+                7162823
         ),
-        ('The Sirens of Titan', 'Kurt Vonnegut Jr.'),
+        (
+                'The Sirens of Titan',
+                'Kurt Vonnegut Jr.',
+                15130491
+        ),
         (
                 'Capital: A Crtique of Political Economy Volume 1',
-                'Karl Marx'
+                'Karl Marx',
+                14923999
         ),
         (
                 'Manufacturing Consent: The Political Economy of the Mass Media',
-                'Edward S. Herman and Noam Chomsky'
+                'Edward S. Herman and Noam Chomsky',
+                7900362
         ),
-        ('Catch-22', 'Joseph Heller') ON CONFLICT (title, author) DO NOTHING;
+        ('Catch-22', 'Joseph Heller', 14925170) ON CONFLICT (title, author) DO NOTHING;
 
 -- Insert reading history
 INSERT INTO
