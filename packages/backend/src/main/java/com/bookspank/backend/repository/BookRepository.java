@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import static com.bookspank.jooq.tables.Books.BOOKS;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.bookspank.backend.model.Book;
 
@@ -90,7 +91,7 @@ public class BookRepository {
                                                 record.get(BOOKS.FINISHED)));
         }
 
-        public Book getCurrentBook() {
+        public Optional<Book> getCurrentBook() {
                 return this.dsl
                                 .select(
                                                 BOOKS.ID,
@@ -103,15 +104,7 @@ public class BookRepository {
                                                 BOOKS.SELECTED_BY)
                                 .from(BOOKS)
                                 .where(BOOKS.STARTED.isNotNull(), BOOKS.FINISHED.isNull())
-                                .fetchOne()
-                                .map(record -> new Book(
-                                                record.get(BOOKS.ID),
-                                                record.get(BOOKS.TITLE),
-                                                record.get(BOOKS.AUTHOR),
-                                                record.get(BOOKS.COVER_ID),
-                                                record.get(BOOKS.SELECTED_BY),
-                                                record.get(BOOKS.STARTED),
-                                                record.get(BOOKS.FINISHED)));
+                                .fetchOptionalInto(Book.class);
         }
 
 }
