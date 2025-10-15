@@ -46,9 +46,20 @@ const app = issuer({
     providers: {
         code: CodeProvider(
             CodeUI({
-                // TODO: Check valid email here?
-                sendCode: async (email, code) => {
-                    console.log(email, code)
+                sendCode: async (claims, code) => {
+                    if (!claims.email) {
+                        throw new Error("No email received...");
+                    }
+
+                    const user = await getUser(claims.email);
+                    if (!user) {
+                        // Rejecting here will cause CodeUI to show an error message
+                        throw new Error("Invalid email address");
+                    }
+
+                    // TODO: On prod need to send actual email
+                    // Otherwise, continue sending your code (email/SMS/etc.)
+                    console.log(`✅ Sending code ${code} to ${claims.email}`);
                 },
             }),
         ),
