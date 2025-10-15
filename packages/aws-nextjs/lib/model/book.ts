@@ -13,7 +13,7 @@ export class Book {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.cover_id = cover_id,
+        this.cover_id = cover_id;
     }
 
     public static fromJSON(json: any): Book {
