@@ -10,16 +10,28 @@ type ToastProps = {
 
 export default function Toast({ message, duration }: ToastProps) {
     const [visible, setVisible] = useState(true);
+    const [fading, setFading] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => setVisible(false), duration ?? 5000);
-        return () => clearTimeout(timer);
-    }, []);
 
-    if (!visible) return null;
+        const myDuration = duration ?? 5000;
+        const fadeStart = Math.max(myDuration - 500, 0);
+        const fadeTimer = setTimeout(() => setFading(true), fadeStart);
+        const removeTimer = setTimeout(() => setVisible(false), myDuration);
+        return () => {
+            clearTimeout(fadeTimer);
+            clearTimeout(removeTimer);
+        };
+    }, [duration]);
+
+    if (!visible && !fading) return null;
+
 
     return (
-        <div className="fixed top-4 right-4 z-50 bg-red-500 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-100 animate-fade-out">
+        <div
+            className={`bg-red-500 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 ${fading ? "opacity-0" : "opacity-100"
+                }`}
+        >
             {message}
         </div>
     );

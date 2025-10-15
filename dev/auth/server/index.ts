@@ -54,7 +54,7 @@ const app = issuer({
                     const user = await getUser(claims.email);
                     if (!user) {
                         // Rejecting here will cause CodeUI to show an error message
-                        throw new Error("Invalid email address");
+                        throw new Error("SPANKERS ONLY!!!!");
                     }
 
                     // TODO: On prod need to send actual email
