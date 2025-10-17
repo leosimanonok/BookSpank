@@ -24,7 +24,6 @@ export class ReadingListService implements IReadingListService {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                userId,
                 bookId
             }),
         });
@@ -51,7 +50,6 @@ export class ReadingListService implements IReadingListService {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                userId,
                 bookId,
                 newPosition,
             }),
