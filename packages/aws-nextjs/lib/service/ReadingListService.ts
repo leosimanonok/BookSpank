@@ -19,6 +19,6 @@ export interface IReadingListService {
      * @param bookId 
      * @param newPosition 
      */
-    updateBookPosition(userId: number, bookId: number, newPosition: number): Promise<Response>;
+    updateBookPosition(userId: number, bookId: number, origPosition: number, newPosition: number): Promise<Response>;
 
 }

@@ -7,7 +7,7 @@ import static com.bookspank.jooq.tables.Books.BOOKS;
 import java.util.List;
 import java.util.Optional;
 
-import com.bookspank.backend.dto.PostBookForm;
+import com.bookspank.backend.dto.PostBookRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,7 +31,7 @@ public class BookRepository {
          * @param form
          * @return inserted bookId
          */
-        public Integer addBook(PostBookForm form) {
+        public Integer addBook(PostBookRequest form) {
                 try {
                         return this.dsl.insertInto(BOOKS)
                                         .set(BOOKS.TITLE, form.getTitle())

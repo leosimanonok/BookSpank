@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 // required for json parsing
 @Data
 @NoArgsConstructor
-public class PostBookForm {
+public class PostBookRequest {
     @NotNull
     private String title;
 

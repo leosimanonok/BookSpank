@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bookspank.backend.dto.PostBookForm;
+import com.bookspank.backend.dto.PostBookRequest;
+import com.bookspank.backend.dto.UpdateBookPositionRequest;
 import com.bookspank.backend.model.ReadingListEntry;
 import com.bookspank.backend.service.ReadingListService;
 
@@ -42,7 +43,7 @@ public class ReadingListController {
     @PostMapping("/user/{userId}")
     public ResponseEntity<?> addBook(
             @PathVariable @NotNull Integer userId,
-            @RequestBody @Valid PostBookForm postBookForm) {
+            @RequestBody @Valid PostBookRequest postBookForm) {
 
         try {
             service.addBook(userId, postBookForm);
@@ -63,10 +64,8 @@ public class ReadingListController {
     @PatchMapping("/user/{userId}")
     public ResponseEntity<?> updateBookPosition(
             @PathVariable @NotNull Integer userId,
-            @RequestBody @NotNull Integer bookId,
-            @RequestBody @NotNull Integer origPosition,
-            @RequestBody @NotNull Integer newPosition) {
-        service.updateBookPosition(userId, bookId, origPosition, newPosition);
+            @RequestBody @Valid UpdateBookPositionRequest req) {
+        service.updateBookPosition(userId, req.getBookId(), req.getOrigPosition(), req.getNewPosition());
         return ResponseEntity.status(HttpStatus.OK).body("Book position updated successfully.");
     }
 

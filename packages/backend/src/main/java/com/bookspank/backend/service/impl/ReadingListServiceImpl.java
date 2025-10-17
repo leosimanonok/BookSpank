@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bookspank.backend.dto.PostBookForm;
+import com.bookspank.backend.dto.PostBookRequest;
 import com.bookspank.backend.model.ReadingListEntry;
 import com.bookspank.backend.repository.BookRepository;
 import com.bookspank.backend.repository.ReadingListRespository;
@@ -24,7 +24,7 @@ public class ReadingListServiceImpl implements ReadingListService {
 
     @Override
     @Transactional
-    public void addBook(Integer userId, PostBookForm form) {
+    public void addBook(Integer userId, PostBookRequest form) {
         Integer bookId = bookRepository.getIdFromTitleAndAuthor(form.getTitle(), form.getTitle());
 
         if (bookId == null) {
