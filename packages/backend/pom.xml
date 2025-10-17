@@ -175,12 +175,12 @@
                 <artifactId>jooq-codegen-maven</artifactId>
                 <version>3.19.11</version>
                 <configuration>
-                    <!-- JDBC connection to local Docker DB -->
+                    <!-- JDBC connection using configurable properties -->
                     <jdbc>
                         <driver>org.postgresql.Driver</driver>
-                        <url>jdbc:postgresql://localhost:5432/bookspank_dev</url>
-                        <user>bookspank</user>
-                        <password>password</password>
+                        <url>${db.url}</url>
+                        <user>${db.user}</user>
+                        <password>${db.password}</password>
                     </jdbc>
 
                     <!-- Generator configuration -->

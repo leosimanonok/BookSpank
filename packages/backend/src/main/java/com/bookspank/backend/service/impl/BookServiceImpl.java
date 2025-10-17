@@ -37,4 +37,9 @@ public class BookServiceImpl implements BookService {
         this.bookRepository.postUserBook(userId, form);
     }
 
+    @Override
+    public Book getCurrentBook() {
+        return this.bookRepository.getCurrentBook();
+    }
+
 }

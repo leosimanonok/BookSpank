@@ -7,5 +7,7 @@ export interface IBookService {
 
     getUserBooks(userId: number, limit: number, offset: number): Promise<Book[]>;
 
-    addBook(userId: number, bookInfo: OpenLibrarySearchResponse): Promise<void>;
+    addBook(userId: number, bookInfo: OpenLibrarySearchResponse): Promise<void>;;
+
+    getCurrentBook(): Promise<Book | null>;
 }
