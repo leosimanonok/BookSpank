@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import static com.bookspank.jooq.tables.Books.BOOKS;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.bookspank.backend.dto.PostBookForm;
 import com.bookspank.backend.model.Book;
@@ -110,6 +111,22 @@ public class BookRepository {
                         }
                         throw e; // rethrow other exceptions
                 }
+        }
+
+        public Optional<Book> getCurrentBook() {
+                return this.dsl
+                                .select(
+                                                BOOKS.ID,
+                                                BOOKS.TITLE,
+                                                BOOKS.AUTHOR,
+                                                BOOKS.COVER_ID,
+                                                BOOKS.COVER_ID,
+                                                BOOKS.STARTED,
+                                                BOOKS.FINISHED,
+                                                BOOKS.SELECTED_BY)
+                                .from(BOOKS)
+                                .where(BOOKS.STARTED.isNotNull(), BOOKS.FINISHED.isNull())
+                                .fetchOptionalInto(Book.class);
         }
 
 }

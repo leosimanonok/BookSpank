@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:local": "./dev/start-local.sh",
+    "dev:local": "./dev/start-local.sh $@",
     "dev:aws": "npx sst dev"
   },
   "repository": {

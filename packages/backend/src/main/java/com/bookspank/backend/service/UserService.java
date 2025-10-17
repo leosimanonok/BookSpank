@@ -9,4 +9,5 @@ public interface UserService {
     public Optional<User> getUser(String email);
 
     public Optional<User> updateUsername(UpdateUserForm form);
+
 }

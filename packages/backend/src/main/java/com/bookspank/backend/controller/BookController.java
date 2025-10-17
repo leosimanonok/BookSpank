@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.bookspank.backend.dto.PostBookForm;
 import com.bookspank.backend.model.Book;
@@ -64,6 +65,12 @@ public class BookController {
         } catch (DuplicateKeyException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Book already exists");
         }
+    }
+
+    @GetMapping("/current")
+    public Book getCurrentBook() {
+        return bookService.getCurrentBook()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Current book not found"));
     }
 
 }

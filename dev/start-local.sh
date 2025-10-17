@@ -35,12 +35,21 @@ echo "📦 Starting PostgreSQL database..."
 # cd packages
 docker compose -f "${REPO_ROOT}/dev/docker-compose.yml" up -d db
 
-echo "⏳ Waiting for database to be ready..."
-until docker exec backend-db pg_isready -U bookspank -d bookspank_dev > /dev/null 2>&1; do
+echo "⏳ Waiting for postgres to be ready..."
+until docker exec backend-db pg_isready -U bookspank > /dev/null 2>&1; do
   echo -n "."
   sleep 2
 done
 echo "✅ PostgreSQL is ready!"
+
+# If requested, wipe db
+if [ "$1" == "wipe-db" ]; then
+  echo "🧹 Wiping existing database..."
+  PGPASSWORD=password psql -h localhost -U bookspank -d postgres -c "DROP DATABASE bookspank_dev;" 2>&1 && echo "🧹 Dropped existing bookspank_dev database" || echo "No existing bookspank_dev database to drop"
+fi
+
+echo "🔧 Ensuring bookspank_dev database exists..."
+docker exec backend-db psql -U bookspank -d postgres -c "CREATE DATABASE bookspank_dev;" 2>&1 || echo "Database bookspank_dev already exists or was created automatically"
 
 echo "🔄 Running database migrations..."
 cd $JAVA_DIR
@@ -51,7 +60,10 @@ mvn org.flywaydb:flyway-maven-plugin:10.20.0:migrate \
   -Dflyway.locations=filesystem:src/main/resources/db/migration
 
 echo "🏗️ Generating jOOQ code..."
-mvn jooq-codegen:generate
+mvn jooq-codegen:generate \
+  -Ddb.url=jdbc:postgresql://localhost:5432/bookspank_dev \
+  -Ddb.user=bookspank \
+  -Ddb.password=password
 
 echo "🔨 Building and starting backend..."
 cd -
