@@ -38,7 +38,8 @@ public class BookRepository {
                                         .set(BOOKS.AUTHOR, form.getAuthor())
                                         .set(BOOKS.COVER_ID, form.getCover_id()) // nullable
                                         .returning(BOOKS.ID)
-                                        .execute();
+                                        .fetchOne()
+                                        .getId();
                 } catch (DataAccessException e) {
                         if (e.getCause() instanceof java.sql.SQLIntegrityConstraintViolationException) {
                                 // Duplicate entry detected

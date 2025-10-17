@@ -1,7 +1,6 @@
-import { useBackendService } from "@/hook/useBackendService";
+import { ReadingListService } from "@/client_service/ReadingListServiceImpl";
 
 export const useReadingListService = () => {
-    const service = useBackendService();
-
-    return service.ReadingList;
+    const service = new ReadingListService();
+    return service;
 };

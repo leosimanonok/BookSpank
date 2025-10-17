@@ -14,8 +14,6 @@ export class ReadingListService implements IReadingListService {
             },
             body: JSON.stringify(bookInfo),
         });
-
-
     }
 
     async removeBook(userId: number, bookId: number): Promise<void> {
