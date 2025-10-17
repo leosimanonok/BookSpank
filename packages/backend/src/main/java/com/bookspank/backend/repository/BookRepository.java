@@ -19,6 +19,37 @@ import org.springframework.dao.DuplicateKeyException;
 @RequiredArgsConstructor
 public class BookRepository {
 
+        public Integer getIdFromTitleAndAuthor(String title, String author) {
+                return this.dsl.select(BOOKS.ID)
+                                .from(BOOKS)
+                                .where(BOOKS.TITLE.eq(title))
+                                .and(BOOKS.AUTHOR.eq(author))
+                                .fetchOneInto(Integer.class);
+        }
+
+        /**
+         * 
+         * @param form
+         * @return inserted bookId
+         */
+        public Integer addBook(PostBookForm form) {
+                try {
+                        return this.dsl.insertInto(BOOKS)
+                                        .set(BOOKS.TITLE, form.getTitle())
+                                        .set(BOOKS.AUTHOR, form.getAuthor())
+                                        .set(BOOKS.COVER_ID, form.getCover_id()) // nullable
+                                        .returning(BOOKS.ID)
+                                        .execute();
+                } catch (DataAccessException e) {
+                        if (e.getCause() instanceof java.sql.SQLIntegrityConstraintViolationException) {
+                                // Duplicate entry detected
+                                throw new DuplicateKeyException("Book already exists", e);
+                        }
+                        throw e; // rethrow other exceptions
+                }
+
+        }
+
         private final DSLContext dsl;
 
         public List<Book> getBooks(Integer limit, Integer offset) {

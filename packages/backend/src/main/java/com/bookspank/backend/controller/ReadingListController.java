@@ -65,8 +65,9 @@ public class ReadingListController {
     public ResponseEntity<?> updateBookPosition(
             @PathVariable @NotNull Integer userId,
             @RequestBody @NotNull Integer bookId,
+            @RequestBody @NotNull Integer origPosition,
             @RequestBody @NotNull Integer newPosition) {
-        service.updateBookPosition(userId, bookId, newPosition);
+        service.updateBookPosition(userId, bookId, origPosition, newPosition);
         return ResponseEntity.status(HttpStatus.OK).body("Book position updated successfully.");
     }
 
