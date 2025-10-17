@@ -1,11 +1,11 @@
 "use client";
 
 import { useBookService } from "@/lib/hook/useBookService";
-import { Book } from "@/lib/model/book";
+import { ClubHistoryEntry } from "@/model/ClubHistoryEntry";
 import { useEffect, useState } from "react";
 
 export default function CurrentSpank() {
-    const [currentBook, setCurrentBook] = useState<Book | null>(null);
+    const [currentBook, setCurrentBook] = useState<ClubHistoryEntry | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const bookService = useBookService();
@@ -26,7 +26,7 @@ export default function CurrentSpank() {
 
         fetchCurrentBook();
 
-        return () => {};
+        return () => { };
     }, []);
 
     return (

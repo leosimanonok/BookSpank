@@ -1,5 +1,5 @@
 import { auth } from "@/app/actions";
-import { OpenLibraryService } from "@/lib/service/impl/OpenLibraryServiceImpl";
+import { OpenLibraryService } from "@/lib/service/client/impl/OpenLibraryServiceImpl";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {

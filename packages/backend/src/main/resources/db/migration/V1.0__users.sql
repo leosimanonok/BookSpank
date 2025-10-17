@@ -1,5 +1,6 @@
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(255) NULL UNIQUE,
-    email VARCHAR(255) NOT NULL UNIQUE
-);
+CREATE TABLE
+    users (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(255) NULL UNIQUE,
+        email VARCHAR(255) NOT NULL UNIQUE
+    );
