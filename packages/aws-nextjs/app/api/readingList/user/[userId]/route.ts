@@ -1,6 +1,6 @@
 import { auth } from "@/app/actions";
 import { isOpenLibrarySearchResponse } from "@/lib/dto/OpenLibrarySearchResponse";
-import { BackendService } from "@/lib/service/server/impl/BackendServiceImpl";
+import { ReadingListService } from "@/server_service/ReadingListServiceImpl";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -45,8 +45,8 @@ export async function GET(req: NextRequest, { params }: { params: Promise<Params
         return NextResponse.json({ error: "Bad Request - Offset must be an integer..." }, { status: 400 });
     }
 
-    const backendService = new BackendService();
-    const backendRes = await backendService.ReadingList.getReadingList(parseInt(userId), limit, offset);
+    const backendService = new ReadingListService();
+    const backendRes = await backendService.getReadingList(parseInt(userId), limit, offset);
 
     if (!backendRes.ok) {
         console.error(`${backendRes.status} - ${backendRes.statusText}`);
@@ -61,7 +61,6 @@ export async function GET(req: NextRequest, { params }: { params: Promise<Params
 
 export async function POST(req: NextRequest, { params }: { params: Promise<Params> }) {
 
-    //TODO: Do we want this public?
     const subject = await auth();
 
     if (!subject) {
@@ -78,8 +77,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<Param
         return NextResponse.json({ error: "Bad Request - Body is invalid..." }, { status: 400 });
     }
 
-    const backendService = new BackendService();
-    const backendRes = await backendService.ReadingList.addBook(parseInt(userId), body);
+    const backendService = new ReadingListService();
+    const backendRes = await backendService.addBook(parseInt(userId), body);
 
     if (!backendRes.ok) {
         if (backendRes.status === 409) {
@@ -89,5 +88,76 @@ export async function POST(req: NextRequest, { params }: { params: Promise<Param
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 
-    return NextResponse.json({ message: "Created - Book added to db..." }, { status: 201 });
+    return NextResponse.json({ message: "Created - Book added to reading list..." }, { status: 201 });
+}
+
+export async function DELETE(req: NextRequest, { params }: { params: Promise<Params> }) {
+    const subject = await auth();
+
+    if (!subject) {
+        return NextResponse.json({ error: "Unauthorized - please login..." }, { status: 401 });
+    }
+
+    const [{ userId }, body] = await Promise.all([params, req.json()]);
+
+    if (!userId) {
+        return NextResponse.json({ error: "Bad Request - Missing userId..." }, { status: 400 });
+    }
+
+    if (!body.bookId) {
+        return NextResponse.json({ error: "Bad Request - Missing bookId..." }, { status: 400 });
+    }
+
+
+    const backendService = new ReadingListService();
+    const backendRes = await backendService.removeBook(parseInt(userId), parseInt(body.bookId));
+
+    if (!backendRes.ok) {
+        if (backendRes.status === 404) {
+            return NextResponse.json({ message: "Not Found - Book not found..." }, { status: 200 });
+        }
+        console.error(backendRes.statusText);
+        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    }
+
+    return NextResponse.json({ message: "Ok - Book removed from reading list..." }, { status: 200 });
+}
+
+export async function PATCH(req: NextRequest, { params }: { params: Promise<Params> }) {
+    const subject = await auth();
+
+    if (!subject) {
+        return NextResponse.json({ error: "Unauthorized - please login..." }, { status: 401 });
+    }
+
+    const [{ userId }, body] = await Promise.all([params, req.json()]);
+
+    if (!userId) {
+        return NextResponse.json({ error: "Bad Request - Missing userId..." }, { status: 400 });
+    }
+
+    if (!body.bookId) {
+        return NextResponse.json({ error: "Bad Request - Missing bookId..." }, { status: 400 });
+    }
+
+    if (!body.origPosition) {
+        return NextResponse.json({ error: "Bad Request - Missing origPosition..." }, { status: 400 });
+    }
+
+    if (!body.newPosition) {
+        return NextResponse.json({ error: "Bad Request - Missing newPosition..." }, { status: 400 });
+    }
+
+    const backendService = new ReadingListService();
+    const backendRes = await backendService.updateBookPosition(parseInt(userId), parseInt(body.bookId), parseInt(body.origPosition), parseInt(body.newPosition));
+
+    if (!backendRes.ok) {
+        if (backendRes.status === 404) {
+            return NextResponse.json({ message: "Not Found - Book not found..." }, { status: 200 });
+        }
+        console.error(backendRes.statusText);
+        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    }
+
+    return NextResponse.json({ message: "Ok - Book position updated..." }, { status: 200 });
 }
