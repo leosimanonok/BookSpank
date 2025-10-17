@@ -1,7 +1,9 @@
-import { OpenLibrarySearchResponse } from "@/lib/dto/OpenLibrarySearchResponse";
-import { IReadingListService } from "../ReadingListService";
+import { OpenLibrarySearchResponse } from "@/dto/OpenLibrarySearchResponse";
+import { IReadingListService } from "@/server_service/ReadingListService";
 
-
+/**
+ * All methods just forward response to backend, as api logic will handle failures
+ */
 export class ReadingListService implements IReadingListService {
     addBook(userId: number, bookInfo: OpenLibrarySearchResponse): Promise<Response> {
         const backendQuery = new URL(this.baseUrl + `/user/${userId}`);
@@ -29,7 +31,7 @@ export class ReadingListService implements IReadingListService {
         });
     }
 
-    getReadingList(userId: number, limit: number, offset: number): Promise<Response> {
+    async getReadingList(userId: number, limit: number, offset: number): Promise<Response> {
         const backendQuery = new URL(this.baseUrl + `/user/${userId}`);
 
         const backendParams = new URLSearchParams();

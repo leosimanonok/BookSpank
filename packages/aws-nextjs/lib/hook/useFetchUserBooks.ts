@@ -1,10 +1,10 @@
-import { useBookService } from "@/hook/useBookService";
 import useFetchBooks from "./useFetchBooks";
+import { useReadingListService } from "./useReadingListService";
 
 export default function useFetchUserBooks(userId: number) {
-    const bookService = useBookService(); // get the service from context
+    const service = useReadingListService(); // get the service from context
 
     return useFetchBooks({
-        fetchBooks: (limit, offset) => bookService.getUserBooks(userId, limit, offset),
+        fetchBooks: (limit, offset) => service.getReadingList(userId, limit, offset),
     });
 }

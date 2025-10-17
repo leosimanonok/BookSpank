@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { Book } from "@/model/Book"
 
+
 interface FetchBooksProps {
-    fetchBooks(limit: number, offset: number): Promise<Book[]>;
+    fetchBooks(limit: number, offset: number): Promise<{ book: Book }[]>;
 }
 
 export default function useFetchBooks({ fetchBooks }: FetchBooksProps) {
@@ -24,7 +25,7 @@ export default function useFetchBooks({ fetchBooks }: FetchBooksProps) {
             if (moreBooks.length < PAGE_SIZE) {
                 setHasMoreBooks(false);
             }
-            setBooks((prev) => [...prev, ...moreBooks]);
+            setBooks((prev) => [...prev, ...moreBooks.map(x => x.book)]);
         }
         finally {
             setLoading(false);

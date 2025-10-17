@@ -1,6 +1,6 @@
 import { auth } from "@/app/actions";
 import { isOpenLibrarySearchResponse } from "@/lib/dto/OpenLibrarySearchResponse";
-import { BackendService } from "@/lib/service/impl/BackendServiceImpl";
+import { BackendService } from "@/lib/service/server/impl/BackendServiceImpl";
 import { NextRequest, NextResponse } from "next/server";
 
 

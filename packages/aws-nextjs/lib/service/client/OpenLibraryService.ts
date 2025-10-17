@@ -1,4 +1,4 @@
-import { OpenLibrarySearchResponse } from "../dto/OpenLibrarySearchResponse";
+import { OpenLibrarySearchResponse } from "@/dto/OpenLibrarySearchResponse";
 
 export interface IOpenLibraryService {
 

@@ -1,4 +1,4 @@
-import { ClubHistoryEntry } from "../model/ClubHistoryEntry";
+import { ClubHistoryEntry } from "@/model/ClubHistoryEntry";
 
 
 export interface IClubHistoryService {

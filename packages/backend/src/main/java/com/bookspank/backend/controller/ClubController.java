@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/club")
-public class ClubHistoryController {
+public class ClubController {
     private final ClubHistoryService service;
 
     @GetMapping("/history")

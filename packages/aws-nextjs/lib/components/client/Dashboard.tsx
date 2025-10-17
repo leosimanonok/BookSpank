@@ -38,8 +38,6 @@ export function Dashboard() {
                     <UserBookScrollView />
                 </div>
             </div>
-
-
         </div>
     )
 
