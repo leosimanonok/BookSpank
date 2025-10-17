@@ -2,7 +2,7 @@
 INSERT INTO
         users (username, email)
 VALUES
-        ('lsimanonok', 'leo@simanonok.com'),
+        ('lsimanonok', 'leo@simanonok.net'),
         ('mcatalano', 'mattcat26@gmail.com'),
         ('sminix', 'supersam5699@gmail.com'),
         ('qurell', 'quinn@urell.com'),

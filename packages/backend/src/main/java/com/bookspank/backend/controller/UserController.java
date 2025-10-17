@@ -37,6 +37,7 @@ public class UserController {
      */
     @GetMapping
     public User getUser(@RequestParam String email) {
+        System.out.println("Searching for user with email: " + email);
         return this.userService.getUser(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
