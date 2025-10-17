@@ -1,7 +1,7 @@
 import { Book } from "@/model/Book";
 import { OpenLibrarySearchResponse } from "../dto/OpenLibrarySearchResponse";
 
-export interface IBookService {
+export interface IReadingListService {
 
     getCompleted(limit: number, offset: number): Promise<Book[]>;
 

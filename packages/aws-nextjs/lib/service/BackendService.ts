@@ -3,18 +3,14 @@
  * Just a wrapper for fetch
  */
 
-import { OpenLibrarySearchResponse } from "../dto/OpenLibrarySearchResponse";
-import { IClubHistoryService } from "./ClubHistoryService";
+import { IClubHistoryService } from "@/service/ClubHistoryService";
+import { IReadingListService } from "@/service/ReadingListService";
 
 export interface IBackendService {
-    getUserBooks(userId: number, limit: number, offset: number): Promise<Response>;
-
-    getCompletedBooks(limit: number, offset: number): Promise<Response>;
-
-    postUserBook(userId: number, bookInfo: OpenLibrarySearchResponse): Promise<Response>;
 
     getUser(email: string): Promise<{ id: number; username: string } | null>;
 
-    History: IClubHistoryService;
+    ClubHistory: IClubHistoryService;
+    ReadingList: IReadingListService;
 
 }

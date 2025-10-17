@@ -3,7 +3,11 @@
 import { Book } from "@/model/Book";
 import { IBookService } from "../BookService";
 import { OpenLibrarySearchResponse } from "@/lib/dto/OpenLibrarySearchResponse";
+import { ClubHistoryEntry } from "@/lib/model/ClubHistoryEntry";
 
+/**
+ * Class used to add to and reorder a user's reading list
+ */
 export class BookService implements IBookService {
     async addBook(userId: number, bookInfo: OpenLibrarySearchResponse): Promise<void> {
         const res = await fetch(`${this._url}/books/user/${userId}`, {
@@ -63,7 +67,7 @@ export class BookService implements IBookService {
         return books;
     }
 
-    async getCurrentBook(): Promise<Book | null> {
+    async getCurrentBook(): Promise<ClubHistoryEntry | null> {
         const res = await fetch(`${this._url}/books/current`, {
             method: "GET",
             headers: {

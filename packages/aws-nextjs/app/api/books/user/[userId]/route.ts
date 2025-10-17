@@ -9,8 +9,6 @@ type Params = {
 }
 
 export async function GET(req: NextRequest, { params }: { params: Promise<Params> }) {
-
-    //TODO: Do we want this public?
     const subject = await auth();
 
     if (!subject) {
@@ -48,7 +46,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<Params
     }
 
     const backendService = new BackendService();
-    const backendRes = await backendService.getUserBooks(parseInt(userId), limit, offset);
+    const backendRes = await backendService.ReadingList.getReadingList(parseInt(userId), limit, offset);
 
     if (!backendRes.ok) {
         console.error(`${backendRes.status} - ${backendRes.statusText}`);
@@ -81,7 +79,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<Param
     }
 
     const backendService = new BackendService();
-    const backendRes = await backendService.postUserBook(parseInt(userId), body);
+    const backendRes = await backendService.ReadingList.addBook(parseInt(userId), body);
 
     if (!backendRes.ok) {
         if (backendRes.status === 409) {
