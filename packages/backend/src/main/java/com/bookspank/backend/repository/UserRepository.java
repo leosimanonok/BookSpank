@@ -18,9 +18,10 @@ public class UserRepository {
     private final DSLContext dsl;
 
     public Optional<User> getUser(String email) {
-        return this.dsl.select(USERS.ID, USERS.EMAIL, USERS.USERNAME)
+        return this.dsl.select(USERS.ID, USERS.USERNAME)
                 .from(USERS)
                 .where(USERS.EMAIL.eq(email)) // use .eq() for comparison
+                .limit(1)
                 .fetchOptionalInto(User.class);
     }
 
@@ -28,7 +29,7 @@ public class UserRepository {
         return this.dsl.update(USERS)
                 .set(USERS.USERNAME, form.getUsername())
                 .where(USERS.ID.eq(form.getId()))
-                .returning(USERS.ID, USERS.EMAIL, USERS.USERNAME) // columns to fetch
+                .returning(USERS.ID, USERS.USERNAME) // columns to fetch
                 .fetchOptionalInto(User.class);
     }
 

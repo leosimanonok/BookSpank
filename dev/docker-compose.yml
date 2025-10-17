@@ -30,6 +30,8 @@ services:
       context: ./auth
       dockerfile: Dockerfile
     container_name: backend-auth
+    environment:
+      NEXT_PUBLIC_BACKEND_API_URL: http://backend:8080
     ports: 
       - "3001:3001"
 
