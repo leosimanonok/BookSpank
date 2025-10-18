@@ -25,14 +25,14 @@ public class ClubController {
     private final ClubHistoryService service;
 
     @GetMapping("/history")
-    private List<ClubHistoryEntry> getClubHistory(
+    public List<ClubHistoryEntry> getClubHistory(
             @RequestParam @Min(1) Integer limit,
             @RequestParam @Min(0) Integer offset) {
         return this.service.getClubHistory(limit, offset);
     }
 
     @GetMapping("/current")
-    private ClubHistoryEntry getCurrent() {
+    public ClubHistoryEntry getCurrent() {
         return this.service.getCurrent()
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No current book..."));
     }

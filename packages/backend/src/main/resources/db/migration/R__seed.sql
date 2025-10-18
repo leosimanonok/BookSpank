@@ -15,7 +15,21 @@ SET
 INSERT INTO
         books (title, author, cover_id)
 VALUES
-        ('The Road', 'Cormac McCarthy', 14818120),
+        (
+                'The Autobiography of Malcolm X',
+                'Alex Haley and Malcolm X',
+                7885134
+        ),
+        (
+                'The Road',
+                'Cormac McCarthy',
+                14818120
+        ),
+        (
+                'The Road',
+                'Cormac McCarthy',
+                14818120
+        ),
         (
                 'The Origins and History of Consciousness',
                 'Erich Neumann',
@@ -26,9 +40,21 @@ VALUES
                 'Stephen Hawking',
                 15104429
         ),
-        ('The Alchemist', 'Paulo Coelho', 15121528),
-        ('The Stranger', 'Albert Camus', 15118287),
-        ('Meditations', 'Marcus Aurelius', 5559829),
+        (
+                'The Alchemist',
+                'Paulo Coelho',
+                15121528
+        ),
+        (
+                'The Stranger',
+                'Albert Camus',
+                15118287
+        ),
+        (
+                'Meditations',
+                'Marcus Aurelius', 
+                5559829
+        ),
         (
                 'Mans Search for Meaning',
                 'Viktor E. Frankl',
@@ -64,7 +90,11 @@ VALUES
                 'Edward S. Herman and Noam Chomsky',
                 7900362
         ),
-        ('Catch-22', 'Joseph Heller', 14925170) ON CONFLICT (title, author) DO NOTHING;
+        (
+                'Catch-22',
+                'Joseph Heller',
+                14925170
+        ) ON CONFLICT (title, author) DO NOTHING;
 
 -- Insert reading history
 INSERT INTO
@@ -89,6 +119,26 @@ VALUES
                 ),
                 '2025-09-18',
                 '2025-10-14'
+        ),
+        (
+                (
+                        SELECT
+                                id
+                        FROM
+                                books
+                        WHERE
+                                title = 'The Autobiography of Malcolm X'
+                ),
+                (
+                        SELECT
+                                id
+                        FROM
+                                users
+                        WHERE
+                                username = 'mcatalano'
+                ),
+                '2025-10-15',
+                NULL
         ),
         (
                 (

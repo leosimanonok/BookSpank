@@ -3,7 +3,7 @@ import { Book } from "@/model/Book";
 export class ClubHistoryEntry {
     public readonly id: number;
     public readonly book: Book;
-    public readonly seleted_by: number;
+    public readonly selected_by: number;
     public readonly started?: Date;
     public readonly finished?: Date;
 
@@ -15,7 +15,7 @@ export class ClubHistoryEntry {
         finished?: Date,
     ) {
         this.id = id;
-        this.seleted_by = selected_by;
+        this.selected_by = selected_by;
         this.book = book;
         this.started = started;
         this.finished = finished;
