@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { OpenLibrarySearchResponse } from "../dto/OpenLibrarySearchResponse";
-import { useBookService } from "./useBookService";
 import { useUser } from "../context/UserContext";
 import { useReadingListService } from "./useReadingListService";
 
