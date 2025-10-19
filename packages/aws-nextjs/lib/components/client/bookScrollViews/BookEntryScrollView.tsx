@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/client_components/base/Card";
-import { BookEntryCard } from "@/client_components/BookCard";
+import { BookEntryCard } from "@/lib/components/client/BookEntryCard";
 
 import { useEffect, useRef } from "react";
 import { IBookEntry } from "@/model/BookEntry";
@@ -54,11 +54,11 @@ export function BookEntryScrollView({ fetchHook }: BookScrollViewProps) {
     return (
         <Card className="w-2/3 mx-auto">
             {entries.map((b) => (
-                <BookCard key={b.id} book={b} />
+                <BookEntryCard entry={b} />
             ))}
 
             {/* Scroll div at the bottom */}
-            {hasMoreBooks && <div ref={scrollRef} className="h-8" />}
+            {hasMoreEntries && <div ref={scrollRef} className="h-8" />}
 
             {loading && <p className="mt-2 text-sm text-black text-center">Loading more books...</p>}
         </Card>

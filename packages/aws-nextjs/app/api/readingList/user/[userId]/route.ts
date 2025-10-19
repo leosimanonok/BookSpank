@@ -140,16 +140,18 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<Para
         return NextResponse.json({ error: "Bad Request - Missing bookId..." }, { status: 400 });
     }
 
-    if (!body.origPosition) {
-        return NextResponse.json({ error: "Bad Request - Missing origPosition..." }, { status: 400 });
+    if (!body.wantToReadNext) {
+        return NextResponse.json({ error: "Bad Request - Missing wantToReadNext..." }, { status: 400 });
     }
 
-    if (!body.newPosition) {
-        return NextResponse.json({ error: "Bad Request - Missing newPosition..." }, { status: 400 });
+    // TODO: Might need more parsing here...
+    if (typeof body.wantToReadNext !== "boolean") {
+        return NextResponse.json({ error: "Bad Request - wantToReadNext should be a boolean..." }, { status: 400 });
+
     }
 
     const backendService = new ReadingListService();
-    const backendRes = await backendService.updateBookPosition(parseInt(userId), parseInt(body.bookId), parseInt(body.origPosition), parseInt(body.newPosition));
+    const backendRes = await backendService.updateWantToReadNext(parseInt(userId), parseInt(body.bookId), body.wantToReadNext);
 
     if (!backendRes.ok) {
         if (backendRes.status === 404) {

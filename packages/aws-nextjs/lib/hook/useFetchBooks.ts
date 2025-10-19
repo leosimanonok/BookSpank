@@ -16,7 +16,7 @@ export default function useFetchEntries({ fetchEntries }: FetchBooksProps) {
     const [loading, setLoading] = useState(false);
     const [hasMoreEntries, setHasMoreEntries] = useState(true);
 
-    const loadEntries = async () => {
+    const loadMoreEntries = async () => {
         if (!hasMoreEntries || loading) return;
         setLoading(true);
 
@@ -35,14 +35,14 @@ export default function useFetchEntries({ fetchEntries }: FetchBooksProps) {
 
     // Pull initial books
     useEffect(() => {
-        loadEntries();
+        loadMoreEntries();
     }, []);
 
     return {
         entries,
         loading,
-        hasMoreBooks: hasMoreEntries,
-        loadMoreBooks: loadEntries
+        hasMoreEntries,
+        loadMoreEntries
     };
 
 }
