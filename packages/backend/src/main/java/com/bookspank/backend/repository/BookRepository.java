@@ -29,6 +29,7 @@ public class BookRepository {
          * @return inserted bookId
          */
         public Integer addBook(PostBookRequest form) {
+
                 try {
                         return this.dsl.insertInto(BOOKS)
                                         .set(BOOKS.TITLE, form.getTitle())
