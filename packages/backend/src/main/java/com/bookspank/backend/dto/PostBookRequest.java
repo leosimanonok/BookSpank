@@ -14,5 +14,5 @@ public class PostBookRequest {
     @NotNull
     private String author;
 
-    private Integer cover_id;
+    private Integer coverId;
 }
