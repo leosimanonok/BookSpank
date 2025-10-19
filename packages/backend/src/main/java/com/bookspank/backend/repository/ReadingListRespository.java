@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.jooq.DSLContext;
 import org.jooq.exception.DataAccessException;
-import org.jooq.impl.DSL;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +21,6 @@ public class ReadingListRespository {
 
         public List<ReadingListEntry> getReadingList(Integer userId, Integer limit, Integer offset) {
                 return this.dsl.select(
-                                READING_LIST_ENTRIES.POSITION,
                                 READING_LIST_ENTRIES.WANT_TO_READ_NEXT,
                                 BOOKS.AUTHOR,
                                 BOOKS.TITLE,
@@ -31,7 +29,6 @@ public class ReadingListRespository {
                                 .from(READING_LIST_ENTRIES)
                                 .innerJoin(BOOKS)
                                 .on(READING_LIST_ENTRIES.BOOK_ID.eq(BOOKS.ID))
-                                .orderBy(READING_LIST_ENTRIES.POSITION.asc())
                                 .limit(limit)
                                 .offset(offset)
                                 .fetch(record -> new ReadingListEntry(
@@ -51,18 +48,10 @@ public class ReadingListRespository {
          */
         public void addBook(Integer userId, Integer bookId) {
 
-                Integer maxPosition = dsl.select(DSL.max(READING_LIST_ENTRIES.POSITION))
-                                .from(READING_LIST_ENTRIES)
-                                .where(READING_LIST_ENTRIES.USER_ID.eq(userId))
-                                .fetchOneInto(Integer.class);
-
-                Integer nextPosition = (maxPosition == null) ? 1 : maxPosition + 1;
-
                 try {
                         this.dsl.insertInto(READING_LIST_ENTRIES)
                                         .set(READING_LIST_ENTRIES.USER_ID, userId)
                                         .set(READING_LIST_ENTRIES.BOOK_ID, bookId)
-                                        .set(READING_LIST_ENTRIES.POSITION, nextPosition)
                                         .execute();
                 } catch (DataAccessException e) {
                         if (e.getCause() instanceof java.sql.SQLIntegrityConstraintViolationException) {
