@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookspank.backend.dto.PostBookRequest;
-import com.bookspank.backend.dto.UpdateBookPositionRequest;
+import com.bookspank.backend.dto.UpdateBookRequest;
 import com.bookspank.backend.model.ReadingListEntry;
 import com.bookspank.backend.service.ReadingListService;
 
@@ -62,10 +62,10 @@ public class ReadingListController {
     }
 
     @PatchMapping("/user/{userId}")
-    public ResponseEntity<?> updateBookPosition(
+    public ResponseEntity<?> updateWantToReadNext(
             @PathVariable @NotNull Integer userId,
-            @RequestBody @Valid UpdateBookPositionRequest req) {
-        service.updateBookPosition(userId, req.getBookId(), req.getOrigPosition(), req.getNewPosition());
+            @RequestBody @Valid UpdateBookRequest req) {
+        service.updateWantToReadNext(userId, req.getBookId(), req.getWantToReadNext());
         return ResponseEntity.status(HttpStatus.OK).body("Book position updated successfully.");
     }
 

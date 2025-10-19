@@ -5,18 +5,13 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class UpdateBookPositionRequest {
+public class UpdateBookRequest {
 
     @NotNull
     @Min(0)
     private Integer bookId;
 
     @NotNull
-    @Min(0)
-    private Integer origPosition;
-
-    @NotNull
-    @Min(0)
-    private Integer newPosition;
+    private Boolean wantToReadNext;
 
 }

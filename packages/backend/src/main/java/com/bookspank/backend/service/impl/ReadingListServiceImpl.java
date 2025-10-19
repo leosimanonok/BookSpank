@@ -1,6 +1,5 @@
 package com.bookspank.backend.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -44,7 +43,7 @@ public class ReadingListServiceImpl implements ReadingListService {
     }
 
     @Override
-    public void updateWantToRead(Integer userId, Integer bookId, Boolean wantToReadNext) {
+    public void updateWantToReadNext(Integer userId, Integer bookId, Boolean wantToReadNext) {
         readingListRespository.updateWantToReadNext(userId, bookId, wantToReadNext);
     }
 

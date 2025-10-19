@@ -81,6 +81,8 @@ public class ReadingListRespository {
                                 .execute();
         }
 
+        // TODO: How do we want to enforce a certain number of books which can be in
+        // want to read next state?
         public void updateWantToReadNext(Integer userId, Integer bookId, Boolean wantToReadNext) {
                 this.dsl.update(READING_LIST_ENTRIES)
                                 .set(READING_LIST_ENTRIES.WANT_TO_READ_NEXT, wantToReadNext)
