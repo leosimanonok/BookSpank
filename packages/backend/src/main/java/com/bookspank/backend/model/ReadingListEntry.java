@@ -8,5 +8,5 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ReadingListEntry {
     private Book book;
-    private Integer position;
+    private Boolean wantToReadNext;
 }

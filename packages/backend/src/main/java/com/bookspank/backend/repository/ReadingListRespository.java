@@ -23,6 +23,7 @@ public class ReadingListRespository {
         public List<ReadingListEntry> getReadingList(Integer userId, Integer limit, Integer offset) {
                 return this.dsl.select(
                                 READING_LIST_ENTRIES.POSITION,
+                                READING_LIST_ENTRIES.WANT_TO_READ_NEXT,
                                 BOOKS.AUTHOR,
                                 BOOKS.TITLE,
                                 BOOKS.COVER_ID,
@@ -39,7 +40,7 @@ public class ReadingListRespository {
                                                                 record.get(BOOKS.TITLE),
                                                                 record.get(BOOKS.AUTHOR),
                                                                 record.get(BOOKS.COVER_ID)),
-                                                record.get(READING_LIST_ENTRIES.POSITION)));
+                                                record.get(READING_LIST_ENTRIES.WANT_TO_READ_NEXT)));
         }
 
         /**
