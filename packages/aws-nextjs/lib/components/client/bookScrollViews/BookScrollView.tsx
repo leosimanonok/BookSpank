@@ -1,34 +1,35 @@
 "use client";
 
-import { Card } from "../base/Card";
-import { BookCard } from "../BookCard";
+import { Card } from "@/client_components/base/Card";
+import { BookEntryCard } from "@/client_components/BookCard";
+
 import { useEffect, useRef } from "react";
-import { Book } from "@/model/Book"
+import { IBookEntry } from "@/model/BookEntry";
 
 
 interface BookScrollViewProps {
     fetchHook: () => {
-        books: Book[];
+        entries: IBookEntry[];
         loading: boolean;
-        hasMoreBooks: boolean;
-        loadMoreBooks: () => void;
+        hasMoreEntries: boolean;
+        loadMoreEntries: () => void;
     };
 }
 
-export function BookScrollView({ fetchHook }: BookScrollViewProps) {
+export function BookEntryScrollView({ fetchHook }: BookScrollViewProps) {
 
-    const { books, loading, hasMoreBooks, loadMoreBooks } = fetchHook();
+    const { entries, loading, hasMoreEntries, loadMoreEntries } = fetchHook();
 
     const scrollRef = useRef<HTMLDivElement | null>(null);
 
     // Infinite scroll observer
     useEffect(() => {
-        if (!scrollRef.current || !hasMoreBooks) return;
+        if (!scrollRef.current || !hasMoreEntries) return;
 
         const observer = new IntersectionObserver(
             async ([entry]) => {
                 if (entry.isIntersecting) {
-                    loadMoreBooks();
+                    loadMoreEntries();
                 }
             },
             { rootMargin: "200px" }
@@ -39,10 +40,10 @@ export function BookScrollView({ fetchHook }: BookScrollViewProps) {
         return () => {
             if (scrollRef.current) observer.unobserve(scrollRef.current);
         };
-    }, [loading, hasMoreBooks, loadMoreBooks]);
+    }, [loading, hasMoreEntries, loadMoreEntries]);
 
 
-    if (!books.length) {
+    if (!entries.length) {
         return (
             <div className="flex justify-center">
                 <p >{loading ? "Loading books..." : "No books found..."}</p>
@@ -52,7 +53,7 @@ export function BookScrollView({ fetchHook }: BookScrollViewProps) {
 
     return (
         <Card className="w-2/3 mx-auto">
-            {books.map((b) => (
+            {entries.map((b) => (
                 <BookCard key={b.id} book={b} />
             ))}
 
