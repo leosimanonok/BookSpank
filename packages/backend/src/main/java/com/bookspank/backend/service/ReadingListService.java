@@ -13,5 +13,5 @@ public interface ReadingListService {
 
     public void removeBook(Integer userId, Integer bookId);
 
-    public void updateBookPosition(Integer userId, Integer bookId, Integer origPosition, Integer newPosition);
+    public void updateWantToRead(Integer userId, Integer bookId, Boolean wantToReadNext);
 }

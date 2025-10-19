@@ -81,39 +81,14 @@ public class ReadingListRespository {
                                 .execute();
         }
 
-        public void updateBookPosition(Integer userId, Integer bookId, Integer origPosition, Integer newPosition) {
-                // if moving up in list, ie decreasing position integer (pos 5 -> pos 1), need
-                // to increment position of elem 1,2,3,4
-                // in other words where position < origPosition && position >= newPosition
-
-                // if moving down in list, ie increasing position integer (pos 1 -> pos 5), need
-                // to decrement position of elem 2,3,4,5
-                // in other words where position > origPosition && position <= newPosition
-
-                if (newPosition < origPosition) {
-                        this.dsl.update(READING_LIST_ENTRIES)
-                                        .set(READING_LIST_ENTRIES.POSITION, READING_LIST_ENTRIES.POSITION.plus(1))
-                                        .where(READING_LIST_ENTRIES.USER_ID.eq(userId)
-                                                        .and(READING_LIST_ENTRIES.POSITION.ge(newPosition))
-                                                        .and(READING_LIST_ENTRIES.POSITION.lt(origPosition)))
-                                        .execute();
-                } else if (newPosition > origPosition) {
-                        this.dsl.update(READING_LIST_ENTRIES)
-                                        .set(READING_LIST_ENTRIES.POSITION, READING_LIST_ENTRIES.POSITION.minus(1))
-                                        .where(READING_LIST_ENTRIES.USER_ID.eq(userId)
-                                                        .and(READING_LIST_ENTRIES.POSITION.gt(origPosition))
-                                                        .and(READING_LIST_ENTRIES.POSITION.le(newPosition)))
-                                        .execute();
-                }
-
-                // Finally, move the book itself:
+        public void updateWantToReadNext(Integer userId, Integer bookId, Boolean wantToReadNext) {
                 this.dsl.update(READING_LIST_ENTRIES)
-                                .set(READING_LIST_ENTRIES.POSITION, newPosition)
+                                .set(READING_LIST_ENTRIES.WANT_TO_READ_NEXT, wantToReadNext)
+
                                 .where(READING_LIST_ENTRIES.USER_ID.eq(userId)
                                                 .and(READING_LIST_ENTRIES.BOOK_ID.eq(bookId)))
                                 .execute();
         }
 
         private final DSLContext dsl;
-
 }

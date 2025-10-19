@@ -1,5 +1,6 @@
 package com.bookspank.backend.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class ReadingListServiceImpl implements ReadingListService {
         Integer bookId = bookRepository.getIdFromTitleAndAuthor(form.getTitle(), form.getTitle());
 
         if (bookId == null) {
+            System.out.printf("Adding {} to db", form.getTitle());
             bookId = bookRepository.addBook(form);
         }
 
@@ -42,11 +44,8 @@ public class ReadingListServiceImpl implements ReadingListService {
     }
 
     @Override
-    public void updateBookPosition(Integer userId, Integer bookId, Integer origPosition, Integer newPosition) {
-
-        if (origPosition == newPosition)
-            return;
-        readingListRespository.updateBookPosition(userId, bookId, origPosition, newPosition);
+    public void updateWantToRead(Integer userId, Integer bookId, Boolean wantToReadNext) {
+        readingListRespository.updateWantToReadNext(userId, bookId, wantToReadNext);
     }
 
     private final ReadingListRespository readingListRespository;

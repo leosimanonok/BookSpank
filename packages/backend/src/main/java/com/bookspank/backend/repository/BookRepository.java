@@ -4,9 +4,6 @@ import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 import static com.bookspank.jooq.tables.Books.BOOKS;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.bookspank.backend.dto.PostBookRequest;
 
 import lombok.RequiredArgsConstructor;
