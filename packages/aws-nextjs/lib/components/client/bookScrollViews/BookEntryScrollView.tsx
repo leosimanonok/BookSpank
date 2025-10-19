@@ -54,7 +54,7 @@ export function BookEntryScrollView({ fetchHook }: BookScrollViewProps) {
     return (
         <Card className="w-2/3 mx-auto">
             {entries.map((b) => (
-                <BookEntryCard entry={b} />
+                <BookEntryCard key={b.book.id} entry={b} />
             ))}
 
             {/* Scroll div at the bottom */}

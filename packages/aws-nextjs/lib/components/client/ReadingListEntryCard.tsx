@@ -19,7 +19,7 @@ export function ReadingListEntryCard({ entry }: props) {
 
     const onClick = () => {
         try {
-            service.updateWantToReadNext(user.id, entry.book.id, currEntry.wantToReadNext);
+            service.updateWantToReadNext(user.id, entry.book.id, !currEntry.wantToReadNext);
             setCurrEntry((prev) => ({ ...prev, wantToReadNext: !prev.wantToReadNext }));
         }
         catch (err) {
@@ -29,9 +29,7 @@ export function ReadingListEntryCard({ entry }: props) {
     }
 
     return (
-        <div key={entry.book.id}
-            onClick={onClick}
-        >
+        <div onClick={onClick} >
             <Card className={`flex flex-col bg-accent transition-colors duration-200 ${currEntry.wantToReadNext ? "border-2 border-blue-500 bg-blue-100" : ""
                 }`}>
                 <h3>{entry.book.title}</h3>

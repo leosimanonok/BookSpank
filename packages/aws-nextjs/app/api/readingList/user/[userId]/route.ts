@@ -140,14 +140,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<Para
         return NextResponse.json({ error: "Bad Request - Missing bookId..." }, { status: 400 });
     }
 
-    if (!body.wantToReadNext) {
+    if (body.wantToReadNext === undefined) {
         return NextResponse.json({ error: "Bad Request - Missing wantToReadNext..." }, { status: 400 });
-    }
-
-    // TODO: Might need more parsing here...
-    if (typeof body.wantToReadNext !== "boolean") {
-        return NextResponse.json({ error: "Bad Request - wantToReadNext should be a boolean..." }, { status: 400 });
-
     }
 
     const backendService = new ReadingListService();
