@@ -1,6 +1,6 @@
 import { Book } from "@/model/Book"
-import { Card } from "./base/Card";
-import { Label } from "./base/Label";
+import { Card } from "@/components/base/Card";
+import { Label } from "@/components/base/Label";
 
 type props = {
     book: Book;

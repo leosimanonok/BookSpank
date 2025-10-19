@@ -48,6 +48,9 @@
       ],
       "@/dto/*": [
         "./lib/dto/*"
+      ],
+      "@/components/*": [
+        "./lib/components/*"
       ]
     }
   },

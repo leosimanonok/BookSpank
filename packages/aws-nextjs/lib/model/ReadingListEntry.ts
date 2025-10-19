@@ -1,6 +1,7 @@
 import { Book } from "@/model/Book";
+import { IBookEntry } from "@/model/BookEntry";
 
-export class ReadingListEntry {
+export class ReadingListEntry implements IBookEntry {
     public readonly book: Book;
     public readonly wantToReadNext: boolean;
 
