@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "ES2017",
+        "moduleResolution": "nodenext",
+        "module": "nodenext",
+        "paths": {
+            "@/service/*": [
+                "../aws-nextjs/lib/service/*",
+                "../aws-nextjs/lib/service/impl/*"
+            ]
+        }
+    }
+}

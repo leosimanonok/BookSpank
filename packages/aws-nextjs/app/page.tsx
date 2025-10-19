@@ -1,8 +1,22 @@
+import Toast from "@/lib/components/client/Toast";
 import Image from "next/image";
 
-export default function Home() {
+type HomeProps = {
+  searchParams: { error_description?: string }
+}
+
+export default function Home({ searchParams }: HomeProps) {
+  const { error_description } = searchParams;
+
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+      {/* Render a toast only if error_description exists */}
+      {error_description && (
+        <div className="fixed left-1/2 top-1/3 transform -translate-x-1/2">
+          <Toast message={error_description} duration={3000} />
+        </div>
+      )}
+
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"

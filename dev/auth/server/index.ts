@@ -46,9 +46,19 @@ const app = issuer({
     providers: {
         code: CodeProvider(
             CodeUI({
-                // TODO: Check valid email here?
-                sendCode: async (email, code) => {
-                    console.log(email, code)
+                sendCode: async (claims, code) => {
+                    if (!claims.email) {
+                        throw new Error("No email received...");
+                    }
+
+                    const user = await getUser(claims.email);
+                    if (!user) {
+                        throw new Error("SPANKERS ONLY!!!!");
+                    }
+
+                    // TODO: On prod need to send actual email
+                    // Otherwise, continue sending your code (email/SMS/etc.)
+                    console.log(`✅ Sending code ${code} to ${claims.email}`);
                 },
             }),
         ),
@@ -57,11 +67,8 @@ const app = issuer({
         if (value.provider === "code") {
             const user = await getUser(value.claims.email);
 
-            console.log("In sucess...");
-            console.dir(user);
-
-            if (user === null) {
-                throw new Error("Invalid email")
+            if (!user) {
+                throw new Error("SPANKERS ONLY!!!!");
             }
             return ctx.subject("user", user)
         }
