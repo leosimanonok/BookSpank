@@ -1,7 +1,5 @@
-import { useBackendService } from "./useBackendService";
+import { ClubHistoryService } from "../service/server/impl/ClubHistoryServiceImpl";
 
 export const useClubHistoryService = () => {
-    const service = useBackendService();
-
-    return service.ClubHistory;
-};
+    return new ClubHistoryService();
+}
