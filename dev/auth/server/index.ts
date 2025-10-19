@@ -21,7 +21,11 @@ async function getUser(email: string): Promise<{ id: number; username: string; }
         },
     });
 
+    console.log(backendQuery.href);
+
+
     if (!res.ok) {
+        console.log(`Status: ${res.status}`);
         if (res.status === 404) {
             return null;
         }

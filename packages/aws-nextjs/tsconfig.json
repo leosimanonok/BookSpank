@@ -29,9 +29,13 @@
       "@/auth/*": [
         "../auth/*"
       ],
-      "@/service/*": [
-        "./lib/service/*",
-        "./lib/service/impl/*"
+      "@/server_service/*": [
+        "./lib/service/server/*",
+        "./lib/service/server/impl/*"
+      ],
+      "@/client_service/*": [
+        "./lib/service/client/*",
+        "./lib/service/client/impl/*"
       ],
       "@/model/*": [
         "./lib/model/*"

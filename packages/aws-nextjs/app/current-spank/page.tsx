@@ -1,21 +1,21 @@
 "use client";
 
-import { useBookService } from "@/lib/hook/useBookService";
-import { Book } from "@/lib/model/book";
+import { useClubHistoryService } from "@/lib/hook/useClubHistoryService";
+import { ClubHistoryEntry } from "@/model/ClubHistoryEntry";
 import { useEffect, useState } from "react";
 
 export default function CurrentSpank() {
-    const [currentBook, setCurrentBook] = useState<Book | null>(null);
+    const [currentBook, setCurrentBook] = useState<ClubHistoryEntry | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const bookService = useBookService();
+    const clubHistoryService = useClubHistoryService();
 
     useEffect(() => {
 
         const fetchCurrentBook = async () => {
             try {
                 setLoading(true);
-                const book = await bookService.getCurrentBook();
+                const book = await clubHistoryService.getCurrent();
                 setCurrentBook(book);
             } catch (err) {
                 setError(err instanceof Error ? err.message : "Failed to fetch current book");
@@ -26,7 +26,7 @@ export default function CurrentSpank() {
 
         fetchCurrentBook();
 
-        return () => {};
+        return () => { };
     }, []);
 
     return (
@@ -46,8 +46,8 @@ export default function CurrentSpank() {
 
                 {!loading && !error && currentBook && (
                     <div className="text-center">
-                        <h4 className="text-lg font-medium mb-2">{currentBook.title}</h4>
-                        <p className="text-gray-700">by {currentBook.author}</p>
+                        <h4 className="text-lg font-medium mb-2">{currentBook.book.title}</h4>
+                        <p className="text-gray-700">by {currentBook.book.author}</p>
                         {currentBook.started && (
                             <p className="text-sm text-gray-500 mt-2">
                                 Started: {currentBook.started.toLocaleDateString()}
