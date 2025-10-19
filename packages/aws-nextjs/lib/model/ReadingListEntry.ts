@@ -16,8 +16,9 @@ export class ReadingListEntry implements IBookEntry {
     public static fromJSON(json: any): ReadingListEntry {
         if (
             !json.book ||
-            !json.wantToReadNext
+            json.wantToReadNext === undefined
         ) {
+            console.dir(json);
             throw new Error("Invalid json for ReadingListEntry creation...");
         }
 

@@ -9,6 +9,7 @@ type props = {
 }
 
 // TODO: I don't really like this setup, maybe we need to split all this up
+// need this to use the book entry scroll view logic for pulling, since we only know entry type at runtime...
 export function BookEntryCard(props: props) {
 
     if (isReadingListEntry(props.entry)) return (<ReadingListEntryCard entry={props.entry} />);
