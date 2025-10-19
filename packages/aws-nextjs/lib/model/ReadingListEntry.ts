@@ -2,22 +2,20 @@ import { Book } from "@/model/Book";
 
 export class ReadingListEntry {
     public readonly book: Book;
-    public readonly position: number;
+    public readonly wantToReadNext: boolean;
 
     private constructor(
         book: Book,
-        position: number,
+        wantToReadNext: boolean,
     ) {
-        if (position < 0) throw new Error(`Invalid book position: ${position}`);
-
         this.book = book;
-        this.position = position;
+        this.wantToReadNext = wantToReadNext;
     }
 
     public static fromJSON(json: any): ReadingListEntry {
         if (
             !json.book ||
-            !json.position
+            !json.wantToReadNext
         ) {
             throw new Error("Invalid json for ReadingListEntry creation...");
         }
@@ -26,7 +24,7 @@ export class ReadingListEntry {
 
         return new ReadingListEntry(
             book,
-            json.position,
+            json.wantToReadNext,
         )
 
     }

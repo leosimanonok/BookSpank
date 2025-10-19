@@ -43,7 +43,7 @@ export class ReadingListService implements IReadingListService {
         return fetch(backendQuery);
     }
 
-    updateBookPosition(userId: number, bookId: number, origPosition: number, newPosition: number): Promise<Response> {
+    updateWantToReadNext(userId: number, bookId: number, wantToReadNext: boolean): Promise<Response> {
         const backendQuery = new URL(this.baseUrl + `/user/${userId}`);
 
         return fetch(backendQuery, {
@@ -53,8 +53,7 @@ export class ReadingListService implements IReadingListService {
             },
             body: JSON.stringify({
                 bookId,
-                origPosition,
-                newPosition,
+                wantToReadNext
             }),
         });
     }

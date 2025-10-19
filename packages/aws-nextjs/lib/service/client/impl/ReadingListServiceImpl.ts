@@ -57,7 +57,7 @@ export class ReadingListService implements IReadingListService {
         }
     }
 
-    async updateBookPosition(userId: number, bookId: number, origPosition: number, newPosition: number): Promise<void> {
+    async updateWantToReadNext(userId: number, bookId: number, wantToReadNext: boolean): Promise<void> {
         const backendQuery = new URL(this._url + `/user/${userId}`);
 
         await fetch(backendQuery, {
@@ -67,8 +67,7 @@ export class ReadingListService implements IReadingListService {
             },
             body: JSON.stringify({
                 bookId,
-                origPosition,
-                newPosition,
+                wantToReadNext
             }),
         });
     }
