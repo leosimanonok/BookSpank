@@ -22,6 +22,9 @@ export class ClubHistoryService implements IClubHistoryService {
         const query = new URL(this._url + "/current");
         return fetch(query, {
             method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({
                 userId,
                 bookId,

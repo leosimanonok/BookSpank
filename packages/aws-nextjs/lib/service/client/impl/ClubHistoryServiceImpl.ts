@@ -34,6 +34,7 @@ export class ClubHistoryService implements IClubHistoryService {
         const res = await fetch(query);
 
         if (!res.ok) {
+            console.error(res.statusText);
             throw new Error("Unable to get current entry...");
         }
 

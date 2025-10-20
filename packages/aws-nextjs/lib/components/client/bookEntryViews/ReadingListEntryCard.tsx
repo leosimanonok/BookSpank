@@ -15,6 +15,9 @@ type props = {
 
 export function ReadingListEntryCard({ entry }: props) {
     const { user } = useUser();
+
+    if (user === null) throw new Error("User should not be null");
+
     const service = useReadingListService();
 
     const [currEntry, setCurrEntry] = useState<ReadingListEntry>(entry);

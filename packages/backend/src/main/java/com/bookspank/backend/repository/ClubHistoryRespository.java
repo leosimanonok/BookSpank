@@ -77,7 +77,7 @@ public class ClubHistoryRespository {
                 this.dsl.update(CLUB_HISTORY)
                                 .set(CLUB_HISTORY.FINISHED, LocalDate.now())
                                 .where(CLUB_HISTORY.BOOK_ID.eq(form.getBookId())
-                                                .and(CLUB_HISTORY.FINISHED.isNotNull()))
+                                                .and(CLUB_HISTORY.FINISHED.isNull()))
                                 .execute();
 
                 return this.dsl.select(CLUB_HISTORY.ID,

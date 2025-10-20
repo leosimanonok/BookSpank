@@ -7,6 +7,8 @@ export async function GET() {
     const service = new ClubHistoryService();
     const res = await service.getCurrent();
 
+    console.log(`Status: ${res.status} - ${res.statusText}`);
+
     if (!res.ok && res.status === 404) {
         return NextResponse.json({ error: "Not Found - Unable to find current spank..." }, { status: 404 });
     }

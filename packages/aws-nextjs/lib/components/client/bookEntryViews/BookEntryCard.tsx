@@ -3,6 +3,8 @@ import { Label } from "@/client_components/base/Label";
 import { ClubHistoryEntry } from "@/model/ClubHistoryEntry";
 import { IBookEntry, isClubHistoryEntry, isReadingListEntry } from "@/model/BookEntry";
 import { ReadingListEntryCard } from "./ReadingListEntryCard";
+import Image from "next/image";
+import { OpenLibraryService } from "@/client_service/OpenLibraryServiceImpl";
 
 type props = {
     entry: IBookEntry;
@@ -15,15 +17,26 @@ export function BookEntryCard(props: props) {
     if (isReadingListEntry(props.entry)) return (<ReadingListEntryCard entry={props.entry} />);
 
     return (
-        <div key={props.entry.book.id}>
-            <Card className="bg-accent flex flex-col">
-                <h3>{props.entry.book.title}</h3>
-                <Label>By: {props.entry.book.author}</Label>
-                {isClubHistoryEntry(props.entry) && (
+        <Card className="relative bg-accent flex flex-col justify-center p-4 text-center items-center ">
+
+            <div className="mb-2">
+                <h3 className="text-center bold text-2xl">{props.entry.book.title}</h3>
+                <Label>Author: {props.entry.book.author}</Label>
+
+            </div>
+            {isClubHistoryEntry(props.entry) && (
+                <div className="flex flex-col mb-2">
                     <ClubHistoryEntryAdds entry={props.entry} />
-                )}
-            </Card>
-        </div>
+                </div>
+            )}
+
+            <Image className="mb-4" src={props.entry.book.cover_id ? OpenLibraryService.getCoverImageUrl(props.entry.book.cover_id, "M") : "/file.svg"}
+                alt={`${props.entry.book.title}-img`}
+                width={200}
+                height={200}
+                style={{ width: "auto", height: "200px" }}
+            />
+        </Card>
     )
 }
 

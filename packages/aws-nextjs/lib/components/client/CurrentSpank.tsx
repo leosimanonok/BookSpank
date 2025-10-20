@@ -5,6 +5,7 @@ import { useClubHistoryService } from "@/hook/useClubHistoryService";
 import { ClubHistoryEntry } from "@/model/ClubHistoryEntry";
 import { useEffect, useState } from "react";
 import { Button } from "@/client_components/base/Button";
+import { BookEntryCard } from "./bookEntryViews/BookEntryCard";
 
 // TODO: update this to always display the latest book, even if it is 'finished', so that we have something here until we start the next book
 export function CurrentSpankView() {
@@ -14,10 +15,15 @@ export function CurrentSpankView() {
     const clubHistoryService = useClubHistoryService();
     const { user } = useUser();
 
+    console.log("user in current view");
+    console.dir(user);
+
+    console.dir(currentEntry);
+
     const [updating, setUpdating] = useState(false);
 
     const onButtonClick = async () => {
-        if (currentEntry === null || currentEntry.finished) return;
+        if (currentEntry === null || currentEntry.finished || user === null) return;
         try {
             setUpdating(true);
             const updatedEntry = await clubHistoryService.completeBook(user.id, currentEntry.book.id);
@@ -68,25 +74,14 @@ export function CurrentSpankView() {
                 )}
 
                 {!loadingEntry && !error && currentEntry && (
-                    <div className="text-center">
-                        <h4 className="text-lg font-medium mb-2">{currentEntry.book.title}</h4>
-                        <p className="text-gray-700">by {currentEntry.book.author}</p>
-                        {currentEntry.started && (
-                            <p className="text-sm text-gray-500 mt-2">
-                                Started: {currentEntry.started.toLocaleDateString()}
-                            </p>
-                        )}
-                        {currentEntry.finished && (
-                            <p className="text-sm text-gray-500 mt-2">
-                                Finished: {currentEntry.finished.toLocaleDateString()}
-                            </p>
-                        )}
-                    </div>
+                    <>
+                        <BookEntryCard entry={currentEntry} />
+                    </>
                 )}
 
                 {user && (
-                    <Button
-                        disabled={currentEntry?.finished !== null}
+                    <Button className="bg-red-500 my-2"
+                        disabled={currentEntry?.finished !== null && currentEntry?.finished !== undefined}
                         onClick={onButtonClick}
                     >
                         {updating ? "Completing spank..." : "Finish book"}
