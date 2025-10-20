@@ -1,7 +1,6 @@
 "use client";
-import { useUser } from "@/lib/context/UserContext";
-import { BookEntryScrollView } from "./BookEntryScrollView";
-import useFetchReadingListEntries from "@/lib/hook/useFetchReadingListEntriesBooks";
+import { BookEntryScrollView } from "@/client_components/bookScrollViews/BookEntryScrollView";
+import useFetchReadingListEntries from "@/hook/useFetchReadingListEntriesBooks";
 
 
 export function ReadingListScrollView() {

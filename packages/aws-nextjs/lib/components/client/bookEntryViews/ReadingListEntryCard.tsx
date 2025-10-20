@@ -54,8 +54,8 @@ export function ReadingListEntryCard({ entry }: props) {
 
                 <Image className="mb-4" src={entry.book.cover_id ? OpenLibraryService.getCoverImageUrl(entry.book.cover_id, "M") : "/file.svg"}
                     alt={`${entry.book.title}-img`}
-                    width={200}           // max width
-                    height={200}          // max height
+                    width={200}
+                    height={200}
                     style={{ width: "auto", height: "200px" }}
                 />
             </Card>

@@ -1,8 +1,8 @@
-import { Card } from "./base/Card";
-import { Label } from "./base/Label";
+import { Card } from "@/client_components/base/Card";
+import { Label } from "@/client_components/base/Label";
 import Image from "next/image";
 import { OpenLibrarySearchResponse } from "@/lib/dto/OpenLibrarySearchResponse";
-import { Button } from "./base/Button";
+import { Button } from "@/client_components/base/Button";
 import useAddBook from "@/lib/hook/useAddBook";
 
 type props = {
