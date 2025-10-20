@@ -76,6 +76,11 @@ export function CurrentSpankView() {
                                 Started: {currentEntry.started.toLocaleDateString()}
                             </p>
                         )}
+                        {currentEntry.finished && (
+                            <p className="text-sm text-gray-500 mt-2">
+                                Finished: {currentEntry.finished.toLocaleDateString()}
+                            </p>
+                        )}
                     </div>
                 )}
 
