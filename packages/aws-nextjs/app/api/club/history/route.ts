@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { ClubHistoryService } from "@/server_service/ClubHistoryServiceImpl";
 
 export async function GET(req: NextRequest) {
 
@@ -27,22 +28,19 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: "Bad Request - Offset must be an integer..." }, { status: 400 });
     }
 
-    if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
-        throw new Error("Missing backend url...");
+    const service = new ClubHistoryService();
+
+    const res = await service.getClubHistory(limit, offset);
+
+    if (!res.ok) {
+        console.error(`Status: ${res.status} - ${res.statusText}`);
+        return NextResponse.json({ error: "Internal Server Error - Unable to complete your request..." }, { status: 500 });
     }
 
-    const backendQuery = new URL(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/books/completed");
-    const params = new URLSearchParams();
-    params.set("limit", limit.toString());
-    params.set("offset", offset.toString());
+    const data = await res.json();
 
-    backendQuery.search = params.toString();
-
-    const backendRes = await fetch(backendQuery);
-    const backendResJson = await backendRes.json();
-
-    console.log("From backend: ");
-    console.dir(backendResJson);
-
-    return NextResponse.json(backendResJson);
+    return NextResponse.json(data, {
+        status: 200,
+        statusText: "Ok"
+    });
 };
