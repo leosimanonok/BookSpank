@@ -1,27 +1,24 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { ClubHistoryService } from "@/server_service/ClubHistoryServiceImpl";
 
 export async function GET() {
-    if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
-        throw new Error("Missing backend url...");
+
+    const service = new ClubHistoryService();
+    const res = await service.getCurrent();
+
+    if (!res.ok && res.status === 404) {
+        return NextResponse.json({ error: "Not Found - Unable to find current spank..." }, { status: 404 });
+    }
+    else if (!res.ok) {
+        console.error(`Status: ${res.status} - ${res.statusText}`);
+        return NextResponse.json({ error: "Internal Server Error - Unable to complete your request..." }, { status: 500 });
+
     }
 
-    const backendQuery = new URL(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/books/current");
+    const data = await res.json();
 
-    try {
-        const backendRes = await fetch(backendQuery);
-
-        if (!backendRes.ok) {
-            return NextResponse.json({ error: "Failed to fetch current book" }, { status: backendRes.status });
-        }
-
-        const backendResJson = await backendRes.json();
-
-        console.log("Current book from backend: ");
-        console.dir(backendResJson);
-
-        return NextResponse.json(backendResJson);
-    } catch (error) {
-        console.error("Error fetching current book:", error);
-        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-    }
+    return NextResponse.json(data, {
+        status: 200,
+        statusText: "Ok"
+    });
 }

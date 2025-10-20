@@ -4,7 +4,7 @@ import { IClubHistoryService } from "@/server_service/ClubHistoryService";
 
 export class ClubHistoryService implements IClubHistoryService {
     getClubHistory(limit: number, offset: number): Promise<Response> {
-        const backendQuery = new URL(this.baseUrl + "/history");
+        const backendQuery = new URL(this._url + "/history");
 
         const backendParams = new URLSearchParams();
         backendParams.set("limit", limit.toString());
@@ -15,27 +15,14 @@ export class ClubHistoryService implements IClubHistoryService {
         return fetch(backendQuery);
     }
 
-    async getCurrent(): Promise<ClubHistoryEntry | null> {
-        const backendQuery = new URL(this.baseUrl + "/current");
-        const res = await fetch(backendQuery);
-
-        if (!res.ok && res.status === 404) {
-            return null;
-        }
-        else if (!res.ok) {
-            throw new Error("Unable to get current...");
-        }
-
-        const data = await res.json();
-
-        try {
-            return ClubHistoryEntry.fromJSON(data);
-        }
-        catch (err) {
-            console.error(err);
-            throw err;
-        }
+    getCurrent(): Promise<Response> {
+        const backendQuery = new URL(this._url + "/current");
+        return fetch(backendQuery);
     }
 
-    private readonly baseUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL + "/club";
+    completeCurrent(userId: number, bookId: number): Promise<Response> {
+        throw new Error("Method not implemented.");
+    }
+
+    private readonly _url = process.env.NEXT_PUBLIC_BACKEND_API_URL + "/club";
 }
