@@ -15,11 +15,6 @@ export function CurrentSpankView() {
     const clubHistoryService = useClubHistoryService();
     const { user } = useUser();
 
-    console.log("user in current view");
-    console.dir(user);
-
-    console.dir(currentEntry);
-
     const [updating, setUpdating] = useState(false);
 
     const onButtonClick = async () => {

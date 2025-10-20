@@ -60,7 +60,8 @@ public class ClubHistoryRespository {
                                 .from(CLUB_HISTORY)
                                 .innerJoin(BOOKS)
                                 .on(CLUB_HISTORY.BOOK_ID.eq(BOOKS.ID))
-                                .where(CLUB_HISTORY.STARTED.isNotNull(), CLUB_HISTORY.FINISHED.isNull())
+                                .orderBy(CLUB_HISTORY.STARTED.desc())
+                                .limit(1)
                                 .fetchOptional(record -> new ClubHistoryEntry(
                                                 record.get(CLUB_HISTORY.ID),
                                                 new Book(

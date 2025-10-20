@@ -43,7 +43,6 @@ public class ClubController {
     @PatchMapping("/current")
     public ClubHistoryEntry completeBook(
             @RequestBody @Valid CompleteBookRequest form) {
-        System.out.println("bookId: " + form.getBookId());
         return this.service.completeBook(form)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Current book not found..."));
     }
