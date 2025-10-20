@@ -5,15 +5,19 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.bookspank.backend.service.ClubHistoryService;
-
+import com.bookspank.backend.dto.CompleteBookRequest;
+import com.bookspank.backend.dto.PostBookRequest;
 import com.bookspank.backend.model.ClubHistoryEntry;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 
@@ -31,9 +35,26 @@ public class ClubController {
         return this.service.getClubHistory(limit, offset);
     }
 
-    @GetMapping("/current")
-    public ClubHistoryEntry getCurrent() {
-        return this.service.getCurrent()
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No current book..."));
+    @RestController
+    @RequiredArgsConstructor
+    @Validated
+    @RequestMapping("/current")
+    public class CurrentController {
+        private final ClubHistoryService service;
+
+        @GetMapping()
+        public ClubHistoryEntry getCurrent() {
+            return this.service.getCurrent()
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No current book..."));
+        }
+
+        @PatchMapping()
+        public ClubHistoryEntry completeBook(
+                @RequestBody @Valid CompleteBookRequest form) {
+            return this.service.completeBook(form)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Current book not found..."));
+        }
+
     }
+
 }

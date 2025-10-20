@@ -41,7 +41,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     const service = new ClubHistoryService();
-    const res = await service.completeCurrent(userId, bookId);
+    const res = await service.completeBook(userId, bookId);
 
     if (!res.ok && res.status === 404) {
         return NextResponse.json({ error: "Not Found - Unable to find current spank..." }, { status: 404 });

@@ -47,7 +47,7 @@ export class ClubHistoryService implements IClubHistoryService {
         }
     }
 
-    async completeCurrent(userId: number, bookId: number): Promise<ClubHistoryEntry> {
+    async completeBook(userId: number, bookId: number): Promise<ClubHistoryEntry> {
         const query = new URL(this._url + "/current");
         const res = await fetch(query, {
             method: "PATCH",

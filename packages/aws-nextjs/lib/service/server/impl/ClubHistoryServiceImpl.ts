@@ -18,7 +18,7 @@ export class ClubHistoryService implements IClubHistoryService {
         return fetch(backendQuery);
     }
 
-    completeCurrent(userId: number, bookId: number): Promise<Response> {
+    completeBook(userId: number, bookId: number): Promise<Response> {
         const query = new URL(this._url + "/current");
         return fetch(query, {
             method: "PATCH",
