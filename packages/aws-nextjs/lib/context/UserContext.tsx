@@ -8,13 +8,13 @@ type User = {
 };
 
 type UserContextType = {
-    user: User;
+    user: User | null;
     setUser: (user: User) => void;
 };
 
 type UserProviderProps = {
     children: ReactNode;
-    initialUser: User;
+    initialUser: User | null;
 };
 
 // 2️⃣ Create the context object
@@ -22,7 +22,7 @@ export const UserContext = createContext<UserContextType | undefined>(undefined)
 
 // 3️⃣ Create a provider component
 export const UserProvider = ({ children, initialUser }: UserProviderProps) => {
-    const [user, setUser] = useState<User>(initialUser);
+    const [user, setUser] = useState<User | null>(initialUser);
 
     return (
         <UserContext.Provider value={{ user, setUser }}>
