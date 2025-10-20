@@ -1,9 +1,9 @@
-import { ClubHistoryEntry } from "@/lib/model/ClubHistoryEntry";
-import { IClubHistoryService } from "../ClubHistoryService";
+import { ClubHistoryEntry } from "@/model/ClubHistoryEntry";
+import { IClubHistoryService } from "@/server_service/ClubHistoryService";
 
 
 export class ClubHistoryService implements IClubHistoryService {
-    async getClubHistory(limit: number, offset: number): Promise<ClubHistoryEntry[]> {
+    getClubHistory(limit: number, offset: number): Promise<Response> {
         const backendQuery = new URL(this.baseUrl + "/history");
 
         const backendParams = new URLSearchParams();
@@ -12,22 +12,7 @@ export class ClubHistoryService implements IClubHistoryService {
 
         backendQuery.search = backendParams.toString();
 
-        const res = await fetch(backendQuery);
-
-        if (!res.ok) {
-            // TODO: Decide how to handle
-            throw new Error("Unable to get history...");
-        }
-
-        const data: any[] = await res.json();
-
-        try {
-            return data.map(x => ClubHistoryEntry.fromJSON(x));
-        }
-        catch (err) {
-            console.error(err);
-            throw err;
-        }
+        return fetch(backendQuery);
     }
 
     async getCurrent(): Promise<ClubHistoryEntry | null> {

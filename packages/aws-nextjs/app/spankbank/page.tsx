@@ -1,4 +1,4 @@
-import { CompletedBookScrollView } from "@/lib/components/client/bookScrollViews/ClubHistoryScrollView";
+import { ClubHistoryScrollView } from "@/lib/components/client/bookScrollViews/ClubHistoryScrollView";
 
 export default function SpankBank() {
 
@@ -8,7 +8,7 @@ export default function SpankBank() {
                 <div>
                     <h3 className="text-xl font-semibold mb-4"> The Spank Bank </h3>
                 </div>
-                <CompletedBookScrollView />
+                <ClubHistoryScrollView />
             </div>
         </>
     )

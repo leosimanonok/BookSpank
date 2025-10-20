@@ -3,6 +3,6 @@
 import useFetchClubHistory from "@/hook/useFetchClubHistory";
 import { BookEntryScrollView } from "@/client_components/bookScrollViews/BookEntryScrollView";
 
-export function CompletedBookScrollView() {
+export function ClubHistoryScrollView() {
     return <BookEntryScrollView fetchHook={useFetchClubHistory} />;
 }
