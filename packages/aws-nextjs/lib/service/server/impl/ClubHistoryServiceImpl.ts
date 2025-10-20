@@ -1,6 +1,4 @@
-import { ClubHistoryEntry } from "@/model/ClubHistoryEntry";
 import { IClubHistoryService } from "@/server_service/ClubHistoryService";
-
 
 export class ClubHistoryService implements IClubHistoryService {
     getClubHistory(limit: number, offset: number): Promise<Response> {
@@ -21,7 +19,14 @@ export class ClubHistoryService implements IClubHistoryService {
     }
 
     completeCurrent(userId: number, bookId: number): Promise<Response> {
-        throw new Error("Method not implemented.");
+        const query = new URL(this._url + "/current");
+        return fetch(query, {
+            method: "PATCH",
+            body: JSON.stringify({
+                userId,
+                bookId,
+            }),
+        });
     }
 
     private readonly _url = process.env.NEXT_PUBLIC_BACKEND_API_URL + "/club";
