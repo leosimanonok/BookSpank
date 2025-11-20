@@ -1,27 +1,63 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { ClubHistoryService } from "@/server_service/ClubHistoryServiceImpl";
+import { auth } from "@/app/actions";
 
 export async function GET() {
-    if (!process.env.NEXT_PUBLIC_BACKEND_API_URL) {
-        throw new Error("Missing backend url...");
+
+    const service = new ClubHistoryService();
+    const res = await service.getCurrent();
+
+    console.log(`Status: ${res.status} - ${res.statusText}`);
+
+    if (!res.ok && res.status === 404) {
+        return NextResponse.json({ error: "Not Found - Unable to find current spank..." }, { status: 404 });
+    }
+    else if (!res.ok) {
+        console.error(`Status: ${res.status} - ${res.statusText}`);
+        return NextResponse.json({ error: "Internal Server Error - Unable to complete your request..." }, { status: 500 });
     }
 
-    const backendQuery = new URL(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/books/current");
+    const data = await res.json();
 
-    try {
-        const backendRes = await fetch(backendQuery);
+    return NextResponse.json(data, {
+        status: 200,
+        statusText: "Ok"
+    });
+}
 
-        if (!backendRes.ok) {
-            return NextResponse.json({ error: "Failed to fetch current book" }, { status: backendRes.status });
-        }
+export async function PATCH(req: NextRequest) {
+    const user = await auth();
 
-        const backendResJson = await backendRes.json();
-
-        console.log("Current book from backend: ");
-        console.dir(backendResJson);
-
-        return NextResponse.json(backendResJson);
-    } catch (error) {
-        console.error("Error fetching current book:", error);
-        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    if (!user) {
+        return NextResponse.json({ error: "Unauthorized - Login before accessing this endpoint..." }, { status: 403 });
     }
+
+    const { userId, bookId } = await req.json();
+
+    if (!userId) {
+        return NextResponse.json({ error: "Bad Request - Missing userId..." }, { status: 400 });
+    }
+
+    if (!bookId) {
+        return NextResponse.json({ error: "Bad Request - Missing bookId..." }, { status: 400 });
+    }
+
+    const service = new ClubHistoryService();
+    const res = await service.completeBook(userId, bookId);
+
+    if (!res.ok && res.status === 404) {
+        return NextResponse.json({ error: "Not Found - Unable to find current spank..." }, { status: 404 });
+    }
+    else if (!res.ok) {
+        console.error(`Status: ${res.status} - ${res.statusText}`);
+        return NextResponse.json({ error: "Internal Server Error - Unable to complete your request..." }, { status: 500 });
+    }
+
+    const data = await res.json();
+
+    return NextResponse.json(data, {
+        status: 200,
+        statusText: "Ok"
+    });
+
 }

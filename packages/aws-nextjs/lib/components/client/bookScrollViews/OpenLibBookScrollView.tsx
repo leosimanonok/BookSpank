@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Card } from "../base/Card";
-import { OpenLibBookCard } from "../OpenLibBookCard";
-import useFetchOpenLibBooks from "@/lib/hook/useFetchOpenLibBooks";
-import { Label } from "../base/Label";
-import { Input } from "../base/Input";
+import { Card } from "@/client_components/base/Card";
+import { OpenLibBookCard } from "@/client_components/bookEntryViews/OpenLibBookCard";
+import useFetchOpenLibBooks from "@/hook/useFetchOpenLibBooks";
+import { Label } from "@/client_components/base/Label";
+import { Input } from "@/client_components/base/Input";
 
 export function OpenLibBookScrollView() {
 

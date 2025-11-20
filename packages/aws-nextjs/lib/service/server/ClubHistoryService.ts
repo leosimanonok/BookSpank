@@ -1,7 +1,7 @@
-import { ClubHistoryEntry } from "@/model/ClubHistoryEntry";
 
 
 export interface IClubHistoryService {
-    getClubHistory(limit: number, offset: number): Promise<ClubHistoryEntry[]>;
-    getCurrent(): Promise<ClubHistoryEntry | null>;
+    getClubHistory(limit: number, offset: number): Promise<Response>;
+    getCurrent(): Promise<Response>;
+    completeBook(userId: number, bookId: number): Promise<Response>;
 }

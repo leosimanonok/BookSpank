@@ -23,19 +23,16 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./*"
-      ],
       "@/auth/*": [
         "../auth/*"
       ],
       "@/server_service/*": [
-        "./lib/service/server/*",
-        "./lib/service/server/impl/*"
+        "./lib/service/server/impl/*",
+        "./lib/service/server/*"
       ],
       "@/client_service/*": [
-        "./lib/service/client/*",
-        "./lib/service/client/impl/*"
+        "./lib/service/client/impl/*",
+        "./lib/service/client/*"
       ],
       "@/model/*": [
         "./lib/model/*"
@@ -54,6 +51,9 @@
       ],
       "@/server_components/*": [
         "./lib/components/server/*"
+      ],
+      "@/*": [
+        "./*"
       ]
     }
   },

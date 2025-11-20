@@ -1,4 +1,4 @@
-import { Book } from "@/lib/model/Book";
+import { Book } from "@/model/Book";
 
 export class ClubHistoryEntry {
     public readonly id: number;

@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/client_components/base/Card";
-import { BookEntryCard } from "@/lib/components/client/BookEntryCard";
+import { BookEntryCard } from "@/client_components/bookEntryViews/BookEntryCard";
 
 import { useEffect, useRef } from "react";
 import { IBookEntry } from "@/model/BookEntry";

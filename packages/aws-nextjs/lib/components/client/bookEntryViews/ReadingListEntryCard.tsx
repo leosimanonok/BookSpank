@@ -15,6 +15,9 @@ type props = {
 
 export function ReadingListEntryCard({ entry }: props) {
     const { user } = useUser();
+
+    if (user === null) throw new Error("User should not be null");
+
     const service = useReadingListService();
 
     const [currEntry, setCurrEntry] = useState<ReadingListEntry>(entry);
@@ -54,8 +57,8 @@ export function ReadingListEntryCard({ entry }: props) {
 
                 <Image className="mb-4" src={entry.book.cover_id ? OpenLibraryService.getCoverImageUrl(entry.book.cover_id, "M") : "/file.svg"}
                     alt={`${entry.book.title}-img`}
-                    width={200}           // max width
-                    height={200}          // max height
+                    width={200}
+                    height={200}
                     style={{ width: "auto", height: "200px" }}
                 />
             </Card>

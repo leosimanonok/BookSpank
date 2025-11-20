@@ -3,7 +3,7 @@ CREATE TABLE
         id SERIAL PRIMARY KEY,
         selected_by INT NOT NULL REFERENCES users (id),
         book_id INT NOT NULL UNIQUE REFERENCES books (id),
-        started DATE,
+        started DATE NOT NULL DEFAULT NOW (),
         finished DATE
     );
 
