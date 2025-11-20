@@ -5,6 +5,9 @@ import { ReadingListEntry } from "@/model/ReadingListEntry";
 
 export class ReadingListService implements IReadingListService {
     async addBook(userId: number, bookInfo: OpenLibrarySearchResponse): Promise<void> {
+
+        console.log("Sending info: ");
+        console.dir(bookInfo);
         const backendQuery = new URL(this._url + `/user/${userId}`);
 
         const res = await fetch(backendQuery, {

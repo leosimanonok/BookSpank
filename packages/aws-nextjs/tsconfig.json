@@ -48,6 +48,12 @@
       ],
       "@/dto/*": [
         "./lib/dto/*"
+      ],
+      "@/client_components/*": [
+        "./lib/components/client/*"
+      ],
+      "@/server_components/*": [
+        "./lib/components/server/*"
       ]
     }
   },

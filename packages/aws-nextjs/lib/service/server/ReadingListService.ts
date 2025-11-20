@@ -1,5 +1,4 @@
 import { OpenLibrarySearchResponse } from "@/dto/OpenLibrarySearchResponse";
-import { ReadingListEntry } from "../../model/ReadingListEntry";
 
 export interface IReadingListService {
 

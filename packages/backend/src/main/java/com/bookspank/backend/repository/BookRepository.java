@@ -34,7 +34,7 @@ public class BookRepository {
                         return this.dsl.insertInto(BOOKS)
                                         .set(BOOKS.TITLE, form.getTitle())
                                         .set(BOOKS.AUTHOR, form.getAuthor())
-                                        .set(BOOKS.COVER_ID, form.getCover_id()) // nullable
+                                        .set(BOOKS.COVER_ID, form.getCoverId()) // nullable
                                         .returning(BOOKS.ID)
                                         .fetchOne()
                                         .getId();

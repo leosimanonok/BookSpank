@@ -46,6 +46,7 @@ public class ReadingListController {
             @RequestBody @Valid PostBookRequest postBookForm) {
 
         try {
+            System.out.println("Recieved coverid: " + postBookForm.getCoverId());
             service.addBook(userId, postBookForm);
             return ResponseEntity.status(HttpStatus.CREATED).body("Book added to reading list successfully.");
         } catch (DuplicateKeyException e) {

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "./base/Button";
 import { OpenLibBookScrollView } from "./bookScrollViews/OpenLibBookScrollView";
-import { UserBookScrollView } from "./bookScrollViews/UserBookScrollView";
+import { ReadingListScrollView } from "./bookScrollViews/ReadingListScrollView";
 import { useUser } from "@/lib/context/UserContext";
 
 export function Dashboard() {
@@ -35,7 +35,7 @@ export function Dashboard() {
                     <OpenLibBookScrollView />
                 </div>
                 <div className={tab === "view" ? "block" : "hidden"}>
-                    <UserBookScrollView />
+                    <ReadingListScrollView />
                 </div>
             </div>
         </div>

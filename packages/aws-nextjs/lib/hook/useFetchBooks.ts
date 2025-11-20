@@ -2,30 +2,31 @@
 
 import { useEffect, useState } from "react";
 import { Book } from "@/model/Book"
+import { IBookEntry } from "../model/BookEntry";
 
 
 interface FetchBooksProps {
-    fetchBooks(limit: number, offset: number): Promise<{ book: Book }[]>;
+    fetchEntries(limit: number, offset: number): Promise<{ book: Book }[]>;
 }
 
-export default function useFetchBooks({ fetchBooks }: FetchBooksProps) {
+export default function useFetchEntries({ fetchEntries }: FetchBooksProps) {
 
     const PAGE_SIZE = 20;
-    const [books, setBooks] = useState<Book[]>([]);
+    const [entries, setEntries] = useState<IBookEntry[]>([]);
     const [loading, setLoading] = useState(false);
-    const [hasMoreBooks, setHasMoreBooks] = useState(true);
+    const [hasMoreEntries, setHasMoreEntries] = useState(true);
 
-    const loadBooks = async () => {
-        if (!hasMoreBooks || loading) return;
+    const loadMoreEntries = async () => {
+        if (!hasMoreEntries || loading) return;
         setLoading(true);
 
         try {
-            const moreBooks = await fetchBooks(PAGE_SIZE, books.length);
+            const moreBooks = await fetchEntries(PAGE_SIZE, entries.length);
 
             if (moreBooks.length < PAGE_SIZE) {
-                setHasMoreBooks(false);
+                setHasMoreEntries(false);
             }
-            setBooks((prev) => [...prev, ...moreBooks.map(x => x.book)]);
+            setEntries((prev) => [...prev, ...moreBooks]);
         }
         finally {
             setLoading(false);
@@ -34,14 +35,14 @@ export default function useFetchBooks({ fetchBooks }: FetchBooksProps) {
 
     // Pull initial books
     useEffect(() => {
-        loadBooks();
+        loadMoreEntries();
     }, []);
 
     return {
-        books,
+        entries,
         loading,
-        hasMoreBooks,
-        loadMoreBooks: loadBooks
+        hasMoreEntries,
+        loadMoreEntries
     };
 
 }

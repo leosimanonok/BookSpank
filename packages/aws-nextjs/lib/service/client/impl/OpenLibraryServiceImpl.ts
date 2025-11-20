@@ -1,5 +1,5 @@
 import { OpenLibrarySearchResponse } from "@/dto/OpenLibrarySearchResponse";
-import { IOpenLibraryService } from "@/service/OpenLibraryService";
+import { IOpenLibraryService } from "@/client_service/OpenLibraryService";
 
 export class OpenLibraryService implements IOpenLibraryService {
 
@@ -43,9 +43,9 @@ export class OpenLibraryService implements IOpenLibraryService {
             author: x.author_name?.[0] ?? "Unknown",
             coverId: x.cover_i ?? null,
             coverUrls: x.cover_i ? {
-                S: this.getCoverImageUrl(x.cover_i, "S"),
-                M: this.getCoverImageUrl(x.cover_i, "M"),
-                L: this.getCoverImageUrl(x.cover_i, "L"),
+                S: OpenLibraryService.getCoverImageUrl(x.cover_i, "S"),
+                M: OpenLibraryService.getCoverImageUrl(x.cover_i, "M"),
+                L: OpenLibraryService.getCoverImageUrl(x.cover_i, "L"),
             }
                 : null
         }));
@@ -59,13 +59,13 @@ export class OpenLibraryService implements IOpenLibraryService {
     }
 
 
-    private getCoverImageUrl(coverId: number, size: "S" | "M" | "L"): string {
+    static getCoverImageUrl(coverId: number, size: "S" | "M" | "L"): string {
         return `${this.coverUrl}/${coverId}-${size}.jpg`;
     }
 
 
     private readonly searchUrl = "https://openlibrary.org/search.json";
-    private readonly coverUrl = "https://covers.openlibrary.org/b/id";
+    private static readonly coverUrl = "https://covers.openlibrary.org/b/id";
 
     // see https://openlibrary.org/developers/api
     private readonly headers = new Headers({
