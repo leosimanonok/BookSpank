@@ -21,7 +21,7 @@ export function CurrentSpankView() {
         if (currentEntry === null || currentEntry.finished || user === null) return;
         try {
             setUpdating(true);
-            const updatedEntry = await clubHistoryService.completeBook(user.id, currentEntry.book.id);
+            const updatedEntry = await clubHistoryService.completeBook(currentEntry.book.id);
             setCurrentEntry(updatedEntry);
         }
         catch (err) {

@@ -48,12 +48,11 @@ export class ClubHistoryService implements IClubHistoryService {
         }
     }
 
-    async completeBook(userId: number, bookId: number): Promise<ClubHistoryEntry> {
+    async completeBook(bookId: number): Promise<ClubHistoryEntry> {
         const query = new URL(this._url + "/current");
         const res = await fetch(query, {
             method: "PATCH",
             body: JSON.stringify({
-                userId,
                 bookId,
             }),
         });
